@@ -1,10 +1,17 @@
 /* Layout styling */
+.container {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
 .layout {
   display: flex;
   height: 100vh;
 }
 
 .sidebar {
+  display: flex;
+  flex-direction: column;
   background-color: #192733;
   color: white;
   width: 250px;
@@ -34,6 +41,7 @@
 }
 
 .hamburger {
+  text-align: end;
   background: none;
   border: none;
   color: white;
@@ -50,14 +58,9 @@
   transition: margin-left 0.3s ease;
 }
 
-.main-content.full-width {
-  margin-left: 10px;
-}
-
 main {
   flex: 1;
   padding: 20px;
-  background-color: #f4f4f4;
   overflow-y: auto;
 }
 
