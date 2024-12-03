@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react";
+import Script from 'next/script';
 import Header from "./component/Header";
 import Footer from "./component/Footer";
 import SideBar from "./component/SideBar"; // Import Sidebar component
@@ -17,20 +18,20 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <script
+        <Script
           src="https://cdn.jsdelivr.net/npm/react/umd/react.production.min.js"
           crossOrigin="anonymous"
-        ></script>
+        ></Script>
 
-        <script
+        <Script
           src="https://cdn.jsdelivr.net/npm/react-dom/umd/react-dom.production.min.js"
           crossOrigin="anonymous"
-        ></script>
+        ></Script>
 
-        <script
+        <Script
           src="https://cdn.jsdelivr.net/npm/react-bootstrap@next/dist/react-bootstrap.min.js"
           crossOrigin="anonymous"
-        ></script>
+        ></Script>
       </head>
       <body>
         <div className="layout">
