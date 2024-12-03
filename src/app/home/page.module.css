@@ -1,0 +1,35 @@
+.home h2 span {
+    font-size: 20px;
+}
+
+.home ul {
+    list-style: none;
+}
+
+.home a {
+    text-decoration: none;
+}
+
+.card {
+    background-color: #fff;
+    box-shadow: 0 5px 10px rgb(30 32 37 / 12%); 
+    border: 1px solid #000;
+}
+
+.cardHdr {
+    background-color: #192733;
+    color: #fff;
+}
+
+.cardBg {
+    background-image: url("/modulebg.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    padding: 20PX 0PX;
+}
+
+.cardLink a {
+    color: #000;
+    padding: 20px 0px;
+}
