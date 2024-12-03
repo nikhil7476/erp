@@ -14,6 +14,11 @@
     height: 300px;
     background-color: #fff;
     box-shadow: 0 5px 10px rgb(30 32 37 / 12%);
+    transition: .3s;
+}
+
+.card:hover {
+    transform: scale(0.9);
 }
 
 .cardHdr {

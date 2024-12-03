@@ -21,7 +21,7 @@ export default function Home() {
                                 <h3>Students</h3>
                             </div>
                             <div className={style.cardBg}>
-                                <Image src="/reading-book.webp" alt="Students" title="Students" width={100} height={100} />
+                                <Image src="/reading-book.webp" alt="Students" title="Students" width={75} height={75} />
                             </div>
                             <div className={style.cardLink}>
                                 <ul>
@@ -38,7 +38,7 @@ export default function Home() {
                                 <h3>Fees</h3>
                             </div>
                             <div className={style.cardBg}>
-                                <Image src="/fees.webp" alt="Fees" title="Fees" width={100} height={100} />
+                                <Image src="/fees.webp" alt="Fees" title="Fees" width={75} height={75} />
                             </div>
                             <div className={style.cardLink}>
                                 <ul>
@@ -55,7 +55,7 @@ export default function Home() {
                                 <h3>Transport</h3>
                             </div>
                             <div className={style.cardBg}>
-                                <Image src="/bus.webp" alt="Transport" title="Transport" width={100} height={100} />
+                                <Image src="/bus.webp" alt="Transport" title="Transport" width={75} height={75} />
                             </div>
                             <div className={style.cardLink}>
                                 <ul>
@@ -74,7 +74,7 @@ export default function Home() {
                                 <h3>Stocks</h3>
                             </div>
                             <div className={style.cardBg}>
-                                <Image src="/stock.webp" alt="Stocks" title="Stocks" width={100} height={100} />
+                                <Image src="/stock.webp" alt="Stocks" title="Stocks" width={75} height={75} />
                             </div>
                             <div className={style.cardLink}>
                                 <ul>
@@ -91,7 +91,7 @@ export default function Home() {
                                 <h3>Payroll</h3>
                             </div>
                             <div className={style.cardBg}>
-                                <Image src="/payroll1.webp" alt="Payroll" title="Payroll" width={100} height={100} />
+                                <Image src="/payroll1.webp" alt="Payroll" title="Payroll" width={75} height={75} />
                             </div>
                             <div className={style.cardLink}>
                                 <ul>
@@ -108,7 +108,7 @@ export default function Home() {
                                 <h3>Library</h3>
                             </div>
                             <div className={style.cardBg}>
-                                <Image src="/libary.webp" alt="Library" title="Library" width={100} height={100} />
+                                <Image src="/libary.webp" alt="Library" title="Library" width={75} height={75} />
                             </div>
                             <div className={style.cardLink}>
                                 <ul>
@@ -127,7 +127,7 @@ export default function Home() {
                                 <h3>Exam</h3>
                             </div>
                             <div className={style.cardBg}>
-                                <Image src="/exam.webp" alt="Exam" title="Exam" width={100} height={100} />
+                                <Image src="/exam.webp" alt="Exam" title="Exam" width={75} height={75} />
                             </div>
                             <div className={style.cardLink}>
                                 <ul>
@@ -144,7 +144,7 @@ export default function Home() {
                                 <h3>Attendance</h3>
                             </div>
                             <div className={style.cardBg}>
-                                <Image src="/attendance.webp" alt="Attendance" title="Attendance" width={100} height={100} />
+                                <Image src="/attendance.webp" alt="Attendance" title="Attendance" width={75} height={75} />
                             </div>
                             <div className={style.cardLink}>
                                 <ul>
@@ -161,7 +161,7 @@ export default function Home() {
                                 <h3>Time Table</h3>
                             </div>
                             <div className={style.cardBg}>
-                                <Image src="/timetable.webp" alt="Time Table" title="Time Table" width={100} height={100} />
+                                <Image src="/timetable.webp" alt="Time Table" title="Time Table" width={75} height={75} />
                             </div>
                             <div className={style.cardLink}>
                                 <ul>
@@ -180,7 +180,7 @@ export default function Home() {
                                 <h3>Users</h3>
                             </div>
                             <div className={style.cardBg}>
-                                <Image src="/users.webp" alt="Users" title="Users" width={100} height={100} />
+                                <Image src="/users.webp" alt="Users" title="Users" width={75} height={75} />
                             </div>
                             <div className={style.cardLink}>
                                 <ul>
@@ -196,7 +196,7 @@ export default function Home() {
                                 <h3>Website</h3>
                             </div>
                             <div className={style.cardBg}>
-                                <Image src="/website.webp" alt="Website" title="Website" width={100} height={100} />
+                                <Image src="/website.webp" alt="Website" title="Website" width={75} height={75} />
                             </div>
                             <div className={style.cardLink}>
                                 <ul>
@@ -213,7 +213,7 @@ export default function Home() {
                                 <h3>Homework</h3>
                             </div>
                             <div className={style.cardBg}>
-                                <Image src="/homework.webp" alt="Homework" title="Homework" width={100} height={100} />
+                                <Image src="/homework.webp" alt="Homework" title="Homework" width={75} height={75} />
                             </div>
                             <div className={style.cardLink}>
                                 <ul>
