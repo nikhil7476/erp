@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Container, Row, Col } from "react-bootstrap";
+import { FaLongArrowAltRight } from "react-icons/fa";
 import style from "./page.module.css";
 
 export default function Home() {
@@ -24,9 +25,9 @@ export default function Home() {
                             </div>
                             <div className={style.cardLink}>
                                 <ul>
-                                    <li><Link href="#" title="Create Exam">Create Exam</Link></li>
-                                    <li><Link href="#" title="Marks Entry">Marks Entry</Link></li>
-                                    <li><Link href="#" title="Student Wise Marksheet">Student Vise Marksheet</Link></li>
+                                    <li><Link href="#" title="Create Exam">Create Exam <FaLongArrowAltRight /></Link></li>
+                                    <li><Link href="#" title="Marks Entry">Marks Entry <FaLongArrowAltRight /></Link></li>
+                                    <li><Link href="#" title="Student Wise Marksheet">Student Wise Marksheet <FaLongArrowAltRight /></Link></li>
                                 </ul>
                             </div>
                         </div>
@@ -41,9 +42,9 @@ export default function Home() {
                             </div>
                             <div className={style.cardLink}>
                                 <ul>
-                                    <li><Link href="#" title="Fee Entry">Fee Entry</Link></li>
-                                    <li><Link href="#" title="Student Fee Details">Student Fee Details</Link></li>
-                                    <li><Link href="#" title="Daily Fees Collection">Daily Fees Collection</Link></li>
+                                    <li><Link href="#" title="Fee Entry">Fee Entry <FaLongArrowAltRight /></Link></li>
+                                    <li><Link href="#" title="Student Fee Details">Student Fee Details <FaLongArrowAltRight /></Link></li>
+                                    <li><Link href="#" title="Daily Fees Collection">Daily Fees Collection <FaLongArrowAltRight /></Link></li>
                                 </ul>
                             </div>
                         </div>
@@ -58,9 +59,9 @@ export default function Home() {
                             </div>
                             <div className={style.cardLink}>
                                 <ul>
-                                    <li><Link href="#" title="Add New Vehicle">Add New Vehicle</Link></li>
-                                    <li><Link href="#" title="Student Vehicle Relation">Student Vehicle Relation</Link></li>
-                                    <li><Link href="#" title="All Transport Info">All Transport Info</Link></li>
+                                    <li><Link href="#" title="Add New Vehicle">Add New Vehicle <FaLongArrowAltRight /></Link></li>
+                                    <li><Link href="#" title="Student Vehicle Relation">Student Vehicle Relation <FaLongArrowAltRight /></Link></li>
+                                    <li><Link href="#" title="All Transport Info">All Transport Info <FaLongArrowAltRight /></Link></li>
                                 </ul>
                             </div>
                         </div>
@@ -77,9 +78,9 @@ export default function Home() {
                             </div>
                             <div className={style.cardLink}>
                                 <ul>
-                                    <li><Link href="#" title="Add New Item">Add New Item</Link></li>
-                                    <li><Link href="#" title="Stock Details">Stock Details</Link></li>
-                                    <li><Link href="#" title="Issue Items">Issue Items</Link></li>
+                                    <li><Link href="#" title="Add New Item">Add New Item <FaLongArrowAltRight /></Link></li>
+                                    <li><Link href="#" title="Stock Details">Stock Details <FaLongArrowAltRight /></Link></li>
+                                    <li><Link href="#" title="Issue Items">Issue Items <FaLongArrowAltRight /></Link></li>
                                 </ul>
                             </div>
                         </div>
@@ -94,9 +95,9 @@ export default function Home() {
                             </div>
                             <div className={style.cardLink}>
                                 <ul>
-                                    <li><Link href="#" title="Add New Employee">Add New Employee</Link></li>
-                                    <li><Link href="#" title="Salary Generation">Salary Generation</Link></li>
-                                    <li><Link href="#" title="Pay Slip">Pay Slip</Link></li>
+                                    <li><Link href="#" title="Add New Employee">Add New Employee <FaLongArrowAltRight /></Link></li>
+                                    <li><Link href="#" title="Salary Generation">Salary Generation <FaLongArrowAltRight /></Link></li>
+                                    <li><Link href="#" title="Pay Slip">Pay Slip <FaLongArrowAltRight /></Link></li>
                                 </ul>
                             </div>
                         </div>
@@ -111,9 +112,9 @@ export default function Home() {
                             </div>
                             <div className={style.cardLink}>
                                 <ul>
-                                    <li><Link href="#" title="Add New Book">Add New Book</Link></li>
-                                    <li><Link href="#" title="Issue Book">Issue Book</Link></li>
-                                    <li><Link href="#" title="Issued Books Records">Issued Books Records</Link></li>
+                                    <li><Link href="#" title="Add New Book">Add New Book <FaLongArrowAltRight /></Link></li>
+                                    <li><Link href="#" title="Issue Book">Issue Book <FaLongArrowAltRight /></Link></li>
+                                    <li><Link href="#" title="Issued Books Records">Issued Books Records <FaLongArrowAltRight /></Link></li>
                                 </ul>
                             </div>
                         </div>
@@ -130,9 +131,9 @@ export default function Home() {
                             </div>
                             <div className={style.cardLink}>
                                 <ul>
-                                    <li><Link href="#" title="Create Exam">Create Exam</Link></li>
-                                    <li><Link href="#" title="Marks Entry">Marks Entry</Link></li>
-                                    <li><Link href="#" title="Student Wise Marksheet">Student Wise Marksheet</Link></li>
+                                    <li><Link href="#" title="Create Exam">Create Exam <FaLongArrowAltRight /></Link></li>
+                                    <li><Link href="#" title="Marks Entry">Marks Entry <FaLongArrowAltRight /></Link></li>
+                                    <li><Link href="#" title="Student Wise Marksheet">Student Wise Marksheet <FaLongArrowAltRight /></Link></li>
                                 </ul>
                             </div>
                         </div>
@@ -147,9 +148,9 @@ export default function Home() {
                             </div>
                             <div className={style.cardLink}>
                                 <ul>
-                                    <li><Link href="#" title="Take Attendance">Take Attendance</Link></li>
-                                    <li><Link href="#" title="Attendance Report">Attendance Report</Link></li>
-                                    <li><Link href="#" title="Monthly Report">Monthly Report</Link></li>
+                                    <li><Link href="#" title="Take Attendance">Take Attendance <FaLongArrowAltRight /></Link></li>
+                                    <li><Link href="#" title="Attendance Report">Attendance Report <FaLongArrowAltRight /></Link></li>
+                                    <li><Link href="#" title="Monthly Report">Monthly Report <FaLongArrowAltRight /></Link></li>
                                 </ul>
                             </div>
                         </div>
@@ -164,9 +165,9 @@ export default function Home() {
                             </div>
                             <div className={style.cardLink}>
                                 <ul>
-                                    <li><Link href="#" title="Regular Time Table">Regular Time Table</Link></li>
-                                    <li><Link href="#" title="Online Time Table">Online Time Table</Link></li>
-                                    <li><Link href="#" title="Adjust Time Table">Adjust Time Table</Link></li>
+                                    <li><Link href="#" title="Regular Time Table">Regular Time Table <FaLongArrowAltRight /></Link></li>
+                                    <li><Link href="#" title="Online Time Table">Online Time Table <FaLongArrowAltRight /></Link></li>
+                                    <li><Link href="#" title="Adjust Time Table">Adjust Time Table <FaLongArrowAltRight /></Link></li>
                                 </ul>
                             </div>
                         </div>
@@ -183,8 +184,8 @@ export default function Home() {
                             </div>
                             <div className={style.cardLink}>
                                 <ul>
-                                    <li><Link href="#" title="Add New User">Add New User</Link></li>
-                                    <li><Link href="#" title="Existing Users">Existing Users</Link></li>
+                                    <li><Link href="#" title="Add New User">Add New User <FaLongArrowAltRight /></Link></li>
+                                    <li><Link href="#" title="Existing Users">Existing Users <FaLongArrowAltRight /></Link></li>
                                 </ul>
                             </div>
                         </div>
@@ -199,9 +200,9 @@ export default function Home() {
                             </div>
                             <div className={style.cardLink}>
                                 <ul>
-                                    <li><Link href="#" title="Add New Page">Add New Page</Link></li>
-                                    <li><Link href="#" title="Contact Details">Contact Details</Link></li>
-                                    <li><Link href="#" title="Add Notice">Add Notice</Link></li>
+                                    <li><Link href="#" title="Add New Page">Add New Page <FaLongArrowAltRight /></Link></li>
+                                    <li><Link href="#" title="Contact Details">Contact Details <FaLongArrowAltRight /></Link></li>
+                                    <li><Link href="#" title="Add Notice">Add Notice <FaLongArrowAltRight /></Link></li>
                                 </ul>
                             </div>
                         </div>
@@ -216,7 +217,7 @@ export default function Home() {
                             </div>
                             <div className={style.cardLink}>
                                 <ul>
-                                    <li><Link href="#" title="Add Home Work">Add Home Work</Link></li>
+                                    <li><Link href="#" title="Add Home Work">Add Home Work <FaLongArrowAltRight /></Link></li>
                                 </ul>
                             </div>
                         </div>
