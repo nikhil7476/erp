@@ -50,31 +50,31 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
                                             <Link href="/all-modules">All Modules</Link>
                                         </li>
                                         <li>
-                                            <Link href="/school-info">School Info</Link>
+                                            <Link href="/master-entry/school-info">School Info</Link>
                                         </li>
                                         <li>
-                                            <Link href="/master-entry/option3">Class Master</Link>
+                                            <Link href="/master-entry/class-master">Class Master</Link>
                                         </li>
                                         <li>
-                                            <Link href="/master-entry/option3">City Master</Link>
+                                            <Link href="/master-entry/city-master">City Master</Link>
                                         </li>
                                         <li>
-                                            <Link href="/master-entry/option3">Year Master</Link>
+                                            <Link href="/master-entry/year-master">Year Master</Link>
                                         </li>
                                         <li>
-                                            <Link href="/master-entry/option3">Document Upload</Link>
+                                            <Link href="/master-entry/document-upload">Document Upload</Link>
                                         </li>
                                         <li>
-                                            <Link href="/master-entry/option3">Category Master</Link>
+                                            <Link href="/master-entry/category-master">Category Master</Link>
                                         </li>
                                         <li>
-                                            <Link href="/master-entry/option3">Religion Master</Link>
+                                            <Link href="/master-entry/religion-master">Religion Master</Link>
                                         </li>
                                         <li>
-                                            <Link href="/master-entry/option3">Subject Master</Link>
+                                            <Link href="/master-entry/subject-master">Subject Master</Link>
                                         </li>
                                         <li>
-                                            <Link href="/master-entry/option3">Cast Master</Link>
+                                            <Link href="/master-entry/cast-master">Cast Master</Link>
                                         </li>
                                     </ul>
                                 </Accordion.Body>
