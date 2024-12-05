@@ -9,10 +9,21 @@
   height: 100vh;
 }
 
+.header{
+  height: 60px;
+  background-color: #201436;
+  padding: 16px;
+}
+
+.header h3{
+  color: #fff;
+  font-size: 22px;
+}
+
 .sidebar {
   display: flex;
   flex-direction: column;
-  background-color: #192733;
+  background-color: #201436;
   color: white;
   width: 250px;
   min-width: 250px;
@@ -34,10 +45,8 @@
 .sidebar li {
   padding: 10px 20px;
   cursor: pointer;
-}
-
-.sidebar li:hover {
-  background-color: #1e2d3d;
+  background-color: #fff;
+  border: 1px solid #f4eeee;
 }
 
 .hamburger {
@@ -50,7 +59,6 @@
   margin: 10px;
 }
 
-/* Main content styling */
 .main-content {
   width: 100%;
   display: flex;
@@ -64,9 +72,138 @@ main {
   overflow-y: auto;
 }
 
+.accordion-item{
+  border-radius: 0px !important;
+}
+
+.accordion-item > .accordion-header .accordion-button {
+  font-size: 17px !important;
+  font-weight: 500 !important;
+}
+
+.accordion-body {
+  padding: 0px !important;
+}
+
+li a{
+  text-decoration: none !important;
+  color: #201436;
+  font-size: 17px;
+  font-weight: 500;
+}
+
 footer {
   background-color: #1e2d3d;
   color: white;
   text-align: center;
   padding: 10px;
 }
+
+.dashboardCardCard span{
+  font-size: 22px;
+}
+
+.studentCardTitle h4{
+  font-size: 18px;
+}
+
+.studentItemList h5{
+  font-size: 16px;
+}
+
+.studentCardDetails {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.studentCardTitle{
+  background-color: #6d49b1;
+  padding: 11px;
+  color: #fff;
+}
+
+.dashboardCardCard h1{
+  font-size: 35px;
+}
+
+.studentImg{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.studentItemList{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.card{
+  text-align: center;
+  border-radius: 28px;
+}
+
+
+.cardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; 
+  justify-content: space-between; 
+}
+
+.subCard1 {
+  width: 30%; 
+  margin-top: 40px;
+}
+
+.SubCardLink {
+  width: 100%;
+  text-decoration: none;
+}
+
+.SubCard {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.SubCard:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.studentIcon {
+  font-size: 40px;
+  color: black;
+  margin-bottom: 10px;
+}
+
+.SubCard h3 {
+  font-weight: 700;
+  font-size: 1.4rem;
+  margin: 10px 0;
+  color: #141e36;
+}
+
+.SubCard p {
+  font-size: 1rem;
+  color: #555555;
+  margin-top: 8px;
+}
+
+@media (max-width: 768px) {
+  .subCard1 {
+    width: 45%; 
+  }
+}
+
+@media (max-width: 480px) {
+  .subCard1 {
+    width: 100%; 
+  }
+}
+
+

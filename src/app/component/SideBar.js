@@ -10,29 +10,6 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
                 <GiHamburgerMenu />
             </button>
             {isOpen && (
-                // <ul>
-                //     <li><Link href="/" title="Dashboard">Dashboard</Link></li>
-                //     <li><Link href="/home" title="Home">Home</Link></li>
-                //     <li>
-                //         <Dropdown>
-                //             <Dropdown.Toggle variant="link" id="dropdown-master-entry" className="p-0">
-                //                 Master Entry
-                //             </Dropdown.Toggle>
-                //             <Dropdown.Menu>
-                //                 <Dropdown.Item as={Link} href="/master-entry/option1">
-                //                     Option 1
-                //                 </Dropdown.Item>
-                //                 <Dropdown.Item as={Link} href="/master-entry/option2">
-                //                     Option 2
-                //                 </Dropdown.Item>
-                //                 <Dropdown.Item as={Link} href="/master-entry/option3">
-                //                     Option 3
-                //                 </Dropdown.Item>
-                //             </Dropdown.Menu>
-                //         </Dropdown>
-                //     </li>
-                //     <li><Link href="/students" title="Students">Students</Link></li>
-                // </ul>
                 <Accordion defaultActiveKey={null} alwaysOpen>
                     <ul style={{ listStyle: 'none', padding: 0 }}>
                         <li>
@@ -41,48 +18,302 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
                         <li>
                             <Link href="/home" title="Home">Home</Link>
                         </li>
-                        <li>
-                            <Accordion.Item eventKey="masterEntry">
-                                <Accordion.Header>Master Entry</Accordion.Header>
-                                <Accordion.Body>
-                                    <ul style={{ paddingLeft: '20px' }}>
-                                        <li>
-                                            <Link href="/all-modules">All Modules</Link>
-                                        </li>
-                                        <li>
-                                            <Link href="/master-entry/school-info">School Info</Link>
-                                        </li>
-                                        <li>
-                                            <Link href="/master-entry/class-master">Class Master</Link>
-                                        </li>
-                                        <li>
-                                            <Link href="/master-entry/city-master">City Master</Link>
-                                        </li>
-                                        <li>
-                                            <Link href="/master-entry/year-master">Year Master</Link>
-                                        </li>
-                                        <li>
-                                            <Link href="/master-entry/document-upload">Document Upload</Link>
-                                        </li>
-                                        <li>
-                                            <Link href="/master-entry/category-master">Category Master</Link>
-                                        </li>
-                                        <li>
-                                            <Link href="/master-entry/religion-master">Religion Master</Link>
-                                        </li>
-                                        <li>
-                                            <Link href="/master-entry/subject-master">Subject Master</Link>
-                                        </li>
-                                        <li>
-                                            <Link href="/master-entry/cast-master">Cast Master</Link>
-                                        </li>
-                                    </ul>
-                                </Accordion.Body>
-                            </Accordion.Item>
-                        </li>
-                        <li>
-                            <Link href="/students" title="Students">Students</Link>
-                        </li>
+                        <Accordion.Item eventKey="masterEntry">
+                            <Accordion.Header>Master Entry</Accordion.Header>
+                            <Accordion.Body>
+                                <ul style={{ paddingLeft: '20px' }}>
+                                    <li>
+                                        <Link href="/master-entry/all-module">All Modules</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/master-entry/school-info">School Info</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/master-entry/class-master">Class Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/master-entry/city-master">City Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/master-entry/year-master">Year Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/master-entry/document-upload">Document Upload</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/master-entry/category-master">Category Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/master-entry/religion-master">Religion Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/master-entry/subject-master">Subject Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/master-entry/cast-master">Cast Master</Link>
+                                    </li>
+                                </ul>
+                            </Accordion.Body>
+                        </Accordion.Item>
+                        <Accordion.Item eventKey="students">
+                            <Accordion.Header>Student</Accordion.Header>
+                            <Accordion.Body>
+                                <ul style={{ paddingLeft: '20px' }}>
+                                    <li>
+                                        <Link href="/all-modules">All Modules</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/add-new-student">add New Student</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/class-master">Class Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/city-master">City Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/year-master">Year Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/document-upload">Document Upload</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/category-master">Category Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/religion-master">Religion Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/subject-master">Subject Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/cast-master">Cast Master</Link>
+                                    </li>
+                                </ul>
+                            </Accordion.Body>
+                        </Accordion.Item>
+                        <Accordion.Item eventKey="students">
+                            <Accordion.Header>Transport</Accordion.Header>
+                            <Accordion.Body>
+                                <ul style={{ paddingLeft: '20px' }}>
+                                    <li>
+                                        <Link href="/all-modules">All Modules</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/add-new-student">add New Student</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/class-master">Class Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/city-master">City Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/year-master">Year Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/document-upload">Document Upload</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/category-master">Category Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/religion-master">Religion Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/subject-master">Subject Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/cast-master">Cast Master</Link>
+                                    </li>
+                                </ul>
+                            </Accordion.Body>
+                        </Accordion.Item>
+                        <Accordion.Item eventKey="students">
+                            <Accordion.Header>Fees</Accordion.Header>
+                            <Accordion.Body>
+                                <ul style={{ paddingLeft: '20px' }}>
+                                    <li>
+                                        <Link href="/all-modules">All Modules</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/add-new-student">add New Student</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/class-master">Class Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/city-master">City Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/year-master">Year Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/document-upload">Document Upload</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/category-master">Category Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/religion-master">Religion Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/subject-master">Subject Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/cast-master">Cast Master</Link>
+                                    </li>
+                                </ul>
+                            </Accordion.Body>
+                        </Accordion.Item>
+                        <Accordion.Item eventKey="students">
+                            <Accordion.Header>Front Office</Accordion.Header>
+                            <Accordion.Body>
+                                <ul style={{ paddingLeft: '20px' }}>
+                                    <li>
+                                        <Link href="/all-modules">All Modules</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/add-new-student">add New Student</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/class-master">Class Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/city-master">City Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/year-master">Year Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/document-upload">Document Upload</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/category-master">Category Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/religion-master">Religion Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/subject-master">Subject Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/cast-master">Cast Master</Link>
+                                    </li>
+                                </ul>
+                            </Accordion.Body>
+                        </Accordion.Item>
+                        <Accordion.Item eventKey="students">
+                            <Accordion.Header>Stock</Accordion.Header>
+                            <Accordion.Body>
+                                <ul style={{ paddingLeft: '20px' }}>
+                                    <li>
+                                        <Link href="/all-modules">All Modules</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/add-new-student">add New Student</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/class-master">Class Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/city-master">City Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/year-master">Year Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/document-upload">Document Upload</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/category-master">Category Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/religion-master">Religion Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/subject-master">Subject Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/cast-master">Cast Master</Link>
+                                    </li>
+                                </ul>
+                            </Accordion.Body>
+                        </Accordion.Item>
+                        <Accordion.Item eventKey="students">
+                            <Accordion.Header>Accounts</Accordion.Header>
+                            <Accordion.Body>
+                                <ul style={{ paddingLeft: '20px' }}>
+                                    <li>
+                                        <Link href="/all-modules">All Modules</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/add-new-student">add New Student</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/class-master">Class Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/city-master">City Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/year-master">Year Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/document-upload">Document Upload</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/category-master">Category Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/religion-master">Religion Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/subject-master">Subject Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/cast-master">Cast Master</Link>
+                                    </li>
+                                </ul>
+                            </Accordion.Body>
+                        </Accordion.Item>
+                        <Accordion.Item eventKey="students">
+                            <Accordion.Header>Medical</Accordion.Header>
+                            <Accordion.Body>
+                                <ul style={{ paddingLeft: '20px' }}>
+                                    <li>
+                                        <Link href="/all-modules">All Modules</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/add-new-student">add New Student</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/class-master">Class Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/city-master">City Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/year-master">Year Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/document-upload">Document Upload</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/category-master">Category Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/religion-master">Religion Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/subject-master">Subject Master</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/students/cast-master">Cast Master</Link>
+                                    </li>
+                                </ul>
+                            </Accordion.Body>
+                        </Accordion.Item>
                     </ul>
                 </Accordion>
             )}
