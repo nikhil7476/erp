@@ -15,65 +15,41 @@ import SubCard from "@/app/component/SubCard";
 const Page = () => {
   const cardData = [
     {
-      href: "/master-entry/school-info",
+      href: "/Transport/vehicle-type-master",
       icon: <RiSchoolLine className="studentIcon" />,
-      title: "School Information",
-      description: "Add Basic Details Of School",
+      title: "Vehicle Type Master",
+      description: "Add Basic Details Of Vehicle Type",
     },
     {
-      href: "/master-entry/class-master",
+      href: "/Transport/vehicle-master",
       icon: <SiGoogleclassroom className="studentIcon" />,
-      title: "Class Master",
-      description: "Add Basic Details Of Class",
+      title: "Vehicle Master",
+      description: "Add Basic Details Of Vehicle",
     },
     {
-      href: "/master-entry/city-master",
+      href: "/Transport/route-master",
       icon: <LiaCitySolid className="studentIcon" />,
-      title: "City Master",
-      description: "Add Basic Details of City Master",
+      title: "Route",
+      description: "Add Basic Details Of Route",
     },
     {
-      href: "/master-entry/year-master",
+      href: "/Transport/fuel-filling",
       icon: <SlCalender className="studentIcon" />,
-      title: "Year Master",
-      description: "Add Basic Details of Year",
+      title: "Vehicle Fuel Filling",
+      description: "Add Basic Details of FuelFilling",
     },
     {
-      href: "/master-entry/document-upload",
+      href: "/Transport/student-vehicle-relation",
       icon: <HiOutlineDocumentPlus className="studentIcon" />,
-      title: "Document Upload",
-      description: "Upload Basic Details of Document",
-    },
-    {
-      href: "/master-entry/category-master",
-      icon: <TbCategoryPlus className="studentIcon" />,
-      title: "Category Master",
-      description: "Add Basic Details of Category",
-    },
-    {
-      href: "/master-entry/religion-master",
-      icon: <PiTreeStructureLight className="studentIcon" />,
-      title: "Religion Master",
-      description: "Add Basic Details of Religion",
-    },
-    {
-      href: "/master-entry/subject-master",
-      icon: <MdOutlineSubject className="studentIcon" />,
-      title: "Subject Master",
-      description: "Add Basic Details of Subject",
-    },
-    {
-      href: "/master-entry/caste-master",
-      icon: <FaChromecast className="studentIcon" />,
-      title: "Caste Master",
-      description: "Add Basic Details of Cast",
+      title: "Assign To Student",
+      description: "Assign Pickup Point to Students",
     },
   ];
 
   return (
     <div>
       <div className="studentHeading">
-        <h2>Master Module</h2>
+        <h2>Transport Module</h2>
         <small>Manage your basic details....</small>
       </div>
       <div className="cardContainer">

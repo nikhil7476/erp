@@ -98,6 +98,10 @@ footer {
   padding: 10px;
 }
 
+.dashboardCardCard{
+  margin-bottom: 23px;
+}
+
 .dashboardCardCard span{
   font-size: 22px;
 }
@@ -121,7 +125,20 @@ footer {
   background-color: #6d49b1;
   padding: 11px;
   color: #fff;
-  
+}
+
+.studentCardTitle1{
+  background-color: #6d49b1;
+  padding: 9px 9px 9px 9px;
+  color: #fff;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  width: 160px;
+  border-radius: 30px;
+}
+
+.studentCardTitle1 h4{
+  font-size: 16px !important;
 }
 
 .dashboardCardCard h1{
@@ -133,6 +150,11 @@ footer {
   padding-bottom: 10px;
 }
 
+.studentImg1{
+  padding-top: 10px;
+  /* padding-bottom: 10px; */
+}
+
 .studentItemList{
   padding-top: 10px;
   padding-bottom: 10px;
@@ -141,6 +163,7 @@ footer {
 .card{
   text-align: center;
   border-radius: 28px;
+  padding-bottom: 20px;
   /* background-color: #fbf8f2; */
   box-shadow: -10px 0 10px 0 hsla(0, 3%, 59%, .5);
   transition: background .3s, border .3s, border-radius .3s, box-shadow .3s;
@@ -151,6 +174,7 @@ footer {
   flex-wrap: wrap;
   gap: 20px; 
   justify-content: space-between; 
+  margin-bottom: 35px;
 }
 
 .subCard1 {
@@ -195,6 +219,19 @@ footer {
   font-size: 1rem;
   color: #555555;
   margin-top: 8px;
+}
+
+.editButton{
+  background-color: #8a59ca;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  margin-right: 5px;
+  padding: 7px 10px;
+  width: 100px;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 16px;
+  margin: 10px 5px;
 }
 
 @media (max-width: 768px) {

@@ -1,8 +1,9 @@
 "use client";
-import React from 'react';
+import React, { useState } from 'react';
 import Table from '@/app/component/DataTable';
 
-const DocumentMasterPage = () => {
+const CasteMasterPage = () => {
+
   const columns = [ 
     {
       name: '#',
@@ -12,7 +13,7 @@ const DocumentMasterPage = () => {
     },
     {
       name: 'Name',
-      selector: row => row.Name,
+      selector: row => row.casteName,
       sortable: true,
     },
     {
@@ -37,35 +38,54 @@ const DocumentMasterPage = () => {
     }
   ];
 
-  const data = [
+  const [data, setData] = useState([
     {
       id: 1,
-      Name: 'BIRTH CERTIFICATE',
+      casteName: 'AGRAWAL',
     },
     {
        id: 2,
-       Name: 'AADHAR CARD',
+       casteName: 'SRIVASTAVA',
     },
     {
       id: 3,
-      Name: 'PHOTO(Passport Size)',
+      casteName: 'MISHRA',
       },
       {
         id: 4,
-        Name: 'TRANSFER CERTIFICATE',
+        casteName: 'GUPTA',
        },
       {
         id: 5,
-        Name: 'MARKSHEET',
+        casteName: 'KASHYAP',
       },
-  ];
+  ]);
+
+  const handleEdit = (id) => {
+    const item = data.find((row) => row.id === id);
+    const updatedName = prompt("Enter new name:", item.casteName);
+
+    if (updatedName) {
+      setRecords((prevData) =>
+        prevData.map((row) =>
+          row.id === id ? { ...row, casteName: updatedName } : row
+        )
+      );
+    }
+  };
+
+  const handleDelete = (id) => {
+    if (confirm("Are you sure you want to delete this entry?")) {
+      setData((prevData) => prevData.filter((row) => row.id !== id));
+    }
+  };
 
   return (
     <div>
-      <h1>Document Upload</h1>
+      <h2>Caste Master</h2>
       <Table columns={columns} data={data} />
     </div>
   );
 };
 
-export default DocumentMasterPage;
+export default CasteMasterPage;

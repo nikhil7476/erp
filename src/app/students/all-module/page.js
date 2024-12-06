@@ -15,65 +15,65 @@ import SubCard from "@/app/component/SubCard";
 const Page = () => {
   const cardData = [
     {
-      href: "/master-entry/school-info",
+      href: "/students/add-new-student",
       icon: <RiSchoolLine className="studentIcon" />,
-      title: "School Information",
-      description: "Add Basic Details Of School",
+      title: "New Student",
+      description: "Add Basic Details Of New Student",
     },
     {
-      href: "/master-entry/class-master",
+      href: "/students/update-student",
       icon: <SiGoogleclassroom className="studentIcon" />,
-      title: "Class Master",
-      description: "Add Basic Details Of Class",
+      title: "Update Student",
+      description: "Update Basic Details Of Student",
     },
     {
-      href: "/master-entry/city-master",
+      href: "/students/assign-roll-no",
       icon: <LiaCitySolid className="studentIcon" />,
-      title: "City Master",
-      description: "Add Basic Details of City Master",
+      title: "Assign RollNo",
+      description: "Assign Roll No To Student",
     },
     {
-      href: "/master-entry/year-master",
+      href: "/students/promote-student",
       icon: <SlCalender className="studentIcon" />,
-      title: "Year Master",
-      description: "Add Basic Details of Year",
+      title: "Promote Student",
+      description: "Promote Student To Next Session",
     },
     {
-      href: "/master-entry/document-upload",
+      href: "/students/transfer-certificate",
       icon: <HiOutlineDocumentPlus className="studentIcon" />,
-      title: "Document Upload",
-      description: "Upload Basic Details of Document",
+      title: "Transfer Certificate",
+      description: "Generate TC Of Student",
     },
     {
-      href: "/master-entry/category-master",
+      href: "/students/id-card",
       icon: <TbCategoryPlus className="studentIcon" />,
-      title: "Category Master",
-      description: "Add Basic Details of Category",
+      title: "ID Card",
+      description: "Generate Id Card Of Student",
     },
-    {
-      href: "/master-entry/religion-master",
-      icon: <PiTreeStructureLight className="studentIcon" />,
-      title: "Religion Master",
-      description: "Add Basic Details of Religion",
-    },
-    {
-      href: "/master-entry/subject-master",
-      icon: <MdOutlineSubject className="studentIcon" />,
-      title: "Subject Master",
-      description: "Add Basic Details of Subject",
-    },
-    {
-      href: "/master-entry/caste-master",
-      icon: <FaChromecast className="studentIcon" />,
-      title: "Caste Master",
-      description: "Add Basic Details of Cast",
-    },
+    // {
+    //   href: "/students/religion-master",
+    //   icon: <PiTreeStructureLight className="studentIcon" />,
+    //   title: "Religion Master",
+    //   description: "Add Basic Details of Religion",
+    // },
+    // {
+    //   href: "/students/subject-master",
+    //   icon: <MdOutlineSubject className="studentIcon" />,
+    //   title: "Subject Master",
+    //   description: "Add Basic Details of Subject",
+    // },
+    // {
+    //   href: "/students/caste-master",
+    //   icon: <FaChromecast className="studentIcon" />,
+    //   title: "Caste Master",
+    //   description: "Add Basic Details of Cast",
+    // },
   ];
 
   return (
     <div>
       <div className="studentHeading">
-        <h2>Master Module</h2>
+        <h2>Student Module</h2>
         <small>Manage your basic details....</small>
       </div>
       <div className="cardContainer">
