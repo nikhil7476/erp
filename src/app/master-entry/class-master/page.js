@@ -42,13 +42,13 @@ const ClassMasterPage = () => {
         <div className="twobuttons">
           <button
             className="editButton"
-            onClick={() => handleEdit(row)}
+            onClick={() => handleEdit(row.id)}
           >
             Edit
           </button>
           <button
             className="editButton"
-            onClick={() => handleDelete(row)}
+            onClick={() => handleDelete(row.id)}
           >
             Delete
           </button>

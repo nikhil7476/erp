@@ -8,6 +8,8 @@ const Card1 = (props) => {
   return (
     <div className="card">
       <div className="studentCard">
+       
+        <div className="studentData p-3">
         <div className="studentImg1">
           {imageSrc && (
             <Image
@@ -19,14 +21,15 @@ const Card1 = (props) => {
             />
           )}
         </div>
-        <div className="studentCardDetails">
+        <div className="studentItemList">
+        <div className="studentCardCount mb-3">
+            <p>
+              {props?.count} <span>{props?.label || ""} </span>
+            </p>
+          </div>
           <div className="studentCardTitle1">
             <h4>{props?.name}</h4>
           </div>
-          <div className="studentCardCount">
-            <p>
-              {props?.count} {props?.label || ""}
-            </p>
           </div>
         </div>
       </div>

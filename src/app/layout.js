@@ -6,8 +6,8 @@ import Header from "./component/Header";
 import Footer from "./component/Footer";
 import SideBar from "./component/SideBar"; // Import Sidebar component
 import "./globals.css";
+import "./darkMode.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-
 export default function RootLayout({ children }) {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
 

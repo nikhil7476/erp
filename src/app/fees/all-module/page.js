@@ -15,57 +15,81 @@ import SubCard from "@/app/component/SubCard";
 const Page = () => {
   const cardData = [
     {
-      href: "/master-entry/school-info",
+      href: "/fees/dashboard",
       icon: <RiSchoolLine className="studentIcon" />,
-      title: "School Information",
+      title: "Dashboard",
       description: "Add Basic Details Of School",
     },
     {
-      href: "/master-entry/class-master",
+      href: "/fees/school-account",
       icon: <SiGoogleclassroom className="studentIcon" />,
-      title: "Class Master",
+      title: "School Accounts",
       description: "Add Basic Details Of Class",
     },
     {
-      href: "/master-entry/city-master",
+      href: "/fees/installment-master",
       icon: <LiaCitySolid className="studentIcon" />,
-      title: "City Master",
+      title: "Installment Master",
       description: "Add Basic Details of City Master",
     },
     {
-      href: "/master-entry/year-master",
+      href: "/fees/head-master",
       icon: <SlCalender className="studentIcon" />,
-      title: "Year Master",
+      title: "Head Master",
       description: "Add Basic Details of Year",
     },
     {
-      href: "/master-entry/document-upload",
+      href: "/fees/fee-group",
       icon: <HiOutlineDocumentPlus className="studentIcon" />,
-      title: "Document Upload",
+      title: "Fee Group",
       description: "Upload Basic Details of Document",
     },
     {
-      href: "/master-entry/category-master",
+      href: "/fees/fee-setting",
       icon: <TbCategoryPlus className="studentIcon" />,
-      title: "Category Master",
+      title: "Fee Setting",
       description: "Add Basic Details of Category",
     },
     {
-      href: "/master-entry/religion-master",
+      href: "/fees/bank-master",
       icon: <PiTreeStructureLight className="studentIcon" />,
-      title: "Religion Master",
+      title: "Bank Master",
       description: "Add Basic Details of Religion",
     },
     {
-      href: "/master-entry/subject-master",
+      href: "/fees/pretty-head",
       icon: <MdOutlineSubject className="studentIcon" />,
-      title: "Subject Master",
+      title: "Pretty Head",
       description: "Add Basic Details of Subject",
     },
     {
-      href: "/master-entry/caste-master",
+      href: "/fees/fee-structure",
       icon: <FaChromecast className="studentIcon" />,
-      title: "Caste Master",
+      title: "Fee Structure",
+      description: "Add Basic Details of Cast",
+    },
+    {
+      href: "/fees/fixed-amount",
+      icon: <FaChromecast className="studentIcon" />,
+      title: "Fixed Amount",
+      description: "Add Basic Details of Cast",
+    },
+    {
+      href: "/fees/fee-entry",
+      icon: <FaChromecast className="studentIcon" />,
+      title: "Fee Entry",
+      description: "Add Basic Details of Cast",
+    },
+    {
+      href: "/fees/concession-entry",
+      icon: <FaChromecast className="studentIcon" />,
+      title: "Concession Entry",
+      description: "Add Basic Details of Cast",
+    },
+    {
+      href: "/fees/cheque-bounce",
+      icon: <FaChromecast className="studentIcon" />,
+      title: "Cheque Bounce Entry",
       description: "Add Basic Details of Cast",
     },
   ];
@@ -73,7 +97,7 @@ const Page = () => {
   return (
     <div>
       <div className="studentHeading">
-        <h2>Master Module</h2>
+        <h2>Fee Module</h2>
         <small>Manage your basic details....</small>
       </div>
       <div className="cardContainer">
