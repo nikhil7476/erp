@@ -6,7 +6,7 @@ import { Container, Row, Col, Breadcrumb, Form, FormLabel, FormGroup, FormContro
 import dynamic from 'next/dynamic';
 import { CgAddR } from 'react-icons/cg';
 
-const assignTransport = () => {
+const StudentVehicle = () => {
 
     const columns = [ 
         {
@@ -226,4 +226,4 @@ const assignTransport = () => {
     );
 };
 
-export default dynamic (() => Promise.resolve(assignTransport), {ssr: false});
+export default dynamic (() => Promise.resolve(StudentVehicle), {ssr: false});

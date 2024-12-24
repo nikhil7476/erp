@@ -6,7 +6,7 @@ import { Container, Row, Col, Breadcrumb, Form, FormLabel, FormGroup, FormContro
 import dynamic from 'next/dynamic';
 import { CgAddR } from 'react-icons/cg';
 
-const vehicleTypeRecords = () => {
+const VehicleTypeRecords = () => {
     const [formData, setFormData] = useState({
         vehicleType: "",
     });
@@ -116,4 +116,4 @@ const vehicleTypeRecords = () => {
     );
 };
 
-export default dynamic(() => Promise.resolve(vehicleTypeRecords), { ssr: false });
+export default dynamic(() => Promise.resolve(VehicleTypeRecords), { ssr: false });

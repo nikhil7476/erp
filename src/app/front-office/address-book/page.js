@@ -7,7 +7,7 @@ import dynamic from 'next/dynamic';
 import { CgAddR } from 'react-icons/cg';
 import "react-datepicker/dist/react-datepicker.css";
 
-const addressBook = () => {
+const AddressBook = () => {
   const [formData, setFormData] = useState({
     name: '',
     homePhone: '',
@@ -246,4 +246,4 @@ const addressBook = () => {
   );
 };
 
-export default dynamic(() => Promise.resolve(addressBook), { ssr: false });
+export default dynamic(() => Promise.resolve(AddressBook), { ssr: false });

@@ -5,7 +5,7 @@ import { Container, Row, Col, Breadcrumb} from 'react-bootstrap';
 import styles from "@/app/students/add-new-student/page.module.css";
 // import dynamic from 'next/dynamic';
 
-const StockInformation = () => {
+const StockAvailable = () => {
   const columns = [
     {
       name: '#',
@@ -80,4 +80,4 @@ const StockInformation = () => {
   );
 };
 
-export default StockInformation;
+export default StockAvailable;

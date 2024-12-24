@@ -6,7 +6,7 @@ import { Container, Row, Col, Breadcrumb, Form, FormLabel, FormGroup, FormContro
 import dynamic from 'next/dynamic';
 import { CgAddR } from 'react-icons/cg';
 
-const StockItemIssue = () => {
+const ItemReturn = () => {
 
   const columns = [
     {
@@ -257,4 +257,4 @@ const StockItemIssue = () => {
   );
 };
 
-export default dynamic (() => Promise.resolve(StockItemIssue), {ssr: false});
+export default dynamic (() => Promise.resolve(ItemReturn), {ssr: false});

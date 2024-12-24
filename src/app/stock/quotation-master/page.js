@@ -8,7 +8,7 @@ import { CgAddR } from 'react-icons/cg';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-const storeMaster = () => {
+const QuotationMaster = () => {
   const [formData, setFormData] = useState({
     storeName: '',
   });
@@ -206,4 +206,4 @@ const storeMaster = () => {
   );
 };
 
-export default dynamic(() => Promise.resolve(storeMaster), { ssr: false });
+export default dynamic(() => Promise.resolve(QuotationMaster), { ssr: false });

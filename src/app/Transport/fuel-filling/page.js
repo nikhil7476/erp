@@ -6,7 +6,7 @@ import { Container, Row, Col, Breadcrumb, Form, FormLabel, FormGroup, FormContro
 import dynamic from 'next/dynamic';
 import { CgAddR } from 'react-icons/cg';
 
-const expenseRecords = () => {
+const FuelFilling = () => {
 
   const columns = [ 
     {
@@ -286,4 +286,4 @@ const expenseRecords = () => {
   );
 };
 
-export default dynamic (() => Promise.resolve(expenseRecords), {ssr: false});
+export default dynamic (() => Promise.resolve(FuelFilling), {ssr: false});

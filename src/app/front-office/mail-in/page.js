@@ -7,7 +7,7 @@ import dynamic from 'next/dynamic';
 import { CgAddR } from 'react-icons/cg';
 import "react-datepicker/dist/react-datepicker.css";
 
-const mailIn = () => {
+const MailIn = () => {
   const [formData, setFormData] = useState({
     mailNo: '',
     forWhom: '',
@@ -240,4 +240,4 @@ const mailIn = () => {
   );
 };
 
-export default dynamic(() => Promise.resolve(mailIn), { ssr: false });
+export default dynamic(() => Promise.resolve(MailIn), { ssr: false });

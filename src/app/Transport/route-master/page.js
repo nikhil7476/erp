@@ -8,7 +8,7 @@ import { CgAddR } from 'react-icons/cg';
 import { CgAdd } from "react-icons/cg";
 import { FiMinus } from "react-icons/fi";
 
-const routeMaster = () => {
+const RouteMaster = () => {
 
   const columns = [ 
     {
@@ -201,4 +201,4 @@ const routeMaster = () => {
   );
 };
 
-export default dynamic (() => Promise.resolve(routeMaster), {ssr: false});
+export default dynamic (() => Promise.resolve(RouteMaster), {ssr: false});

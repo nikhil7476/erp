@@ -8,7 +8,7 @@ import { CgAddR } from 'react-icons/cg';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-const vehicleRecords = () => {
+const VehicleRecords = () => {
     const [formData, setFormData] = useState({
         vehicleType: '',
         driverName: '',
@@ -307,4 +307,4 @@ const vehicleRecords = () => {
   );
 };
 
-export default dynamic (() => Promise.resolve(vehicleRecords), {ssr: false});
+export default dynamic (() => Promise.resolve(VehicleRecords), {ssr: false});
