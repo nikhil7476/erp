@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import styles from "@/app/medical/routine-check-up/page.module.css";
@@ -7,12 +8,12 @@ import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { Form, Row, Col, Container, FormLabel, FormControl, Button } from "react-bootstrap";
 import axios from "axios";
 
-const AddGalleryGroup = () => {
+const CasteMasterPage = () => {
   const [data, setData] = useState([]); // Table data
   const [loading, setLoading] = useState(false); // Loading state
   const [error, setError] = useState(""); // Error state
   const [showAddForm, setShowAddForm] = useState(false); // Toggle Add Form visibility
-  const [newGroupName, setNewGroupName] = useState(""); // New gallery group name
+  const [newCasteName, setNewCasteName] = useState(""); // New caste name
 
   // Table columns configuration
   const columns = [
@@ -24,17 +25,17 @@ const AddGalleryGroup = () => {
     },
     {
       name: "Name",
-      selector: (row) => row.groupName || "N/A", // Default to "N/A" if `groupName` is missing
+      selector: (row) => row.caste_name || "N/A", // Default to "N/A" if `casteName` is missing
       sortable: true,
     },
     {
       name: "Actions",
       cell: (row) => (
         <div className="d-flex gap-2">
-          <button className="editButton" onClick={() => handleEdit(row.id)}>
+          <button className="editButton" onClick={() => handleEdit(row._id)}>
             <FaEdit />
           </button>
-          <button className="editButton btn-danger" onClick={() => handleDelete(row.id)}>
+          <button className="editButton btn-danger" onClick={() => handleDelete(row._id)}>
             <FaTrashAlt />
           </button>
         </div>
@@ -47,9 +48,13 @@ const AddGalleryGroup = () => {
     setLoading(true);
     setError("");
     try {
-      const response = await axios.get("/api/galleryGroups");
-      const fetchedData = response.data || [];
-      setData(fetchedData);
+      const response = await axios.get("https://erp-backend-fy3n.onrender.com/caste/api/castes");
+      const fetchedData = response.data.data || [];
+      const normalizedData = fetchedData.map((item) => ({
+        ...item,
+        caste_name: item.caste_name || "N/A", // Ensure `casteName` always exists
+      }));
+      setData(normalizedData);
     } catch (err) {
       console.error("Error fetching data:", err);
       setError("Failed to fetch data. Please try again later.");
@@ -58,16 +63,18 @@ const AddGalleryGroup = () => {
     }
   };
 
-  // Edit existing group
+  // Edit existing entry
   const handleEdit = async (id) => {
-    const item = data.find((row) => row.id === id);
-    const updatedName = prompt("Enter new name:", item?.groupName || "");
+    const item = data.find((row) => row._id === id);
+    const updatedName = prompt("Enter new name:", item?.caste_name || "");
     if (updatedName) {
       try {
-        await axios.put(`/api/galleryGroups/${id}`, { groupName: updatedName });
+        await axios.put(`https://erp-backend-fy3n.onrender.com/caste/api/castes/${id}`, {
+          caste_name: updatedName,
+        });
         setData((prevData) =>
           prevData.map((row) =>
-            row.id === id ? { ...row, groupName: updatedName } : row
+            row._id === id ? { ...row, caste_name: updatedName } : row
           )
         );
       } catch (error) {
@@ -77,12 +84,12 @@ const AddGalleryGroup = () => {
     }
   };
 
-  // Delete a group
+  // Delete an entry
   const handleDelete = async (id) => {
-    if (confirm("Are you sure you want to delete this group?")) {
+    if (confirm("Are you sure you want to delete this entry?")) {
       try {
-        await axios.delete(`/api/galleryGroups/${id}`);
-        setData((prevData) => prevData.filter((row) => row.id !== id));
+        await axios.delete(`https://erp-backend-fy3n.onrender.com/caste/api/castes/${id}`);
+        setData((prevData) => prevData.filter((row) => row._id !== id));
       } catch (error) {
         console.error("Error deleting data:", error);
         setError("Failed to delete data. Please try again later.");
@@ -90,22 +97,22 @@ const AddGalleryGroup = () => {
     }
   };
 
-  // Add a new gallery group
+  // Add a new entry
   const handleAdd = async () => {
-    if (newGroupName.trim()) {
+    if (newCasteName.trim()) {
       try {
-        const response = await axios.post("/api/galleryGroups", {
-          groupName: newGroupName,
+        const response = await axios.post("https://erp-backend-fy3n.onrender.com/caste/api/castes", {
+          caste_name: newCasteName,
         });
         setData((prevData) => [...prevData, response.data]);
-        setNewGroupName("");
+        setNewCasteName("");
         setShowAddForm(false);
       } catch (error) {
         console.error("Error adding data:", error);
         setError("Failed to add data. Please try again later.");
       }
     } else {
-      alert("Please enter a valid group name.");
+      alert("Please enter a valid caste name.");
     }
   };
 
@@ -121,7 +128,7 @@ const AddGalleryGroup = () => {
           onClick={() => setShowAddForm(!showAddForm)}
           className={`mb-4 ${styles.search}`}
         >
-          Add Group
+          Add Caste
         </Button>
 
         {/* Add Form */}
@@ -129,19 +136,19 @@ const AddGalleryGroup = () => {
           <div className="mb-4">
             <Row className="mb-3">
               <Col lg={6}>
-                <FormLabel>Group Name</FormLabel>
+                <FormLabel>Caste Name</FormLabel>
                 <FormControl
                   type="text"
-                  placeholder="Enter Group Name"
-                  value={newGroupName}
-                  onChange={(e) => setNewGroupName(e.target.value)}
+                  placeholder="Enter Caste Name"
+                  value={newCasteName}
+                  onChange={(e) => setNewCasteName(e.target.value)}
                 />
               </Col>
             </Row>
             <Row>
               <Col>
                 <Button onClick={handleAdd} className={styles.search}>
-                  Add Group
+                  Add Caste
                 </Button>
               </Col>
             </Row>
@@ -151,7 +158,7 @@ const AddGalleryGroup = () => {
         {/* Table Section */}
         <Row>
           <Col>
-            <h2 style={{ fontSize: "22px" }}>Group Records</h2>
+            <h2 style={{ fontSize: "22px" }}>Caste Records</h2>
             {loading && <p>Loading...</p>}
             {error && <p style={{ color: "red" }}>{error}</p>}
             {!loading && !error && <Table columns={columns} data={data} />}
@@ -162,4 +169,4 @@ const AddGalleryGroup = () => {
   );
 };
 
-export default dynamic(() => Promise.resolve(AddGalleryGroup), { ssr: false });
+export default dynamic(() => Promise.resolve(CasteMasterPage), { ssr: false });
