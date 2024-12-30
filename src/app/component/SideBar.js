@@ -104,6 +104,36 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
         { title: "Add Doctor Profile", href: "/medical/add-doctor-profile", icon: <FaUserGraduate /> },
         { title: "Routine Check-Up", href: "/medical/routine-check-up", icon: <FaSchool /> },
     ];
+    const advertisingItems = [
+        { title: "All Modules", href: "/advertising-management/all-module", icon: <FaCog /> },
+        { title: "Create Type", href: "/advertising-management/create-type", icon: <FaSchool /> },
+        { title: "Enter Data", href: "/advertising-management/enter-data", icon: <FaUserGraduate /> },
+    ];
+    const examItems = [
+        { title: "All Modules", href: "/advertising-management/all-module", icon: <FaCog /> },
+        { title: "Create Type", href: "/advertising-management/create-type", icon: <FaSchool /> },
+        { title: "Enter Data", href: "/advertising-management/enter-data", icon: <FaUserGraduate /> },
+    ];
+    const noticeItems = [
+        { title: "All Modules", href: "/advertising-management/all-module", icon: <FaCog /> },
+        { title: "Create Type", href: "/advertising-management/create-type", icon: <FaSchool /> },
+        { title: "Enter Data", href: "/advertising-management/enter-data", icon: <FaUserGraduate /> },
+    ];
+    const hrdItems = [
+        { title: "All Modules", href: "/advertising-management/all-module", icon: <FaCog /> },
+        { title: "Create Type", href: "/advertising-management/create-type", icon: <FaSchool /> },
+        { title: "Enter Data", href: "/advertising-management/enter-data", icon: <FaUserGraduate /> },
+    ];
+    const libraryItems = [
+        { title: "All Modules", href: "/advertising-management/all-module", icon: <FaCog /> },
+        { title: "Create Type", href: "/advertising-management/create-type", icon: <FaSchool /> },
+        { title: "Enter Data", href: "/advertising-management/enter-data", icon: <FaUserGraduate /> },
+    ];
+    // const youtubeItems = [
+    //     { title: "All Modules", href: "/advertising-management/all-module", icon: <FaCog /> },
+    //     { title: "Create Type", href: "/advertising-management/create-type", icon: <FaSchool /> },
+    //     { title: "Enter Data", href: "/advertising-management/enter-data", icon: <FaUserGraduate /> },
+    // ];
     return (
         <div>
            <div
@@ -312,6 +342,116 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
                             <Accordion.Body>
                                 <ul style={{ listStyle: "none", paddingLeft: isOpen || activeKey ? "20px" : "0" }}>
                                     {galleryItems.map((item, index) => (
+                                        <li key={index} style={{ padding: "5px 0", display: "flex", alignItems: "center" }}>
+                                            {item.icon}
+                                            <span style={{display: isOpen || activeKey ? "inline" : "none" }}>
+                                                <Link href={item.href}>
+                                                    {item.title}
+                                                </Link>
+                                            </span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </Accordion.Body>
+                        </Accordion.Item>
+                        <Accordion.Item eventKey="advertising-management">
+                            <Accordion.Header>
+                                <span style={{ display: "flex", alignItems: "center" }}>
+                                    <FaCog style={{ marginRight: isOpen || activeKey ? "10px" : "0" }} />
+                                    {(isOpen || activeKey) && "Advertising Management"}
+                                </span>
+                            </Accordion.Header>
+                            <Accordion.Body>
+                                <ul style={{ listStyle: "none", paddingLeft: isOpen || activeKey ? "20px" : "0" }}>
+                                    {advertisingItems.map((item, index) => (
+                                        <li key={index} style={{ padding: "5px 0", display: "flex", alignItems: "center" }}>
+                                            {item.icon}
+                                            <span style={{display: isOpen || activeKey ? "inline" : "none" }}>
+                                                <Link href={item.href}>
+                                                    {item.title}
+                                                </Link>
+                                            </span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </Accordion.Body>
+                        </Accordion.Item>
+                        <Accordion.Item eventKey="exams">
+                            <Accordion.Header>
+                                <span style={{ display: "flex", alignItems: "center" }}>
+                                    <FaCog style={{ marginRight: isOpen || activeKey ? "10px" : "0" }} />
+                                    {(isOpen || activeKey) && "Exams"}
+                                </span>
+                            </Accordion.Header>
+                            <Accordion.Body>
+                                <ul style={{ listStyle: "none", paddingLeft: isOpen || activeKey ? "20px" : "0" }}>
+                                    {examItems.map((item, index) => (
+                                        <li key={index} style={{ padding: "5px 0", display: "flex", alignItems: "center" }}>
+                                            {item.icon}
+                                            <span style={{display: isOpen || activeKey ? "inline" : "none" }}>
+                                                <Link href={item.href}>
+                                                    {item.title}
+                                                </Link>
+                                            </span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </Accordion.Body>
+                        </Accordion.Item>
+                        <Accordion.Item eventKey="notice">
+                            <Accordion.Header>
+                                <span style={{ display: "flex", alignItems: "center" }}>
+                                    <FaCog style={{ marginRight: isOpen || activeKey ? "10px" : "0" }} />
+                                    {(isOpen || activeKey) && "Notice"}
+                                </span>
+                            </Accordion.Header>
+                            <Accordion.Body>
+                                <ul style={{ listStyle: "none", paddingLeft: isOpen || activeKey ? "20px" : "0" }}>
+                                    {noticeItems.map((item, index) => (
+                                        <li key={index} style={{ padding: "5px 0", display: "flex", alignItems: "center" }}>
+                                            {item.icon}
+                                            <span style={{display: isOpen || activeKey ? "inline" : "none" }}>
+                                                <Link href={item.href}>
+                                                    {item.title}
+                                                </Link>
+                                            </span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </Accordion.Body>
+                        </Accordion.Item>
+                        <Accordion.Item eventKey="HRD">
+                            <Accordion.Header>
+                                <span style={{ display: "flex", alignItems: "center" }}>
+                                    <FaCog style={{ marginRight: isOpen || activeKey ? "10px" : "0" }} />
+                                    {(isOpen || activeKey) && "HRD"}
+                                </span>
+                            </Accordion.Header>
+                            <Accordion.Body>
+                                <ul style={{ listStyle: "none", paddingLeft: isOpen || activeKey ? "20px" : "0" }}>
+                                    {hrdItems.map((item, index) => (
+                                        <li key={index} style={{ padding: "5px 0", display: "flex", alignItems: "center" }}>
+                                            {item.icon}
+                                            <span style={{display: isOpen || activeKey ? "inline" : "none" }}>
+                                                <Link href={item.href}>
+                                                    {item.title}
+                                                </Link>
+                                            </span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </Accordion.Body>
+                        </Accordion.Item>
+                        <Accordion.Item eventKey="library">
+                            <Accordion.Header>
+                                <span style={{ display: "flex", alignItems: "center" }}>
+                                    <FaCog style={{ marginRight: isOpen || activeKey ? "10px" : "0" }} />
+                                    {(isOpen || activeKey) && "Library"}
+                                </span>
+                            </Accordion.Header>
+                            <Accordion.Body>
+                                <ul style={{ listStyle: "none", paddingLeft: isOpen || activeKey ? "20px" : "0" }}>
+                                    {libraryItems.map((item, index) => (
                                         <li key={index} style={{ padding: "5px 0", display: "flex", alignItems: "center" }}>
                                             {item.icon}
                                             <span style={{display: isOpen || activeKey ? "inline" : "none" }}>

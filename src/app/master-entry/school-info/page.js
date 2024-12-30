@@ -7,6 +7,7 @@ import styles from "../school-info/page.module.css";
 
 export default function Form() {
   const [showPreview, setShowPreview] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     schoolName: "",
     phoneNo: "",
@@ -20,82 +21,59 @@ export default function Form() {
     logo: null,
   });
 
-  const [schools, setSchools] = useState([]);
-
-  // Corrected API Base URL
-  const apiBaseUrl = "https://erp-backend-fy3n.onrender.com/api/schools";
-
-  useEffect(() => {
-    fetchSchools();
-  }, []);
-
-  const fetchSchools = async () => {
-    try {
-      const response = await axios.get(apiBaseUrl);
-      setSchools(response.data);
-    } catch (error) {
-      console.error("Error fetching schools. Details:", error.response?.data || error.message);
-    }
-  };
-
+  // Function to handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
+  // Function to handle file input change
   const handleFileChange = (e) => {
     setFormData({ ...formData, logo: e.target.files[0] });
   };
 
+  // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formDataToSend = new FormData();
-    Object.entries(formData).forEach(([key, value]) => {
-      formDataToSend.append(key, value);
-    });
+    setLoading(true);
 
     try {
-      await axios.post(apiBaseUrl, formDataToSend, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+      const data = new FormData();
+      Object.keys(formData).forEach((key) => {
+        if (key === "logo" && formData.logo) {
+          data.append(key, formData.logo);
+        } else {
+          data.append(key, formData[key]);
+        }
       });
-      alert("School added successfully!");
-      fetchSchools();
-    } catch (error) {
-      console.error("Error adding school. Details:", error.response?.data || error.message);
-      alert("Failed to add school.");
-    }
-  };
 
-  const handleUpdate = async (id) => {
-    const formDataToSend = new FormData();
-    Object.entries(formData).forEach(([key, value]) => {
-      formDataToSend.append(key, value);
-    });
-
-    try {
-      await axios.put(`${apiBaseUrl}/${id}`, formDataToSend, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+      // Send POST request to the backend
+      const response = await axios.post("school/api/school", data, {
+        headers: { "Content-Type": "multipart/form-data" },
       });
-      alert("School updated successfully!");
-      fetchSchools();
-    } catch (error) {
-      console.error("Error updating school. Details:", error.response?.data || error.message);
-      alert("Failed to update school.");
-    }
-  };
+      console.log(response);
 
-  const handleDelete = async (id) => {
-    try {
-      await axios.delete(`${apiBaseUrl}/${id}`);
-      alert("School deleted successfully!");
-      fetchSchools();
+      if (response.status === 201) {
+        alert("Form submitted successfully!");
+        setFormData({
+          schoolName: "",
+          phoneNo: "",
+          email: "",
+          webAddress: "",
+          address: "",
+          accountNo: "",
+          ifscCode: "",
+          bankName: "",
+          branchName: "",
+          logo: null,
+        });
+      } else {
+        alert(response.data.message || "Failed to submit the form.");
+      }
     } catch (error) {
-      console.error("Error deleting school. Details:", error.response?.data || error.message);
-      alert("Failed to delete school.");
+      alert(error.response?.data?.message || "An error occurred while submitting the form.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -105,9 +83,13 @@ export default function Form() {
 
   return (
     <div className={styles.inputs} style={{ padding: "20px", maxWidth: "1200px" }}>
-      <h2>School Form</h2>
+      <h2>Inputs</h2>
       {!showPreview ? (
-        <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "row", gap: "27px", margin: "auto" }} className={styles.form}>
+        <form
+          onSubmit={handleSubmit}
+          style={{ display: "flex", flexDirection: "row", gap: "27px", margin: "auto" }}
+          className={styles.form}
+        >
           <div className={styles.label1}>
             <label>
               School Name:
@@ -206,17 +188,16 @@ export default function Form() {
               <input type="file" name="logo" onChange={handleFileChange} className={styles.file} required />
             </label>
           </div>
+          <button className={styles.btnn} type="submit" disabled={loading}>
+            {loading ? "Submitting..." : "Submit"}
+          </button>
         </form>
       ) : (
         <Preview data={formData} onEdit={togglePreview} />
       )}
-
       <div className={styles.buttons}>
         <button className={styles.btnn} type="button" onClick={togglePreview}>
           Preview
-        </button>
-        <button className={styles.btnn} type="submit" onClick={handleSubmit}>
-          Submit
         </button>
       </div>
     </div>

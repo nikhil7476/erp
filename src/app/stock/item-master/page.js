@@ -1,132 +1,56 @@
-"use client";
-import React, { useState } from 'react';
-import Table from '@/app/component/DataTable';
-import styles from "@/app/students/add-new-student/page.module.css"
-import { Container, Row, Col, Breadcrumb, Form, FormLabel, FormGroup, FormControl, FormSelect, Button } from 'react-bootstrap';
-import dynamic from 'next/dynamic';
-import { CgAddR } from 'react-icons/cg';
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+// UPDATED CODE FOR API // PARTIALLY DATA-DIFFRENT KEYS-ITEM-MASTER
+"use client"; // Enables client-side rendering for this file
+
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { Container, Row, Col, Breadcrumb, Form, FormControl, Button, Table } from "react-bootstrap";
+import { CgAddR } from "react-icons/cg";
 
 const ItemMaster = () => {
-  const [formData, setFormData] = useState({
-    storeName: '',
-  });
+  const [data, setData] = useState([]); // State to store item master records
+  const [error, setError] = useState(null); // State to store errors
+  const [searchTerm, setSearchTerm] = useState(""); // State for search input
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+  // Fetch data from the API
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        "https://erp-backend-fy3n.onrender.com/itemMaster/api/itemMasters"
+      );
 
-  const columns = [
-    {
-      name: '#',
-      selector: row => row.id,
-      sortable: true,
-      width: '80px',
-    },
-    {
-      name: 'Category',
-      selector: row => row.category,
-      sortable: true,
-    },
-    {
-      name: 'ItemType',
-      selector: row => row.itemType,
-      sortable: true,
-    },
-    {
-      name: 'ItemName',
-      selector: row => row.itemName,
-      sortable: true,
-    },
-    {
-      name: 'MinimumStock',
-      selector: row => row.minimumStock,
-      sortable: true,
-    },
-    {
-      name: 'Description',
-      selector: row => row.description,
-      sortable: true,
-    },
-    {
-      name: 'Date',
-      selector: row => row.date,
-      sortable: true,
-    },
-    {
-      name: 'Action',
-      cell: row => (
-        <div style={{
-          display: 'flex',
-        }}>
-          <button className='editButton'
-            onClick={() => handleEdit(row.id)}
-          >
-            Edit
-          </button>
-          <button className="editButton"
-            onClick={() => handleDelete(row.id)}
-          >
-            Delete
-          </button>
-        </div>
-      ),
+      console.log("API Response:", response.data); // Debugging API response
+
+      if (response.data && Array.isArray(response.data)) {
+        setData(response.data); // Direct array response
+      } else if (response.data.data && Array.isArray(response.data.data)) {
+        setData(response.data.data); // Response inside `data` field
+      } else {
+        console.error("Unexpected API response format:", response.data);
+        setError("Unexpected API response format.");
+      }
+    } catch (err) {
+      console.error("Error fetching data:", err);
+      setError("Failed to fetch data. Please try again.");
     }
-  ];
-
-  const data = [
-    {
-      id: 1,
-      category: 'Factory Outlet',
-      itemType: 'Furniture',
-      itemName: 'Chair',
-      minimumStock: '3',
-      description: 'No Desc',
-      date: '12/09/2000',
-    },
-    {
-      id: 2,
-      category: 'LotusUp Store',
-      category: 'Factory Outlet',
-      itemType: 'Furniture',
-      itemName: 'Chair',
-      minimumStock: '3',
-      description: 'No Desc',
-      date: '12/09/2000',
-    },
-    {
-      id: 3,
-      category: 'Main Store ',
-      category: 'Factory Outlet',
-      itemType: 'Furniture',
-      itemName: 'Chair',
-      minimumStock: '3',
-      description: 'No Desc',
-      date: '12/09/2000',
-    },
-  ];
-
-  const [startDate, setStartDate] = useState(new Date());
-
-  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
-
-  const togglePopover = () => {
-    setIsPopoverOpen(!isPopoverOpen);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Form submitted:', formData);
-    setIsPopoverOpen(false);
-  };
+  // UseEffect to fetch data on component mount
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  // Filter data based on search input
+  const filteredData = data.filter(
+    (item) =>
+      item.itemName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.category.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
-    <Container className={styles.vehicle}>
-      <Row className='mt-1 mb-1'>
+    <Container className="mt-4">
+      <Row className="mb-3">
         <Col>
-          <Breadcrumb style={{ marginLeft: '20px' }}>
+          <Breadcrumb>
             <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
             <Breadcrumb.Item href="/stock/all-module">
               Stock Module
@@ -135,79 +59,68 @@ const ItemMaster = () => {
           </Breadcrumb>
         </Col>
       </Row>
-      <Row>
+
+      <Row className="d-flex justify-content-between align-items-center mb-3">
         <Col>
-          <button onClick={togglePopover} id="submit" type='button' style={{ marginLeft: '20px' }}>
-            <CgAddR style={{ fontSize: '27px', marginTop: '-2px', marginRight: '5px' }} /> Add New Item</button>
-          {isPopoverOpen && (
-            <div className='absolute right-0 mt-3 w-60 p-4' style={{ backgroundColor: '#f8f9fa', border: '1px solid #ddd', borderRadius: '8px', padding: '20px', width: '940px' }}>
-              <h3>Add New Item</h3>
-              <Form onSubmit={handleSubmit}>
-                <Row className="mb-3">
-                  <FormGroup as={Col} md="6" controlId="validationCustom01">
-                    <FormLabel value={formData.itemCategory} onChange={handleChange} required>Item Category</FormLabel>
-                    <FormSelect>
-                      <option>Select Any Category</option>
-                      <option value="1">Anshika</option>
-                      <option value="2">Ashu</option>
-                      <option value="3">Akansha</option>
-                      <option value="4">Nikhil</option>
-                    </FormSelect>
-                  </FormGroup>
-                  <FormGroup as={Col} md="6" controlId="validationCustom02">
-                    <FormLabel value={formData.itemType} onChange={handleChange} required>Item Type</FormLabel>
-                    <FormSelect>
-                      <option>Select</option>
-                      <option value="1">RECUURING</option>
-                      <option value="2">NON RECUURING</option>
-                    </FormSelect>
-                  </FormGroup>
-                </Row>
-                <Row className='mb-3'>
-                  <FormGroup as={Col} md="6" controlId="validationCustom03">
-                    <FormLabel value={formData.itemName} onChange={handleChange} required>Item Name</FormLabel>
-                    <FormControl
-                      required
-                      type="text"
-                    />
-                  </FormGroup>
-                  <FormGroup as={Col} md="6" controlId="validationCustom04">
-                    <FormLabel value={formData.courierName} onChange={handleChange} required>Description</FormLabel>
-                    <FormControl
-                      required
-                      type="textarea"
-                    />
-                  </FormGroup>
-                </Row>
-                <Row className='mb-3'>
-                  <FormGroup as={Col} md="6" controlId="validationCustom03">
-                    <FormLabel value={formData.category} onChange={handleChange} required>Maintain Minimum Stock</FormLabel>
-                    <FormControl
-                      required
-                      type="text"
-                    />
-                  </FormGroup>
-                  <FormGroup as={Col} md="6" controlId="validationCustom04">
-                  </FormGroup>
-                </Row>
-                <Button type="submit" id="submit" onSubmit={handleSubmit}>Add New Item</Button>
-              </Form>
-            </div>
-          )}
+          <h1>Stock Item Master</h1>
+        </Col>
+        <Col className="text-end">
+          <Button variant="primary">
+            <CgAddR style={{ fontSize: "20px", marginRight: "5px" }} /> Add New Item
+          </Button>
         </Col>
       </Row>
-      <Row>
+
+      <Row className="mb-3">
         <Col>
-          <h2 style={{ marginLeft: '23px', marginTop: '15px', marginBottom: '25px', fontSize: '22px' }}>Stock Item Record</h2>
-          <Table columns={columns} data={data} />
-          <div className={styles.buttons} style={{ float: 'right', marginRight: '10px' }}>
-            <button type="button" className="editButton">Previous</button>
-            <button type="button" className="editButton">Next</button>
-          </div>
+          <FormControl
+            type="text"
+            placeholder="Search..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
         </Col>
       </Row>
+
+      {error ? (
+        <p style={{ color: "red" }}>{error}</p>
+      ) : (
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Category</th>
+              <th>Item Type</th>
+              <th>Item Name</th>
+              <th>Maintain Minimum Stock</th>
+              <th>Description</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredData.map((item, index) => (
+              <tr key={item.id || index}>
+                <td>{index + 1}</td>
+                <td>{item.categoryName}</td>
+                <td>{item.itemType}</td>
+                <td>{item.itemName}</td>
+                <td>{item.maintainMinimumStock}</td>
+                <td>{item.description}</td>
+                <td>
+                  <Button variant="warning" size="sm" className="me-2">
+                    Edit
+                  </Button>
+                  <Button variant="danger" size="sm">
+                    Delete
+                  </Button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      )}
     </Container>
   );
 };
 
-export default dynamic(() => Promise.resolve(ItemMaster), { ssr: false });
+export default ItemMaster;
