@@ -249,6 +249,7 @@ footer {
 }
 .studentItemList h5 {
   font-size: 14px;
+  color: #000;
 }
 .studentCardDetails {
   display: grid;
