@@ -27,7 +27,7 @@ const DailyDairy = () => {
     workDetails: "",
   }); // New entry data
 
-  const baseURL = "https://erp-backend-fy3n.onrender.com/dailydairy/api/dailyDairy";
+  const baseURL = "https://erp-backend-fy3n.onrender.com/api/dailyDairy";
 
   // Table columns configuration
   const columns = [

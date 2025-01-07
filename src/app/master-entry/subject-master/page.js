@@ -63,7 +63,7 @@ const SubjectMasterPage = () => {
     setLoading(true);
     setError("");
     try {
-      const response = await axios.get("https://erp-backend-fy3n.onrender.com/subject/api/subjects");
+      const response = await axios.get("https://erp-backend-fy3n.onrender.com/api/subjects");
       const fetchedSubjects = Array.isArray(response.data) ? response.data : Array.isArray(response.data?.data) ? response.data.data : [];
       setSubjects(fetchedSubjects);
     } catch (err) {
@@ -78,7 +78,7 @@ const SubjectMasterPage = () => {
   const handleAddSubject = async () => {
     if (newSubject.subject_name.trim() && newSubject.teacher_in_charge.trim()) {
       try {
-        const response = await axios.post("https://erp-backend-fy3n.onrender.com/subject/api/subjects", newSubject);
+        const response = await axios.post("https://erp-backend-fy3n.onrender.com/api/subjects", newSubject);
         setSubjects((prevSubjects) => [...prevSubjects, response.data]);
         setNewSubject({ subject_name: "", teacher_in_charge: "", class_name: "", section_name: "" }); // Reset input fields
         setShowAddForm(false); // Hide the form
@@ -101,7 +101,7 @@ const SubjectMasterPage = () => {
 
     if (updatedName && updatedTeacherInCharge && updatedClassName && updatedSectionName) {
       try {
-        await axios.put(`https://erp-backend-fy3n.onrender.com/subject/api/subjects/${id}`, {
+        await axios.put(`https://erp-backend-fy3n.onrender.com/api/subjects/${id}`, {
           subject_name: updatedName,
           teacher_in_charge: updatedTeacherInCharge,
           class_name: updatedClassName,
@@ -125,7 +125,7 @@ const SubjectMasterPage = () => {
   const handleDelete = async (id) => {
     if (confirm("Are you sure you want to delete this subject?")) {
       try {
-        await axios.delete(`https://erp-backend-fy3n.onrender.com/subject/api/subjects/${id}`);
+        await axios.delete(`https://erp-backend-fy3n.onrender.com/api/subjects/${id}`);
         setSubjects((prevSubjects) => prevSubjects.filter((row) => row._id !== id));
         alert("Subject deleted successfully!");
       } catch (err) {

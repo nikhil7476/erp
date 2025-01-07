@@ -61,7 +61,7 @@ const CityMasterPage = () => {
     setError("");
     try {
       const response = await axios.get(
-        "https://erp-backend-fy3n.onrender.com/location/api/states"
+        "https://erp-backend-fy3n.onrender.com/api/states"
       );
 
       // Ensure the response data is an array
@@ -83,7 +83,7 @@ const CityMasterPage = () => {
     if (newStateName.trim() && newCityName.trim()) {
       try {
         const response = await axios.post(
-          "https://erp-backend-fy3n.onrender.com/location/api/states",
+          "https://erp-backend-fy3n.onrender.com/api/states",
           {
             state_name: newStateName,
             cityName: newCityName,
@@ -119,7 +119,7 @@ const CityMasterPage = () => {
     if (updatedStateName && updatedCityName) {
       try {
         await axios.put(
-          `https://erp-backend-fy3n.onrender.com/location/api/states/${id}`,
+          `https://erp-backend-fy3n.onrender.com/api/states/${id}`,
           {
             state_name: updatedStateName,
             cityName: updatedCityName,
@@ -148,7 +148,7 @@ const CityMasterPage = () => {
     if (confirm("Are you sure you want to delete this city?")) {
       try {
         await axios.delete(
-          `https://erp-backend-fy3n.onrender.com/location/api/states/${id}`
+          `https://erp-backend-fy3n.onrender.com/api/states/${id}`
         );
 
         // Remove the city from the state array

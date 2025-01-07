@@ -52,7 +52,7 @@ const CategoryMasterPage = () => {
     setError("");
     try {
       const response = await axios.get(
-        "https://erp-backend-fy3n.onrender.com/category/api/categories"
+        "https://erp-backend-fy3n.onrender.com/api/categories"
       );
 
       // Ensure the response data is an array
@@ -76,7 +76,7 @@ const CategoryMasterPage = () => {
     if (newCategoryName.trim()) {
       try {
         const response = await axios.post(
-          "https://erp-backend-fy3n.onrender.com/category/api/categories",
+          "https://erp-backend-fy3n.onrender.com/api/categories",
           {
             category_name: newCategoryName,
           }
@@ -105,7 +105,7 @@ const CategoryMasterPage = () => {
     if (updatedName) {
       try {
         await axios.put(
-          `https://erp-backend-fy3n.onrender.com/category/api/categories/${id}`,
+          `https://erp-backend-fy3n.onrender.com/api/categories/${id}`,
           {
             category_name: updatedName,
           }
@@ -131,7 +131,7 @@ const CategoryMasterPage = () => {
     if (confirm("Are you sure you want to delete this category?")) {
       try {
         await axios.delete(
-          `https://erp-backend-fy3n.onrender.com/category/api/categories/${id}`
+          `https://erp-backend-fy3n.onrender.com/api/categories/${id}`
         );
 
         // Remove the category from the state array

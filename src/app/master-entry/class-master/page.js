@@ -54,7 +54,7 @@ const ClassMasterPage = () => {
     setError("");
     try {
       const response = await axios.get(
-        "https://erp-backend-fy3n.onrender.com/class/api/classes"
+        "https://erp-backend-fy3n.onrender.com/api/classes"
       );
       if (response.data && Array.isArray(response.data)) {
         setData(response.data); // Setting fetched data
@@ -74,7 +74,7 @@ const ClassMasterPage = () => {
     if (newClassName.trim() && newSection.trim()) {
       try {
         const response = await axios.post(
-          "https://erp-backend-fy3n.onrender.com/class/api/classes",
+          "https://erp-backend-fy3n.onrender.com/api/classes",
           {
             className: newClassName,
             section: newSection,
@@ -104,7 +104,7 @@ const ClassMasterPage = () => {
     if (updatedClassName && updatedSection) {
       try {
         await axios.put(
-          `https://erp-backend-fy3n.onrender.com/class/api/classes/${id}`,
+          `https://erp-backend-fy3n.onrender.com/api/classes/${id}`,
           {
             className: updatedClassName,
             section: updatedSection,
@@ -133,7 +133,7 @@ const ClassMasterPage = () => {
     if (confirm("Are you sure you want to delete this class?")) {
       try {
         await axios.delete(
-          `https://erp-backend-fy3n.onrender.com/class/api/classes/${id}`
+          `https://erp-backend-fy3n.onrender.com/api/classes/${id}`
         );
 
         // Remove the class from the state array

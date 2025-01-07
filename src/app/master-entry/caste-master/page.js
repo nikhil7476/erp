@@ -48,7 +48,7 @@ const CasteMasterPage = () => {
     setLoading(true);
     setError("");
     try {
-      const response = await axios.get("https://erp-backend-fy3n.onrender.com/caste/api/castes");
+      const response = await axios.get("https://erp-backend-fy3n.onrender.com/api/castes");
       const fetchedData = response.data.data || [];
       const normalizedData = fetchedData.map((item) => ({
         ...item,
@@ -69,7 +69,7 @@ const CasteMasterPage = () => {
     const updatedName = prompt("Enter new name:", item?.caste_name || "");
     if (updatedName) {
       try {
-        await axios.put(`https://erp-backend-fy3n.onrender.com/caste/api/castes/${id}`, {
+        await axios.put(`https://erp-backend-fy3n.onrender.com/api/castes/${id}`, {
           caste_name: updatedName,
         });
         setData((prevData) =>
@@ -88,7 +88,7 @@ const CasteMasterPage = () => {
   const handleDelete = async (id) => {
     if (confirm("Are you sure you want to delete this entry?")) {
       try {
-        await axios.delete(`https://erp-backend-fy3n.onrender.com/caste/api/castes/${id}`);
+        await axios.delete(`https://erp-backend-fy3n.onrender.com/api/castes/${id}`);
         setData((prevData) => prevData.filter((row) => row._id !== id));
       } catch (error) {
         console.error("Error deleting data:", error);
@@ -101,7 +101,7 @@ const CasteMasterPage = () => {
   const handleAdd = async () => {
     if (newCasteName.trim()) {
       try {
-        const response = await axios.post("https://erp-backend-fy3n.onrender.com/caste/api/castes", {
+        const response = await axios.post("https://erp-backend-fy3n.onrender.com/api/castes", {
           caste_name: newCasteName,
         });
         setData((prevData) => [...prevData, response.data]);

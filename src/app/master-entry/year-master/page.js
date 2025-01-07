@@ -53,7 +53,7 @@ const YearMasterPage = () => {
     setLoading(true);
     setError("");
     try {
-      const response = await axios.get("https://erp-backend-fy3n.onrender.com/class/api/classes");
+      const response = await axios.get("https://erp-backend-fy3n.onrender.com/api/classes");
       setData(response.data || []);
     } catch (err) {
       console.error("Error fetching data:", err);
@@ -78,7 +78,7 @@ const YearMasterPage = () => {
       try {
         if (selectedYearId) {
           // Update existing year entry
-          await axios.put(`https://erp-backend-fy3n.onrender.com/class/api/classes/${selectedYearId}`, {
+          await axios.put(`https://erp-backend-fy3n.onrender.com/api/classes/${selectedYearId}`, {
             className: newClassName,
             yearCodeAndName: newYearCodeAndName,
           });
@@ -91,7 +91,7 @@ const YearMasterPage = () => {
           );
         } else {
           // Create a new year entry
-          const response = await axios.post("https://erp-backend-fy3n.onrender.com/class/api/classes", {
+          const response = await axios.post("https://erp-backend-fy3n.onrender.com/api/classes", {
             className: newClassName,
             yearCodeAndName: newYearCodeAndName,
           });
@@ -114,7 +114,7 @@ const YearMasterPage = () => {
   const handleDelete = async (id) => {
     if (confirm("Are you sure you want to delete this entry?")) {
       try {
-        await axios.delete(`https://erp-backend-fy3n.onrender.com/class/api/classes/${id}`);
+        await axios.delete(`https://erp-backend-fy3n.onrender.com/api/classes/${id}`);
         setData((prevData) => prevData.filter((row) => row.id !== id));
       } catch (error) {
         console.error("Error deleting data:", error);

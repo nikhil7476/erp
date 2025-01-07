@@ -61,7 +61,7 @@ const DocumentMasterPage = () => {
     setError("");
     try {
       const response = await axios.get(
-        "https://erp-backend-fy3n.onrender.com/document-uploads/api/document-uploads"
+        "https://erp-backend-fy3n.onrender.com/api/document-uploads"
       );
 
       const fetchedData = Array.isArray(response.data)
@@ -84,7 +84,7 @@ const DocumentMasterPage = () => {
     if (newDocumentName.trim()) {
       try {
         const response = await axios.post(
-          "https://erp-backend-fy3n.onrender.com/document-uploads/api/document-uploads",
+          "https://erp-backend-fy3n.onrender.com/api/document-uploads",
           { document_name: newDocumentName }
         );
 
@@ -112,7 +112,7 @@ const DocumentMasterPage = () => {
       try {
         // Make the PUT request to update the document name on the backend
         await axios.put(
-          `https://erp-backend-fy3n.onrender.com/document-uploads/api/document-uploads/${id}`,
+          `https://erp-backend-fy3n.onrender.com/api/document-uploads/${id}`,
           { document_name: updatedName }
         );
 
@@ -137,7 +137,7 @@ const DocumentMasterPage = () => {
     if (confirm("Are you sure you want to delete this document?")) {
       try {
         await axios.delete(
-          `https://erp-backend-fy3n.onrender.com/document-uploads/api/document-uploads/${id}`
+          `https://erp-backend-fy3n.onrender.com/api/document-uploads/${id}`
         );
 
         setData((prevData) => prevData.filter((row) => row._id !== id));
