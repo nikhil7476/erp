@@ -1,119 +1,203 @@
 "use client";
-import React, { useState } from 'react';
-import Table from '@/app/component/DataTable';
-import styles from "@/app/students/add-new-student/page.module.css";
-import { Container, Row, Col, Breadcrumb, Form, FormLabel, FormGroup, FormControl, Button } from 'react-bootstrap';
-import dynamic from 'next/dynamic';
-import { CgAddR } from 'react-icons/cg';
+import React, { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
+import { FaPlus, FaEdit, FaTrashAlt } from "react-icons/fa";
+import { Form, Row, Col, Container, FormLabel, FormControl, Button, Breadcrumb } from "react-bootstrap";
+import axios from "axios";
+import Table from "@/app/component/DataTable"; // Ensure this path is correct
 
-const VehicleTypeRecords = () => {
-    const [formData, setFormData] = useState({
-        vehicleType: "",
-    });
+const VehicleRecords = () => {
+  const [data, setData] = useState([]); // Table data
+  const [loading, setLoading] = useState(false); // Loading state
+  const [error, setError] = useState(""); // Error state
+  const [showAddForm, setShowAddForm] = useState(false); // Toggle Add Form visibility
+  const [newVehicle, setNewVehicle] = useState({
+    vehicle_type: "",
+  }); // New vehicle form
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-    };
+  // Fetch data from API
+  const fetchData = async () => {
+    setLoading(true);
+    setError("");
+    try {
+      const response = await axios.get(
+        "https://erp-backend-fy3n.onrender.com/api/vehicles"
+      );
+      const fetchedData = response.data.data;
+      setData(fetchedData);
+    } catch (err) {
+      console.error("Error fetching data:", err);
+      setError("Failed to fetch data. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    const columns = [
-        {
-            name: '#',
-            selector: row => row.id,
-            sortable: true,
-            width: '80px',
-        },
-        {
-            name: 'Name',
-            selector: row => row.Name,
-            sortable: true,
-        },
-        {
-            name: 'Action',
-            cell: row => (
-                <div style={{ display: 'flex' }}>
-                    <button className='editButton' onClick={() => handleEdit(row.id)}>
-                        Edit
-                    </button>
-                    <button className="editButton" onClick={() => handleDelete(row.id)}>
-                        Delete
-                    </button>
-                </div>
-            ),
-        }
-    ];
+  // Add a new vehicle
+  const handleAdd = async () => {
+    if (newVehicle.vehicle_type.trim()) {
+      try {
+        const response = await axios.post(
+          "https://erp-backend-fy3n.onrender.com/api/vehicles",
+          newVehicle
+        );
+        setData((prevData) => [...prevData, response.data]);
+        setNewVehicle({ vehicle_type: "" });
+        setShowAddForm(false);
+      } catch (error) {
+        console.error("Error adding vehicle:", error);
+        setError("Failed to add vehicle. Please try again later.");
+      }
+    } else {
+      alert("Please fill in the vehicle type.");
+    }
+  };
 
-    const data = [
-        { id: 1, Name: 'AUTO RICKSHAW' },
-        { id: 2, Name: 'MAXIMO' },
-        { id: 3, Name: 'RICKSHAW' },
-        { id: 4, Name: 'MAX' },
-        { id: 5, Name: 'BOLERO' },
-    ];
-
-    const [isPopoverOpen, setIsPopoverOpen] = useState(false);
-
-    const togglePopover = () => {
-        setIsPopoverOpen(!isPopoverOpen);
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log('Form submitted:', formData);
-        setIsPopoverOpen(false); 
-    };
-
-    return (
-        <Container className={styles.vehicle}>
-            <Row className='mt-1 mb-1'>
-                <Col>
-                    <Breadcrumb style={{ marginLeft: '20px' }}>
-                        <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
-                        <Breadcrumb.Item href="/transport">
-                            Transport
-                        </Breadcrumb.Item>
-                        <Breadcrumb.Item active>Add Vehicle Type</Breadcrumb.Item>
-                    </Breadcrumb>
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    <button onClick={togglePopover} id="submit" type='button' style={{ marginLeft: '20px' }}>
-                        <CgAddR style={{ fontSize: '27px', marginRight: '5px' }} /> New Vehicle Type
-                    </button>
-                    {isPopoverOpen && ( 
-                        <div className='absolute right-0 mt-3 w-60 p-4' style={{ backgroundColor: '#f8f9fa', border: '1px solid #ddd', borderRadius: '8px', padding: '20px', width: '600px' }}>
-                            <h3>Add Vehicle Type</h3>
-                            <Form onSubmit={handleSubmit}>
-                                <FormGroup className="mb-3">
-                                    <FormLabel>Vehicle Type</FormLabel>
-                                    <FormControl
-                                        required
-                                        type="text"
-                                        name="vehicleType"
-                                        value={formData.vehicleType}
-                                        onChange={handleChange}
-                                        style={{ width: '100%' }}
-                                    />
-                                </FormGroup>
-                                <Button type="submit" id="submit">Add Vehicle Type</Button>
-                            </Form>
-                        </div>
-                    )}
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    <h2 style={{ marginLeft: '23px', marginTop: '15px', marginBottom: '20px', fontSize: '22px' }}>Vehicle Type Records</h2>
-                    <Table columns={columns} data={data} />
-                    <div className={styles.buttons} style={{ float: 'right', marginRight: '10px' }}>
-                        <button type="button" className="editButton">Previous</button>
-                        <button type="button" className="editButton">Next</button>
-                    </div>
-                </Col>
-            </Row>
-        </Container>
+  // Edit existing vehicle
+  const handleEdit = (id) => {
+    const item = data.find((row) => row._id === id);
+    const updatedVehicleType = prompt(
+      "Enter new vehicle type:",
+      item?.vehicle_type || ""
     );
+
+    if (updatedVehicleType) {
+      try {
+        axios.put(
+          `https://erp-backend-fy3n.onrender.com/api/vehicles/${id}`,
+          { vehicle_type: updatedVehicleType }
+        );
+        setData((prevData) =>
+          prevData.map((row) =>
+            row._id === id ? { ...row, vehicle_type: updatedVehicleType } : row
+          )
+        );
+      } catch (error) {
+        console.error("Error updating vehicle:", error);
+        setError("Failed to update vehicle. Please try again later.");
+      }
+    }
+  };
+
+  // Delete vehicle
+  const handleDelete = async (id) => {
+    if (confirm("Are you sure you want to delete this vehicle?")) {
+      try {
+        await axios.delete(
+          `https://erp-backend-fy3n.onrender.com/api/vehicles/${id}`
+        );
+        setData((prevData) => prevData.filter((row) => row._id !== id));
+      } catch (error) {
+        console.error("Error deleting vehicle:", error);
+        setError("Failed to delete vehicle. Please try again later.");
+      }
+    }
+  };
+
+  // Fetch data on component mount
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const columns = [
+    {
+      name: "#",
+      selector: (row, index) => index + 1,
+      sortable: false,
+      width: "80px",
+    },
+    {
+      name: "Vehicle Type",
+      selector: (row) => row.vehicle_type || "N/A",
+      sortable: true,
+    },
+    {
+      name: "Actions",
+      cell: (row) => (
+        <div className="d-flex gap-2">
+          <button className="editButton" onClick={() => handleEdit(row._id)}>
+            <FaEdit />
+          </button>
+          <button
+            className="editButton btn-danger"
+            onClick={() => handleDelete(row._id)}
+          >
+            <FaTrashAlt />
+          </button>
+        </div>
+      ),
+    },
+  ];
+
+  return (
+    <Container>
+      <Row className="mt-1 mb-1">
+        <Col>
+          <Breadcrumb style={{ marginLeft: "20px" }}>
+            <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
+            <Breadcrumb.Item href="/Transport/all-module">
+              Transport
+            </Breadcrumb.Item>
+            <Breadcrumb.Item active>Vehicle Records</Breadcrumb.Item>
+          </Breadcrumb>
+        </Col>
+      </Row>
+
+      {/* Add Vehicle Form */}
+      <Row>
+        <Col>
+          <Button
+            onClick={() => setShowAddForm(!showAddForm)}
+            className="mb-4"
+          >
+            <FaPlus /> Add Vehicle
+          </Button>
+
+          {showAddForm && (
+            <div className="mb-4">
+              <Row className="mb-3">
+                <Col lg={6}>
+                  <FormLabel>Vehicle Type</FormLabel>
+                  <FormControl
+                    type="text"
+                    placeholder="Enter Vehicle Type"
+                    value={newVehicle.vehicle_type}
+                    onChange={(e) =>
+                      setNewVehicle({
+                        ...newVehicle,
+                        vehicle_type: e.target.value,
+                      })
+                    }
+                  />
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <Button onClick={handleAdd}>Add Vehicle</Button>
+                </Col>
+              </Row>
+            </div>
+          )}
+        </Col>
+      </Row>
+
+      {/* Vehicle List Section */}
+      <Row>
+        <Col>
+          <h2>Vehicle Records</h2>
+          {loading ? (
+            <p>Loading...</p>
+          ) : error ? (
+            <p style={{ color: "red" }}>{error}</p>
+          ) : data.length > 0 ? (
+            <Table columns={columns} data={data} />
+          ) : (
+            <p>No vehicles available.</p>
+          )}
+        </Col>
+      </Row>
+    </Container>
+  );
 };
 
-export default dynamic(() => Promise.resolve(VehicleTypeRecords), { ssr: false });
+export default dynamic(() => Promise.resolve(VehicleRecords), { ssr: false });

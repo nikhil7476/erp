@@ -20,7 +20,7 @@ const AddImage = () => {
   useEffect(() => {
     const fetchGalleryGroups = async () => {
       try {
-        const response = await axios.get("https://erp-backend-fy3n.onrender.com/galleryGroup/api/galleryGroups");
+        const response = await axios.get("https://erp-backend-fy3n.onrender.com/api/galleryGroups");
         console.log("API Response:", response.data); // Log the full response for inspection
 
         // Check if the response is an array or contains a nested data field
@@ -76,7 +76,7 @@ const AddImage = () => {
     formData.append("short_text", imageData.shortText);
 
     try {
-      const response = await axios.post("https://erp-backend-fy3n.onrender.com/addImage/api/images", formData, {
+      const response = await axios.post("https://erp-backend-fy3n.onrender.com/api/images", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

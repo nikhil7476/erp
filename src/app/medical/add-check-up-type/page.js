@@ -47,7 +47,7 @@ const AddCheckUp = () => {
     setLoading(true);
     setError("");
     try {
-      const response = await axios.get("https://erp-backend-fy3n.onrender.com/checkUp/api/checkup-types");
+      const response = await axios.get("https://erp-backend-fy3n.onrender.com/api/checkup-types");
       const fetchedData = response.data.data || [];
       setData(fetchedData);
     } catch (err) {
@@ -62,7 +62,7 @@ const AddCheckUp = () => {
   const handleAdd = async () => {
     if (newCheckUpType.trim()) {
       try {
-        const response = await axios.post("https://erp-backend-fy3n.onrender.com/checkUp/api/checkup-types", {
+        const response = await axios.post("https://erp-backend-fy3n.onrender.com/api/checkup-types", {
           check_up_type: newCheckUpType,
         });
         setData((prevData) => [...prevData, response.data]);
@@ -83,7 +83,7 @@ const AddCheckUp = () => {
     const updatedName = prompt("Enter new check-up type:", item?.check_up_type || "");
     if (updatedName) {
       try {
-        await axios.put(`https://erp-backend-fy3n.onrender.com/checkUp/api/checkup-types/${id}`, {
+        await axios.put(`https://erp-backend-fy3n.onrender.com/api/checkup-types/${id}`, {
           check_up_type: updatedName,
         });
         setData((prevData) =>
@@ -102,7 +102,7 @@ const AddCheckUp = () => {
   const handleDelete = async (id) => {
     if (confirm("Are you sure you want to delete this entry?")) {
       try {
-        await axios.delete(`https://erp-backend-fy3n.onrender.com/checkUp/api/checkup-types/${id}`);
+        await axios.delete(`https://erp-backend-fy3n.onrender.com/api/checkup-types/${id}`);
         setData((prevData) => prevData.filter((row) => row._id !== id));
       } catch (error) {
         console.error("Error deleting data:", error);

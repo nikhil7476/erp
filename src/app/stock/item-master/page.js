@@ -15,7 +15,7 @@ const ItemMaster = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        "https://erp-backend-fy3n.onrender.com/itemMaster/api/itemMasters"
+        "https://erp-backend-fy3n.onrender.com/api/itemMasters"
       );
 
       console.log("API Response:", response.data); // Debugging API response

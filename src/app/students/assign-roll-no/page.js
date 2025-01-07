@@ -1,105 +1,206 @@
 "use client";
-import React, { useState } from "react";
-import Table from "@/app/component/DataTable";
-// import styles from "../city-master/page.module.css";
-import styles from "@/app/students/assign-roll-no/page.module.css"
-import dynamic from "next/dynamic";
-import { Form, Row, Col, Container, FormLabel, Button } from "react-bootstrap";
-import { FormSelect } from "react-bootstrap";
 
-const AssignRollPage = () => {
+import React, { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
+import styles from "@/app/students/assign-roll-no/page.module.css";
+import Table from "@/app/component/DataTable";
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
+import {
+  Form,
+  Row,
+  Col,
+  Container,
+  FormLabel,
+  FormSelect,
+  Button,
+} from "react-bootstrap";
+import axios from "axios";
+
+const AssignRollNumbers = () => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [selectedClass, setSelectedClass] = useState("");
+  const [selectedSection, setSelectedSection] = useState("");
+
   const columns = [
     {
-       name: "#",
-       selector: (row) => row.id,
-       sortable: true,
-       width: "80px",
+      name: "#",
+      selector: (row, index) => index + 1,
+      sortable: false,
+      width: "80px",
     },
     {
-        name: "Student Name",
-        selector: (row) => row.studentName,
-        sortable: true,
-    },
-    {
-        name: "Adm. no.",
-        selector: (row) => row.adminNo,
-        sortable: true,
-    },
-    {
-        name: "Gender",
-        selector: (row) => row.gender,
-        sortable: true,
-    },
-    {
-      name: "RollNo",
-      selector: (row) => row.rollNo,
+      name: "Student Name",
+      selector: (row) => row.studentName || "N/A",
       sortable: true,
     },
-  ];
-
-  const data = [
     {
-      id: 1,
-      studentName: 'Reyansh',
-      adminNo: '1123894853895',
-      gender: 'male',
-      rollNo: '111'
+      name: "Adm. No.",
+      selector: (row) => row.adminNo || "N/A",
+      sortable: true,
     },
     {
-      id: 2,
-      studentName: 'Shreya',
-      adminNo: '1123894853896',
-      gender: 'female',
-      rollNo: '112'
+      name: "Gender",
+      selector: (row) => row.gender || "N/A",
+      sortable: true,
+    },
+    {
+      name: "Roll No",
+      selector: (row) => row.rollNo || "N/A",
+      sortable: true,
+    },
+    {
+      name: "Actions",
+      cell: (row) => (
+        <div className="d-flex gap-2">
+          <button className="editButton" onClick={() => handleUpdateRollNo(row._id, row.rollNo)}>
+            <FaEdit />
+          </button>
+          <button
+            className="editButton btn-danger"
+            onClick={() => handleDeleteRollNo(row._id)}
+          >
+            <FaTrashAlt />
+          </button>
+        </div>
+      ),
+      width: "150px",
     },
   ];
 
+  const fetchData = async () => {
+    if (!selectedClass || !selectedSection) {
+      alert("Please select both class and section to fetch students.");
+      return;
+    }
+    setLoading(true);
+    setError("");
+    try {
+      const response = await axios.get(
+        `https://erp-backend-fy3n.onrender.com/api/roll-assignments`,
+        {
+          params: { class: selectedClass, section: selectedSection },
+        }
+      );
+      setData(response.data.data || []);
+    } catch (err) {
+      setError("Failed to fetch data.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleAssignRollNo = async () => {
+    try {
+      const rollAssignments = data.map((student) => ({
+        student_id: student._id,
+        class_id: selectedClass,
+        section: selectedSection,
+        academic_year: "2024-2025",
+        roll_no: student.rollNo || "", // Default empty if not assigned
+      }));
+
+      await axios.post(
+        "https://erp-backend-fy3n.onrender.com/api/roll-assignments",
+        { rollAssignments }
+      );
+      alert("Roll numbers assigned successfully!");
+      fetchData();
+    } catch (error) {
+      setError("Failed to assign roll numbers.");
+    }
+  };
+
+  const handleUpdateRollNo = async (id, rollNo) => {
+    const updatedRollNo = prompt("Enter new roll number:", rollNo);
+    if (updatedRollNo) {
+      try {
+        await axios.put(
+          `https://erp-backend-fy3n.onrender.com/api/roll-assignments/${id}`,
+          { roll_no: updatedRollNo }
+        );
+        setData((prevData) =>
+          prevData.map((row) => (row._id === id ? { ...row, rollNo: updatedRollNo } : row))
+        );
+      } catch (error) {
+        setError("Failed to update roll number.");
+      }
+    }
+  };
+
+  const handleDeleteRollNo = async (id) => {
+    if (confirm("Are you sure you want to delete this roll number?")) {
+      try {
+        await axios.delete(
+          `https://erp-backend-fy3n.onrender.com/api/roll-assignments/${id}`
+        );
+        setData((prevData) => prevData.filter((row) => row._id !== id));
+      } catch (error) {
+        setError("Failed to delete roll number.");
+      }
+    }
+  };
+
+  useEffect(() => {
+    // Optional: Fetch default data on component mount
+    // fetchData();
+  }, []);
 
   return (
     <Container className={styles.formContainer}>
       <Form className={styles.form}>
-      <Row>
-        <Col>
-        <FormLabel className={styles.class}>Select Class</FormLabel>
-          <FormSelect>
-          <option>Select Class</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="3">4</option>
-          <option value="3">5</option>
-          <option value="3">6</option>
-          <option value="3">7</option>
-          <option value="3">8</option>
-          </FormSelect>
-        </Col>
-        <Col>
-        <FormLabel className={styles.class}>Select Section</FormLabel>
-         <FormSelect>
-          <option>Select Section</option>
-          <option value="1">A</option>
-          <option value="2">B</option>
-          <option value="3">C</option>
-         </FormSelect>
-        </Col>
-      </Row><br/>
-      <Row>
-        <Col><Button className={styles.search}>Search Students</Button></Col>
-      </Row>
-      <br/>
-      <Row>
-        <Col>
-        <h2 style={{fontSize: '22px'}}>Roll No. Assigner</h2>
-        <Table columns={columns} data={data} />
-      <div className={styles.buttons}>
-        <button type="button" className="editButton">Previous</button>
-        <button type="button" className="editButton">Next</button>
-      </div>
-        </Col>
-      </Row>
-    </Form>
+        <Row>
+          <Col>
+            <FormLabel>Select Class</FormLabel>
+            <FormSelect
+              value={selectedClass}
+              onChange={(e) => setSelectedClass(e.target.value)}
+            >
+              <option value="">Select Class</option>
+              {[1, 2, 3, 4, 5, 6, 7, 8].map((cls) => (
+                <option key={cls} value={cls}>
+                  {cls}
+                </option>
+              ))}
+            </FormSelect>
+          </Col>
+          <Col>
+            <FormLabel>Select Section</FormLabel>
+            <FormSelect
+              value={selectedSection}
+              onChange={(e) => setSelectedSection(e.target.value)}
+            >
+              <option value="">Select Section</option>
+              {["A", "B", "C"].map((section) => (
+                <option key={section} value={section}>
+                  {section}
+                </option>
+              ))}
+            </FormSelect>
+          </Col>
+        </Row>
+        <br />
+        <Button
+          className={styles.search}
+          onClick={fetchData}
+          disabled={!selectedClass || !selectedSection}
+        >
+          Search Students
+        </Button>
+        <br />
+        <h2>Assign Roll Numbers</h2>
+        {loading && <p>Loading...</p>}
+        {error && <p>{error}</p>}
+        {!loading && !error && <Table columns={columns} data={data} />}
+        <div className={styles.buttons}>
+          <Button onClick={handleAssignRollNo} className="editButton">
+            Assign Roll Numbers
+          </Button>
+        </div>
+      </Form>
     </Container>
   );
 };
 
-export default dynamic (() => Promise.resolve(AssignRollPage), {ssr: false})
+export default dynamic(() => Promise.resolve(AssignRollNumbers), { ssr: false });

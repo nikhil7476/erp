@@ -50,7 +50,7 @@ const AddGalleryGroup = () => {
     setLoading(true);
     setError("");
     try {
-      const response = await axios.get("https://erp-backend-fy3n.onrender.com/galleryGroup/api/galleryGroups");
+      const response = await axios.get("https://erp-backend-fy3n.onrender.com/api/galleryGroups");
       setData(response.data.data); // Set the fetched data into state
     } catch (error) {
       setError("Error fetching data. Please try again later.");
@@ -67,7 +67,7 @@ const AddGalleryGroup = () => {
   const handleAdd = async () => {
     if (formValues.name.trim()) {
       try {
-        const response = await axios.post("https://erp-backend-fy3n.onrender.com/galleryGroup/api/galleryGroups", {
+        const response = await axios.post("https://erp-backend-fy3n.onrender.com/api/galleryGroups", {
           groupName: formValues.name,
         });
         setData((prevData) => [...prevData, response.data]);
@@ -87,7 +87,7 @@ const AddGalleryGroup = () => {
     const updatedName = prompt("Enter new group name:");
     if (updatedName) {
       try {
-        await axios.put(`https://erp-backend-fy3n.onrender.com/galleryGroup/api/galleryGroups/${id}`, { groupName: updatedName });
+        await axios.put(`https://erp-backend-fy3n.onrender.com/api/galleryGroups/${id}`, { groupName: updatedName });
         setData((prevData) =>
           prevData.map((item) =>
             item._id === id ? { ...item, groupName: updatedName } : item
@@ -104,7 +104,7 @@ const AddGalleryGroup = () => {
   const handleDelete = async (id) => {
     if (confirm("Are you sure you want to delete this group?")) {
       try {
-        await axios.delete(`https://erp-backend-fy3n.onrender.com/galleryGroup/api/galleryGroups/${id}`);
+        await axios.delete(`https://erp-backend-fy3n.onrender.com/api/galleryGroups/${id}`);
         setData((prevData) => prevData.filter((item) => item._id !== id));
       } catch (error) {
         setError("Error deleting group. Please try again later.");

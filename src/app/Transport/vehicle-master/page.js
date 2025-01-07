@@ -1,53 +1,67 @@
-// updated code 5 for api//working with data
 "use client";
 import React, { useState, useEffect } from "react";
-import Table from "@/app/component/DataTable"; // Ensure the path to the DataTable component is correct
+import dynamic from "next/dynamic";
+import Table from "@/app/component/DataTable"; // Ensure this path is correct
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
+import {
+  Form,
+  Row,
+  Col,
+  Container,
+  FormLabel,
+  FormControl,
+  Button,
+  Breadcrumb,
+} from "react-bootstrap";
 import axios from "axios";
-import { Container, Row, Col, Breadcrumb } from "react-bootstrap";
-import { CgAddR } from "react-icons/cg";
 
 const VehicleRecords = () => {
-  const [data, setData] = useState([]); // State to hold the table data
-  const [loading, setLoading] = useState(true); // State to handle loading
-  const [error, setError] = useState(null); // State to handle errors
+  const [data, setData] = useState([]); // Table data
+  const [loading, setLoading] = useState(false); // Loading state
+  const [error, setError] = useState(""); // Error state
+  const [showAddForm, setShowAddForm] = useState(false); // Toggle Add Form visibility
+  const [newVehicle, setNewVehicle] = useState({
+    vehicle_type: "",
+    vehicle_no: "",
+    driver: {
+      driver_name: "",
+    },
+  }); // New vehicle form
 
   const columns = [
     {
       name: "#",
-      selector: (row, index) => index + 1, // Auto-incrementing index for rows
-      sortable: true,
+      selector: (row, index) => index + 1,
+      sortable: false,
       width: "80px",
     },
     {
       name: "Vehicle Type",
-      selector: (row) => row.vehicle_type || "N/A", // Fallback for missing vehicleType
+      selector: (row) => row.vehicle_type || "N/A",
       sortable: true,
     },
     {
       name: "Vehicle No",
-      selector: (row) => row.vehicle_no || "N/A", // Fallback for missing vehicleNo
+      selector: (row) => row.vehicle_no || "N/A",
       sortable: true,
     },
     {
       name: "Driver Name",
-      selector: (row) => row.driver_name || "N/A", // Fallback for missing driverName
+      selector: (row) => row.driver?.driver_name || "N/A",
       sortable: true,
     },
     {
-      name: "Action",
+      name: "Actions",
       cell: (row) => (
-        <div style={{ display: "flex", gap: "10px" }}>
-          <button
-            className="editButton"
-            onClick={() => handleEdit(row._id)} // Assuming _id is the unique identifier
-          >
-            Edit
+        <div className="d-flex gap-2">
+          <button className="editButton" onClick={() => handleEdit(row._id)}>
+            <FaEdit />
           </button>
           <button
-            className="deleteButton"
-            onClick={() => handleDelete(row._id)} // Assuming _id is the unique identifier
+            className="editButton btn-danger"
+            onClick={() => handleDelete(row._id)}
           >
-            Delete
+            <FaTrashAlt />
           </button>
         </div>
       ),
@@ -57,18 +71,16 @@ const VehicleRecords = () => {
   // Fetch data from API
   const fetchData = async () => {
     setLoading(true);
+    setError("");
     try {
       const response = await axios.get(
-        "https://erp-backend-fy3n.onrender.com/transport/api/vehicles"
+        "https://erp-backend-fy3n.onrender.com/api/vehicles"
       );
-
-      // Check if the response has the expected structure
-      if (response.data && response.data.data && Array.isArray(response.data.data)) {
-        setData(response.data.data); // Handle nested response structure
-      } else {
-        console.error("Unexpected API response format:", response.data);
-        setError("Unexpected API response format. Please contact support.");
-      }
+      const fetchedData = response.data.data.map((item) => ({
+        ...item,
+        driver_name: item.driver?.driver_name || "N/A", // Flatten for table display
+      }));
+      setData(fetchedData);
     } catch (err) {
       console.error("Error fetching data:", err);
       setError("Failed to fetch data. Please try again later.");
@@ -77,49 +89,80 @@ const VehicleRecords = () => {
     }
   };
 
-  // Edit entry
-  const handleEdit = async (id) => {
-    const item = data.find((row) => row._id === id); // Ensure _id matches the unique key in your data
-    const updatedName = prompt("Enter new name:", item?.vehicle_type || "");
-
-    if (updatedName) {
+  // Add a new vehicle
+  const handleAdd = async () => {
+    if (
+      newVehicle.vehicle_type.trim() &&
+      newVehicle.vehicle_no.trim() &&
+      newVehicle.driver.driver_name.trim()
+    ) {
       try {
-        const response = await axios.put(
-          `https://erp-backend-fy3n.onrender.com/transport/api/vehicles/${id}`,
+        const response = await axios.post(
+          "https://erp-backend-fy3n.onrender.com/api/vehicles",
+          newVehicle
+        );
+        setData((prevData) => [...prevData, response.data]);
+        setNewVehicle({
+          vehicle_type: "",
+          vehicle_no: "",
+          driver: { driver_name: "" },
+        });
+        setShowAddForm(false);
+      } catch (error) {
+        console.error("Error adding vehicle:", error);
+        setError("Failed to add vehicle. Please try again later.");
+      }
+    } else {
+      alert("Please fill in all fields.");
+    }
+  };
+
+  // Edit existing vehicle
+  const handleEdit = async (id) => {
+    const item = data.find((row) => row._id === id);
+    const updatedVehicleType = prompt(
+      "Enter new vehicle type:",
+      item?.vehicle_type || ""
+    );
+
+    if (updatedVehicleType) {
+      try {
+        await axios.put(
+          `https://erp-backend-fy3n.onrender.com/api/vehicles/${id}`,
           {
-            vehicle_type: updatedName,
+            vehicle_type: updatedVehicleType,
           }
         );
-        if (response.data) {
-          setData((prevData) =>
-            prevData.map((row) =>
-              row._id === id ? { ...row, vehicle_type: updatedName } : row
-            )
-          );
-        }
+        setData((prevData) =>
+          prevData.map((row) =>
+            row._id === id
+              ? { ...row, vehicle_type: updatedVehicleType }
+              : row
+          )
+        );
       } catch (error) {
-        console.error("Error updating data:", error);
-        setError("Failed to update entry. Please try again later.");
+        console.error("Error updating vehicle:", error);
+        setError("Failed to update vehicle. Please try again later.");
       }
     }
   };
 
-  // Delete entry
+  // Delete a vehicle
   const handleDelete = async (id) => {
-    if (confirm("Are you sure you want to delete this entry?")) {
+    if (confirm("Are you sure you want to delete this vehicle?")) {
       try {
         await axios.delete(
-          `https://erp-backend-fy3n.onrender.com/transport/api/vehicles/${id}`
+          `https://erp-backend-fy3n.onrender.com/api/vehicles/${id}`
         );
         setData((prevData) => prevData.filter((row) => row._id !== id));
       } catch (error) {
-        console.error("Error deleting data:", error);
-        setError("Failed to delete entry. Please try again later.");
+        console.error("Error deleting vehicle:", error);
+        setError("Failed to delete vehicle. Please try again later.");
       }
     }
   };
 
-  // Load data on component mount
+  // Fetch data on component mount
   useEffect(() => {
     fetchData();
   }, []);
@@ -137,32 +180,93 @@ const VehicleRecords = () => {
           </Breadcrumb>
         </Col>
       </Row>
+
+      {/* Add Vehicle Form */}
       <Row>
         <Col>
-          <button
-            onClick={() => {}}
-            id="submit"
-            type="button"
-            style={{ marginLeft: "20px" }}
+          <Button
+            onClick={() => setShowAddForm(!showAddForm)}
+            className="mb-4"
           >
-            <CgAddR style={{ fontSize: "27px", marginTop: "-2px", marginRight: "5px" }} />
-            New Vehicle Type
-          </button>
+            Add Vehicle
+          </Button>
+
+          {showAddForm && (
+            <div className="mb-4">
+              <Row className="mb-3">
+                <Col lg={4}>
+                  <FormLabel>Vehicle Type</FormLabel>
+                  <FormControl
+                    type="text"
+                    placeholder="Enter Vehicle Type"
+                    value={newVehicle.vehicle_type}
+                    onChange={(e) =>
+                      setNewVehicle({
+                        ...newVehicle,
+                        vehicle_type: e.target.value,
+                      })
+                    }
+                  />
+                </Col>
+                <Col lg={4}>
+                  <FormLabel>Vehicle No</FormLabel>
+                  <FormControl
+                    type="text"
+                    placeholder="Enter Vehicle No"
+                    value={newVehicle.vehicle_no}
+                    onChange={(e) =>
+                      setNewVehicle({
+                        ...newVehicle,
+                        vehicle_no: e.target.value,
+                      })
+                    }
+                  />
+                </Col>
+                <Col lg={4}>
+                  <FormLabel>Driver Name</FormLabel>
+                  <FormControl
+                    type="text"
+                    placeholder="Enter Driver Name"
+                    value={newVehicle.driver.driver_name}
+                    onChange={(e) =>
+                      setNewVehicle({
+                        ...newVehicle,
+                        driver: {
+                          ...newVehicle.driver,
+                          driver_name: e.target.value,
+                        },
+                      })
+                    }
+                  />
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <Button onClick={handleAdd}>Add Vehicle</Button>
+                </Col>
+              </Row>
+            </div>
+          )}
         </Col>
       </Row>
 
-      <h2>Vehicle Records</h2>
-      {loading ? (
-        <p>Loading data...</p>
-      ) : error ? (
-        <p style={{ color: "red" }}>{error}</p>
-      ) : data.length > 0 ? (
-        <Table columns={columns} data={data} />
-      ) : (
-        <p>No data available.</p>
-      )}
+      {/* Table Section */}
+      <Row>
+        <Col>
+          <h2>Vehicle Records</h2>
+          {loading ? (
+            <p>Loading...</p>
+          ) : error ? (
+            <p style={{ color: "red" }}>{error}</p>
+          ) : data.length > 0 ? (
+            <Table columns={columns} data={data} />
+          ) : (
+            <p>No data available.</p>
+          )}
+        </Col>
+      </Row>
     </Container>
   );
 };
 
-export default VehicleRecords;
+export default dynamic(() => Promise.resolve(VehicleRecords), { ssr: false });

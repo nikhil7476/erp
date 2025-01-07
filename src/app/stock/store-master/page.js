@@ -47,7 +47,7 @@ const StoreMaster = () => {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const response = await axios.get("https://erp-backend-fy3n.onrender.com/store/api/stores");
+      const response = await axios.get("https://erp-backend-fy3n.onrender.com/api/stores");
 
       // Check if the response has the expected structure
       if (response.data && Array.isArray(response.data)) {
@@ -74,7 +74,7 @@ const StoreMaster = () => {
     if (updatedName) {
       try {
         const response = await axios.put(
-          `https://erp-backend-fy3n.onrender.com/store/api/stores/${id}`,
+          `https://erp-backend-fy3n.onrender.com/api/stores/${id}`,
           { storeName: updatedName }
         );
         if (response.data) {
@@ -95,7 +95,7 @@ const StoreMaster = () => {
   const handleDelete = async (id) => {
     if (confirm("Are you sure you want to delete this entry?")) {
       try {
-        await axios.delete(`https://erp-backend-fy3n.onrender.com/store/api/stores/${id}`);
+        await axios.delete(`https://erp-backend-fy3n.onrender.com/api/stores/${id}`);
         setData((prevData) => prevData.filter((row) => row._id !== id));
       } catch (error) {
         console.error("Error deleting data:", error);

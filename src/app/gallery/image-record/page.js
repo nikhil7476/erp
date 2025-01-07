@@ -60,7 +60,7 @@ const ImageRecord = () => {
     setLoading(true);
     setError("");
     try {
-      const response = await axios.get("https://erp-backend-fy3n.onrender.com/addImage/api/images");
+      const response = await axios.get("https://erp-backend-fy3n.onrender.com/api/images");
       const fetchedData = response.data.data || [];
       setData(
         fetchedData.map((item) => ({
@@ -83,7 +83,7 @@ const ImageRecord = () => {
   const handleDelete = async (id) => {
     if (confirm("Are you sure you want to delete this entry?")) {
       try {
-        await axios.delete(`https://erp-backend-fy3n.onrender.com/addImage/api/images/${id}`);
+        await axios.delete(`https://erp-backend-fy3n.onrender.com/api/images/${id}`);
         setData((prevData) => prevData.filter((row) => row._id !== id));
       } catch (error) {
         console.error("Error deleting data:", error);

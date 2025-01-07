@@ -75,7 +75,7 @@ const AddDoctorProfile = () => {
     setLoading(true);
     setError("");
     try {
-      const response = await axios.get("https://erp-backend-fy3n.onrender.com/doctor/api/doctors");
+      const response = await axios.get("https://erp-backend-fy3n.onrender.com/api/doctors");
       const mappedData = (response.data.data || []).map((item) => ({
         _id: item._id,
         doctorName: String(item.doctor_name || "N/A"), // Ensure all fields are strings
@@ -100,7 +100,7 @@ const AddDoctorProfile = () => {
     const updatedName = prompt("Enter new name:", item?.doctorName || "");
     if (updatedName) {
       try {
-        await axios.put(`https://erp-backend-fy3n.onrender.com/doctor/api/doctors/${id}`, {
+        await axios.put(`https://erp-backend-fy3n.onrender.com/api/doctors/${id}`, {
           doctorName: updatedName,
         });
         setData((prevData) =>
@@ -119,7 +119,7 @@ const AddDoctorProfile = () => {
   const handleDelete = async (id) => {
     if (confirm("Are you sure you want to delete this entry?")) {
       try {
-        await axios.delete(`https://erp-backend-fy3n.onrender.com/doctor/api/doctors/${id}`);
+        await axios.delete(`https://erp-backend-fy3n.onrender.com/api/doctors/${id}`);
         setData((prevData) => prevData.filter((row) => row._id !== id));
       } catch (error) {
         console.error("Error deleting data:", error);
@@ -133,7 +133,7 @@ const AddDoctorProfile = () => {
     const { doctorName, mobileNo, emailId, address, specialist, description } = formValues;
     if (doctorName.trim() && mobileNo.trim()) {
       try {
-        const response = await axios.post("https://erp-backend-fy3n.onrender.com/doctor/api/doctors", {
+        const response = await axios.post("https://erp-backend-fy3n.onrender.com/api/doctors", {
           doctor_name: doctorName,
           mobile_no: mobileNo,
           email_id: emailId,

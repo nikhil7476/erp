@@ -7,7 +7,7 @@ import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { Form, Row, Col, Container, FormLabel, FormSelect, FormControl, Button } from "react-bootstrap";
 import { CgAddR } from 'react-icons/cg';
 
-const ImportantSMS = () => {
+const Appointment = () => {
      const columns = [
         {
           name: "#",
@@ -16,41 +16,65 @@ const ImportantSMS = () => {
           width: "80px",
         },
         {
-          name: "Entry Date",
-          selector: (row) => row.entryDate,
+          name: "Student",
+          selector: (row) => row.student,
           sortable: false,
         },
         {
-            name: "Send By",
-            selector: (row) => row.sendBy,
+            name: "Class",
+            selector: (row) => row.class,
             sortable: false,
           },
           {
-            name: "Send To",
-            selector: (row) => row.sendTo,
+            name: "Personal Name",
+            selector: (row) => row.personalName,
             sortable: false,
           },
           {
-            name: "Details",
-            selector: (row) => row.detail,
+            name: "Whom to Meet",
+            selector: (row) => row.whomeToMeet,
             sortable: false,
           },
           {
-            name: "Status",
-            selector: (row) => row.status,
+            name: "Time Duration",
+            selector: (row) => row.timeDuration,
             sortable: false,
           },
-        
+          {
+            name: "Action",
+            selector: (row) => row.action,
+            sortable: false,
+          },
+          {
+            name: "Email Id",
+            selector: (row) => row.emailId,
+            sortable: false,
+          },
+          {
+            name: "Purpose",
+            selector: (row) => row.purpose,
+            sortable: false,
+          },
+          {
+            name: "Remark",
+            selector: (row) => row.remark,
+            sortable: false,
+          },
+
       ];
     
       const data = [
         {
-          id: 1, 
-          entryDate:'',
-          sendBy:'',
-          sendTo:'',
-          detail:'',
-          status:'',
+          id: 1,
+          student: "",
+          class:'',
+          personalName: "",
+          whomeToMeet:'',
+          timeDuration:'',
+          action:'',
+          emailId:'',
+          purpose:'',
+          remark:'',
         },
         
       ];
@@ -75,14 +99,17 @@ const ImportantSMS = () => {
         if (confirm("Are you sure you want to delete this entry?")) {
           setData((prevData) => prevData.filter((item) => item.id !== row.id));
         }
-      }; 
+      };
+     
+  
+  
 
   return (
     <Container className={styles.formContainer}>
     <Form className={styles.form}>
       <Row>
         <Col>
-          <h2 style={{ fontSize: '22px' }}>Important SMS Details</h2>
+          <h2 style={{ fontSize: '22px' }}>Appointment Records</h2>
           <Table columns={columns} data={data} />
           
         </Col>
@@ -92,4 +119,4 @@ const ImportantSMS = () => {
   )
 }
 
-export default dynamic(() => Promise.resolve(ImportantSMS), { ssr: false })
+export default dynamic(() => Promise.resolve(Appointment), { ssr: false })

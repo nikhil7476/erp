@@ -13,7 +13,7 @@ const ItemCategory = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        "https://erp-backend-fy3n.onrender.com/item/api/itemCategories"
+        "https://erp-backend-fy3n.onrender.com/api/itemCategories"
       );
 
       console.log("API Response:", response.data); // Debugging API response

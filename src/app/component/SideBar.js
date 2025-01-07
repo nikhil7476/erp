@@ -115,9 +115,9 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
         { title: "Enter Data", href: "/advertising-management/enter-data", icon: <FaUserGraduate /> },
     ];
     const noticeItems = [
-        { title: "All Modules", href: "/advertising-management/all-module", icon: <FaCog /> },
-        { title: "Create Type", href: "/advertising-management/create-type", icon: <FaSchool /> },
-        { title: "Enter Data", href: "/advertising-management/enter-data", icon: <FaUserGraduate /> },
+        { title: "All Modules", href: "/notice/all-module", icon: <FaCog /> },
+        { title: "Add Notice", href: "/notice/addNotice", icon: <FaSchool /> },
+        { title: "Notice Records", href: "/notice/noticeRecords", icon: <FaUserGraduate /> },
     ];
     const hrdItems = [
         { title: "All Modules", href: "/advertising-management/all-module", icon: <FaCog /> },
@@ -125,15 +125,38 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
         { title: "Enter Data", href: "/advertising-management/enter-data", icon: <FaUserGraduate /> },
     ];
     const libraryItems = [
-        { title: "All Modules", href: "/advertising-management/all-module", icon: <FaCog /> },
-        { title: "Create Type", href: "/advertising-management/create-type", icon: <FaSchool /> },
-        { title: "Enter Data", href: "/advertising-management/enter-data", icon: <FaUserGraduate /> },
+        { title: "All Modules", href: "/library/all-module", icon: <FaCog /> },
+        { title: "Group Master", href: "/library/groupMaster", icon: <FaSchool /> },
+        { title: "Publisher Master", href: "/library/publisher", icon: <FaUserGraduate /> },
+        { title: "Rack Master", href: "/library/rackMaster", icon: <FaUserGraduate /> },
+        { title: "Vendor Master", href: "/library/vendorMaster", icon: <FaUserGraduate /> },
+        { title: "Fine Master", href: "/library/fineMaster", icon: <FaUserGraduate /> },
+        { title: "Category Master", href: "/library/categoryMaster", icon: <FaUserGraduate /> },
+        { title: "New Book Entry", href: "/library/newBookEntry", icon: <FaUserGraduate /> },
+        { title: "New Book Suggestion", href: "/library/newBookSuggestion", icon: <FaUserGraduate /> },
+        { title: "Issue Book", href: "/library/issueBook", icon: <FaUserGraduate /> },
+        { title: "Return Book", href: "/library/returnBook", icon: <FaUserGraduate /> },
     ];
-    // const youtubeItems = [
-    //     { title: "All Modules", href: "/advertising-management/all-module", icon: <FaCog /> },
-    //     { title: "Create Type", href: "/advertising-management/create-type", icon: <FaSchool /> },
-    //     { title: "Enter Data", href: "/advertising-management/enter-data", icon: <FaUserGraduate /> },
-    // ];
+    const dailydairyItems = [
+        { title: "DailyDairy Details", href: "/dailyDairy", icon: <FaCog /> },
+    ];
+    const thoughtItems = [
+        { title: "Thought", href: "/thought", icon: <FaCog /> },
+    ];
+    const complaintItems = [
+        { title: "Complaint", href: "/complaints", icon: <FaCog /> },
+    ];
+    const appointmentItems = [
+        { title: "Appointment", href: "/appointment", icon: <FaCog /> },
+    ];
+    const importantSMSItems = [
+        { title: "importantSMS", href: "/importantSMS", icon: <FaCog /> },
+    ];
+    const userItems = [
+        { title: "All Modules", href: "/userManagement/all-module", icon: <FaCog /> },
+        { title: "Add User", href: "/userManagement/addUser", icon: <FaSchool /> },
+        { title: "Existing Users", href: "/userManagement/exisitingUser", icon: <FaUserGraduate /> },
+    ];
     return (
         <div>
            <div
@@ -452,6 +475,138 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
                             <Accordion.Body>
                                 <ul style={{ listStyle: "none", paddingLeft: isOpen || activeKey ? "20px" : "0" }}>
                                     {libraryItems.map((item, index) => (
+                                        <li key={index} style={{ padding: "5px 0", display: "flex", alignItems: "center" }}>
+                                            {item.icon}
+                                            <span style={{display: isOpen || activeKey ? "inline" : "none" }}>
+                                                <Link href={item.href}>
+                                                    {item.title}
+                                                </Link>
+                                            </span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </Accordion.Body>
+                        </Accordion.Item>
+                        <Accordion.Item eventKey="dailydairy">
+                            <Accordion.Header>
+                                <span style={{ display: "flex", alignItems: "center" }}>
+                                    <FaCog style={{ marginRight: isOpen || activeKey ? "10px" : "0" }} />
+                                    {(isOpen || activeKey) && "DailyDairy Details"}
+                                </span>
+                            </Accordion.Header>
+                            <Accordion.Body>
+                                <ul style={{ listStyle: "none", paddingLeft: isOpen || activeKey ? "20px" : "0" }}>
+                                    {dailydairyItems.map((item, index) => (
+                                        <li key={index} style={{ padding: "5px 0", display: "flex", alignItems: "center" }}>
+                                            {item.icon}
+                                            <span style={{display: isOpen || activeKey ? "inline" : "none" }}>
+                                                <Link href={item.href}>
+                                                    {item.title}
+                                                </Link>
+                                            </span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </Accordion.Body>
+                        </Accordion.Item>
+                        <Accordion.Item eventKey="thought">
+                            <Accordion.Header>
+                                <span style={{ display: "flex", alignItems: "center" }}>
+                                    <FaCog style={{ marginRight: isOpen || activeKey ? "10px" : "0" }} />
+                                    {(isOpen || activeKey) && "Thought"}
+                                </span>
+                            </Accordion.Header>
+                            <Accordion.Body>
+                                <ul style={{ listStyle: "none", paddingLeft: isOpen || activeKey ? "20px" : "0" }}>
+                                    {thoughtItems.map((item, index) => (
+                                        <li key={index} style={{ padding: "5px 0", display: "flex", alignItems: "center" }}>
+                                            {item.icon}
+                                            <span style={{display: isOpen || activeKey ? "inline" : "none" }}>
+                                                <Link href={item.href}>
+                                                    {item.title}
+                                                </Link>
+                                            </span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </Accordion.Body>
+                        </Accordion.Item>
+                        <Accordion.Item eventKey="complaint">
+                            <Accordion.Header>
+                                <span style={{ display: "flex", alignItems: "center" }}>
+                                    <FaCog style={{ marginRight: isOpen || activeKey ? "10px" : "0" }} />
+                                    {(isOpen || activeKey) && "Complaint Details"}
+                                </span>
+                            </Accordion.Header>
+                            <Accordion.Body>
+                                <ul style={{ listStyle: "none", paddingLeft: isOpen || activeKey ? "20px" : "0" }}>
+                                    {complaintItems.map((item, index) => (
+                                        <li key={index} style={{ padding: "5px 0", display: "flex", alignItems: "center" }}>
+                                            {item.icon}
+                                            <span style={{display: isOpen || activeKey ? "inline" : "none" }}>
+                                                <Link href={item.href}>
+                                                    {item.title}
+                                                </Link>
+                                            </span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </Accordion.Body>
+                        </Accordion.Item>
+                        <Accordion.Item eventKey="appointment">
+                            <Accordion.Header>
+                                <span style={{ display: "flex", alignItems: "center" }}>
+                                    <FaCog style={{ marginRight: isOpen || activeKey ? "10px" : "0" }} />
+                                    {(isOpen || activeKey) && "Appointment Details"}
+                                </span>
+                            </Accordion.Header>
+                            <Accordion.Body>
+                                <ul style={{ listStyle: "none", paddingLeft: isOpen || activeKey ? "20px" : "0" }}>
+                                    {appointmentItems.map((item, index) => (
+                                        <li key={index} style={{ padding: "5px 0", display: "flex", alignItems: "center" }}>
+                                            {item.icon}
+                                            <span style={{display: isOpen || activeKey ? "inline" : "none" }}>
+                                                <Link href={item.href}>
+                                                    {item.title}
+                                                </Link>
+                                            </span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </Accordion.Body>
+                        </Accordion.Item>
+                        <Accordion.Item eventKey="importantSMS">
+                            <Accordion.Header>
+                                <span style={{ display: "flex", alignItems: "center" }}>
+                                    <FaCog style={{ marginRight: isOpen || activeKey ? "10px" : "0" }} />
+                                    {(isOpen || activeKey) && "Important SMS"}
+                                </span>
+                            </Accordion.Header>
+                            <Accordion.Body>
+                                <ul style={{ listStyle: "none", paddingLeft: isOpen || activeKey ? "20px" : "0" }}>
+                                    {importantSMSItems.map((item, index) => (
+                                        <li key={index} style={{ padding: "5px 0", display: "flex", alignItems: "center" }}>
+                                            {item.icon}
+                                            <span style={{display: isOpen || activeKey ? "inline" : "none" }}>
+                                                <Link href={item.href}>
+                                                    {item.title}
+                                                </Link>
+                                            </span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </Accordion.Body>
+                        </Accordion.Item>
+                        <Accordion.Item eventKey="userManagement">
+                            <Accordion.Header>
+                                <span style={{ display: "flex", alignItems: "center" }}>
+                                    <FaCog style={{ marginRight: isOpen || activeKey ? "10px" : "0" }} />
+                                    {(isOpen || activeKey) && "User Management"}
+                                </span>
+                            </Accordion.Header>
+                            <Accordion.Body>
+                                <ul style={{ listStyle: "none", paddingLeft: isOpen || activeKey ? "20px" : "0" }}>
+                                    {userItems.map((item, index) => (
                                         <li key={index} style={{ padding: "5px 0", display: "flex", alignItems: "center" }}>
                                             {item.icon}
                                             <span style={{display: isOpen || activeKey ? "inline" : "none" }}>
