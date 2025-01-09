@@ -31,7 +31,7 @@ const CityMasterPage = () => {
     },
     {
       name: "City Name",
-      selector: (row) => row.cityName || "N/A",
+      selector: (row) => row.city_name || "N/A", // Use city_name consistently
       sortable: true,
     },
     {
@@ -61,7 +61,7 @@ const CityMasterPage = () => {
     setError("");
     try {
       const response = await axios.get(
-        "https://erp-backend-fy3n.onrender.com/api/states"
+        "https://erp-backend-fy3n.onrender.com/api/state-cities"
       );
 
       // Ensure the response data is an array
@@ -83,10 +83,10 @@ const CityMasterPage = () => {
     if (newStateName.trim() && newCityName.trim()) {
       try {
         const response = await axios.post(
-          "https://erp-backend-fy3n.onrender.com/api/states",
+          "https://erp-backend-fy3n.onrender.com/api/state-cities",
           {
             state_name: newStateName,
-            cityName: newCityName,
+            city_name: newCityName, // Ensure consistency by using city_name
           }
         );
 
@@ -113,16 +113,16 @@ const CityMasterPage = () => {
     );
     const updatedCityName = prompt(
       "Enter new city name:",
-      item?.cityName || ""
+      item?.city_name || "" // Ensure consistency by using city_name
     );
 
     if (updatedStateName && updatedCityName) {
       try {
         await axios.put(
-          `https://erp-backend-fy3n.onrender.com/api/states/${id}`,
+          `https://erp-backend-fy3n.onrender.com/api/state-cities/${id}`,
           {
             state_name: updatedStateName,
-            cityName: updatedCityName,
+            city_name: updatedCityName, // Ensure consistency by using city_name
           }
         );
 
@@ -130,7 +130,7 @@ const CityMasterPage = () => {
         setCities((prevCities) =>
           prevCities.map((row) =>
             row._id === id
-              ? { ...row, state_name: updatedStateName, cityName: updatedCityName }
+              ? { ...row, state_name: updatedStateName, city_name: updatedCityName } // Ensure consistency
               : row
           )
         );
@@ -148,7 +148,7 @@ const CityMasterPage = () => {
     if (confirm("Are you sure you want to delete this city?")) {
       try {
         await axios.delete(
-          `https://erp-backend-fy3n.onrender.com/api/states/${id}`
+          `https://erp-backend-fy3n.onrender.com/api/state-cities/${id}`
         );
 
         // Remove the city from the state array

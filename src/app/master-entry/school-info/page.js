@@ -4,8 +4,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Preview from "@/app/component/Preview";
 import styles from "../school-info/page.module.css";
+import { Form, Row, Col, Container, FormLabel, FormControl, Button, Breadcrumb } from "react-bootstrap";
 
-export default function Form() {
+export default function Farm() {
   const [showPreview, setShowPreview] = useState(false);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -82,124 +83,146 @@ export default function Form() {
   };
 
   return (
-    <div className={styles.inputs} style={{ padding: "20px", maxWidth: "1200px" }}>
-      <h2>Inputs</h2>
+<Container>
+     <Row className='mt-1 mb-1'>
+            <Col>
+              <Breadcrumb>
+                <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
+                <Breadcrumb.Item href="/library">
+                  Master Entry
+                </Breadcrumb.Item>
+                <Breadcrumb.Item active>School Info</Breadcrumb.Item>
+              </Breadcrumb>
+            </Col>
+          </Row>
+    <div className="cover-sheet">
+      <div className="studentHeading"><h2>School Info</h2> </div>
       {!showPreview ? (
-        <form
-          onSubmit={handleSubmit}
-          style={{ display: "flex", flexDirection: "row", gap: "27px", margin: "auto" }}
-          className={styles.form}
-        >
-          <div className={styles.label1}>
-            <label>
-              School Name:
-              <input
+        <Form onSubmit={handleSubmit}  className="formSheet" >
+         
+            <Row>
+              <Col lg={4}>
+              <FormLabel className="labelForm">  School Name: </FormLabel>
+              <FormControl
                 type="text"
                 name="schoolName"
                 value={formData.schoolName}
                 onChange={handleChange}
                 required
               />
-            </label>
-            <label>
-              Phone No:
-              <input
-                type="tel"
-                name="phoneNo"
-                value={formData.phoneNo}
-                onChange={handleChange}
-                required
+              </Col>
+              <Col lg={4}>
+              <FormLabel className="labelForm">  Phone No: </FormLabel>
+              <FormControl
+               type="tel"
+               name="phoneNo"
+               value={formData.phoneNo}
+               onChange={handleChange}
+               required
               />
-            </label>
-            <label>
-              Email Address:
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
+              </Col>
+              <Col lg={4}>
+              <FormLabel className="labelForm">   Email Address: </FormLabel>
+              <FormControl
+               type="email"
+               name="email"
+               value={formData.email}
+               onChange={handleChange}
+               required
               />
-            </label>
-            <label>
-              Web Address:
-              <input
-                type="url"
-                name="webAddress"
-                value={formData.webAddress}
-                onChange={handleChange}
-                required
+              </Col>
+            </Row>
+            <Row>
+            <Col lg={4}>
+              <FormLabel className="labelForm">   Web Address: </FormLabel>
+              <FormControl
+               type="url"
+               name="webAddress"
+               value={formData.webAddress}
+               onChange={handleChange}
+               required
               />
-            </label>
-            <label>
-              Address:
-              <textarea
-                type="text"
-                name="address"
-                value={formData.address}
-                onChange={handleChange}
-                required
+              </Col>
+              <Col lg={4}>
+              <FormLabel className="labelForm">   Address: </FormLabel>
+              <FormControl as="textarea" rows={1}
+               name="address"
+               value={formData.address}
+               onChange={handleChange}
+               required
               />
-            </label>
-          </div>
-          <div className={styles.label2}>
-            <label>
-              Account No:
-              <input
-                type="text"
-                name="accountNo"
-                value={formData.accountNo}
-                onChange={handleChange}
-                required
+              </Col>
+              <Col lg={4}>
+              <FormLabel className="labelForm">   Account No: </FormLabel>
+              <FormControl
+               type="text"
+               name="accountNo"
+               value={formData.accountNo}
+               onChange={handleChange}
+               required
               />
-            </label>
-            <label>
-              IFSC Code:
-              <input
+              </Col>
+            </Row>
+            <Row>
+            <Col lg={4}>
+              <FormLabel className="labelForm">    IFSC Code: </FormLabel>
+              <FormControl
                 type="text"
                 name="ifscCode"
                 value={formData.ifscCode}
                 onChange={handleChange}
                 required
               />
-            </label>
-            <label>
-              Bank Name:
-              <input
+              </Col>
+              <Col lg={4}>
+              <FormLabel className="labelForm">  Bank Name: </FormLabel>
+              <FormControl
                 type="text"
                 name="bankName"
                 value={formData.bankName}
                 onChange={handleChange}
                 required
               />
-            </label>
-            <label>
-              Branch Name:
-              <input
-                type="text"
-                name="branchName"
-                value={formData.branchName}
-                onChange={handleChange}
-                required
+              </Col>
+              <Col lg={4}>
+              <FormLabel className="labelForm">   Branch Name: </FormLabel>
+              <FormControl
+                 type="text"
+                 name="branchName"
+                 value={formData.branchName}
+                 onChange={handleChange}
+                 required
               />
-            </label>
-            <label>
-              Logo Image:
-              <input type="file" name="logo" onChange={handleFileChange} className={styles.file} required />
-            </label>
-          </div>
-          <button className={styles.btnn} type="submit" disabled={loading}>
+              </Col>
+
+            </Row>
+            <Row>
+            <Col lg={4}>
+              <FormLabel className="labelForm">  Logo Image: </FormLabel>
+              <FormControl
+                 type="file" name="logo" onChange={handleFileChange} className={styles.file} required
+              />
+              </Col>
+            </Row>
+             
+            
+            <Row>
+            <Col lg={12}>
+            <div className="d-flex justify-content-between w-100">
+          <button className="btn btn-primary mt-4" type="submit" disabled={loading}>
             {loading ? "Submitting..." : "Submit"}
           </button>
-        </form>
+          <button className="btn btn-primary mt-4" type="button" onClick={togglePreview}>
+            Preview
+          </button>
+          </div>
+          </Col>
+          </Row>
+        </Form>
       ) : (
         <Preview data={formData} onEdit={togglePreview} />
-      )}
-      <div className={styles.buttons}>
-        <button className={styles.btnn} type="button" onClick={togglePreview}>
-          Preview
-        </button>
-      </div>
+      )}   
     </div>
+    </Container>
   );
 }

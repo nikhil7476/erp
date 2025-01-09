@@ -435,6 +435,18 @@ input::-webkit-inner-spin-button {
   font-size: 16px;
   margin: 10px 5px;
 }
+.deleteButton {
+  background-color: #8a59ca;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  margin-right: 5px;
+  padding: 7px 10px;
+  width: 100px;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 16px;
+  margin: 10px 5px;
+}
 
 @media (max-width: 768px) {
   .subCard1 {
