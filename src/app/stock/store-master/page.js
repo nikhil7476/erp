@@ -1,4 +1,3 @@
-
 "use client";
 import React, { useState, useEffect } from "react";
 import Table from "@/app/component/DataTable"; // Ensure the path to the DataTable component is correct
@@ -49,11 +48,10 @@ const StoreMaster = () => {
     try {
       const response = await axios.get("https://erp-backend-fy3n.onrender.com/api/stores");
 
-      // Check if the response has the expected structure
       if (response.data && Array.isArray(response.data)) {
-        setData(response.data); // Assuming the API returns an array of store objects
+        setData(response.data);
       } else if (response.data && response.data.data && Array.isArray(response.data.data)) {
-        setData(response.data.data); // Handle nested response structure
+        setData(response.data.data);
       } else {
         console.error("Unexpected API response format:", response.data);
         setError("Unexpected API response format. Please contact support.");
@@ -66,15 +64,39 @@ const StoreMaster = () => {
     }
   };
 
+  // Post new store
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!formData.storeName.trim()) {
+      alert("Store name is required.");
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        "https://erp-backend-fy3n.onrender.com/api/store",
+        { storeName: formData.storeName }
+      );
+      if (response.data) {
+        setData((prevData) => [...prevData, response.data]); // Add new store to the existing data
+        setFormData({ storeName: "" }); // Reset form
+        setIsPopoverOpen(false); // Close popover
+      }
+    } catch (error) {
+      console.error("Error adding store:", error);
+      setError("Failed to add store. Please try again later.");
+    }
+  };
+
   // Edit entry
   const handleEdit = async (id) => {
-    const item = data.find((row) => row._id === id); // Ensure _id matches the unique key in your data
+    const item = data.find((row) => row._id === id);
     const updatedName = prompt("Enter new name:", item?.storeName || "");
 
     if (updatedName) {
       try {
         const response = await axios.put(
-          `https://erp-backend-fy3n.onrender.com/api/stores/${id}`,
+          `https://erp-backend-fy3n.onrender.com/api/store/${id}`,
           { storeName: updatedName }
         );
         if (response.data) {
@@ -95,7 +117,7 @@ const StoreMaster = () => {
   const handleDelete = async (id) => {
     if (confirm("Are you sure you want to delete this entry?")) {
       try {
-        await axios.delete(`https://erp-backend-fy3n.onrender.com/api/stores/${id}`);
+        await axios.delete(`https://erp-backend-fy3n.onrender.com/api/store/${id}`);
         setData((prevData) => prevData.filter((row) => row._id !== id));
       } catch (error) {
         console.error("Error deleting data:", error);
@@ -108,12 +130,6 @@ const StoreMaster = () => {
   useEffect(() => {
     fetchData();
   }, []);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form submitted:", formData);
-    setIsPopoverOpen(false);
-  };
 
   return (
     <Container className={styles.vehicle}>
@@ -161,7 +177,7 @@ const StoreMaster = () => {
                     />
                   </FormGroup>
                 </Row>
-                <Button type="submit" id="submit" onSubmit={handleSubmit}>Add Store</Button>
+                <Button type="submit" id="submit">Add Store</Button>
               </Form>
             </div>
           )}

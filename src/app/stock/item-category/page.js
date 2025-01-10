@@ -49,7 +49,7 @@ const ItemCategory = () => {
 
     if (updatedName) {
       try {
-        const response = await axios.put(`https://erp-backend-fy3n.onrender.com/api/itemCategories/${id}`, {
+        const response = await axios.put(`https://erp-backend-fy3n.onrender.com/api/itemCategory/${id}`, {
           categoryName: updatedName,
         });
         if (response.data) {
@@ -68,7 +68,7 @@ const ItemCategory = () => {
   const handleDelete = async (id) => {
     if (confirm("Are you sure you want to delete this category?")) {
       try {
-        await axios.delete(`https://erp-backend-fy3n.onrender.com/api/itemCategories/${id}`);
+        await axios.delete(`https://erp-backend-fy3n.onrender.com/api/itemCategory/${id}`);
         setData((prevData) => prevData.filter((row) => row.id !== id));
       } catch (error) {
         console.error("Error deleting data:", error);
@@ -81,7 +81,7 @@ const ItemCategory = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("https://erp-backend-fy3n.onrender.com/api/itemCategories", formData);
+      const response = await axios.post("https://erp-backend-fy3n.onrender.com/api/itemCategory", formData);
       if (response.data) {
         setData((prevData) => [...prevData, response.data]);
         setFormData({ categoryName: "" });
