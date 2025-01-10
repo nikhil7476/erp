@@ -1,11 +1,12 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
-import { Form, Row, Col, Container, FormLabel, FormControl, Button } from "react-bootstrap";
+import { Form, Row, Col, Container, FormLabel, FormControl, Button, Breadcrumb } from "react-bootstrap";
 import axios from "axios";
 import Table from "@/app/component/DataTable";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import styles from "@/app/medical/routine-check-up/page.module.css"; // Assuming shared styles
+import { CgAddR } from 'react-icons/cg';
 
 const ClassMasterPage = () => {
   const [data, setData] = useState([]); // State for class data
@@ -40,7 +41,7 @@ const ClassMasterPage = () => {
           <button className="editButton" onClick={() => handleEdit(row.id)}>
             <FaEdit />
           </button>
-          <button className="deleteButton btn-danger" onClick={() => handleDelete(row.id)}>
+          <button className="editButton btn-danger" onClick={() => handleDelete(row.id)}>
             <FaTrashAlt />
           </button>
         </div>
@@ -155,20 +156,35 @@ const ClassMasterPage = () => {
   }, []);
 
   return (
-    <Container className={styles.formContainer}>
-      <Form className={styles.form}>
-        <Button
+    <Container>
+      <Row className='mt-1 mb-1'>
+            <Col>
+              <Breadcrumb>
+                <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
+                <Breadcrumb.Item href="/master-entry/all-module">
+                  Master Entry
+                </Breadcrumb.Item>
+                <Breadcrumb.Item active>Class Master</Breadcrumb.Item>
+              </Breadcrumb>
+            </Col>
+          </Row>
+          <Button
           onClick={() => setShowAddForm(!showAddForm)}
           className={`mb-4 ${styles.search}`}
         >
-          Add Class
+          <CgAddR/> Add Class
         </Button>
 
         {showAddForm && (
-          <div className="result">
+
+      <div className="cover-sheet">
+                <div className="studentHeading"><h2>  Add Class</h2></div>
+                <Form className="formSheet">
+       
+        
             <Row className="mb-3">
               <Col lg={6}>
-                <FormLabel className={styles.class}>Class Name</FormLabel>
+                <FormLabel className="labelForm">Class Name</FormLabel>
                 <FormControl
                   required
                   type="text"
@@ -177,10 +193,8 @@ const ClassMasterPage = () => {
                   onChange={(e) => setNewClassName(e.target.value)}
                 />
               </Col>
-            </Row>
-            <Row className="mb-3">
               <Col lg={6}>
-                <FormLabel className={styles.class}>Section</FormLabel>
+                <FormLabel className="labelForm">Section</FormLabel>
                 <FormControl
                   required
                   type="text"
@@ -190,25 +204,28 @@ const ClassMasterPage = () => {
                 />
               </Col>
             </Row>
+            
             <Row className="mb-3">
               <Col>
-                <Button onClick={handleAddClass} className={styles.search}>
+                <Button onClick={handleAddClass} className="btn btn-primary mt-4">
                   Add Class
                 </Button>
               </Col>
             </Row>
+            </Form>
           </div>
         )}
-
         <Row>
           <Col>
-            <h2 style={{ fontSize: "22px" }}>Class & Section Records</h2>
+          <div className="tableSheet">
+            <h2>Class & Section Records</h2>
             {loading && <p>Loading...</p>}
             {error && <p style={{ color: "red" }}>{error}</p>}
             {!loading && !error && <Table columns={columns} data={data} />}
+            </div>
           </Col>
         </Row>
-      </Form>
+     
     </Container>
   );
 };

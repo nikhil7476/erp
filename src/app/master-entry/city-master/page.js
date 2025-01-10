@@ -3,11 +3,11 @@
 import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
-import { Form, Row, Col, Container, FormLabel, FormControl, Button } from "react-bootstrap";
+import { Form, Row, Col, Container, FormLabel, FormControl, Button, Breadcrumb } from "react-bootstrap";
 import Table from "@/app/component/DataTable"; // Ensure the path to the DataTable component is correct
 import axios from "axios";
 import styles from "@/app/medical/routine-check-up/page.module.css"; // Assuming the same styles are used
-
+import { CgAddR } from 'react-icons/cg';
 const CityMasterPage = () => {
   const [cities, setCities] = useState([]); // State for cities
   const [newStateName, setNewStateName] = useState(""); // State for new state name
@@ -170,17 +170,31 @@ const CityMasterPage = () => {
   }, []);
 
   return (
-    <Container className={styles.formContainer}>
-      <Form className={styles.form}>
-        <Button
+    <Container>
+      <Row className='mt-1 mb-1'>
+            <Col>
+              <Breadcrumb>
+                <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
+                <Breadcrumb.Item href="/master-entry/all-module">
+                  Master Entry
+                </Breadcrumb.Item>
+                <Breadcrumb.Item active>City Master</Breadcrumb.Item>
+              </Breadcrumb>
+            </Col>
+          </Row>
+          <Button
           onClick={() => setShowAddForm(!showAddForm)}
           className={`mb-4 ${styles.search}`}
-        >
-          Add City
+        > 
+          <CgAddR/> Add City
         </Button>
 
         {showAddForm && (
-          <div className="result">
+
+
+      <div className="cover-sheet">
+        <div className="studentHeading"><h2>   Add City</h2></div>
+            <Form className="formSheet">
             <Row className="mb-3">
               <Col lg={6}>
                 <FormLabel className={styles.class}>State Name</FormLabel>
@@ -192,8 +206,7 @@ const CityMasterPage = () => {
                   onChange={(e) => setNewStateName(e.target.value)}
                 />
               </Col>
-            </Row>
-            <Row className="mb-3">
+            
               <Col lg={6}>
                 <FormLabel className={styles.class}>City Name</FormLabel>
                 <FormControl
@@ -212,18 +225,21 @@ const CityMasterPage = () => {
                 </Button>
               </Col>
             </Row>
+            </Form>
           </div>
         )}
 
         <Row>
           <Col>
-            <h2 style={{ fontSize: "22px" }}>City Records</h2>
+          <div className="tableSheet">
+            <h2>City Records</h2>
             {loading && <p>Loading...</p>}
             {error && <p style={{ color: "red" }}>{error}</p>}
             {!loading && !error && <Table columns={columns} data={cities} />}
+            </div>
           </Col>
         </Row>
-      </Form>
+      
     </Container>
   );
 };

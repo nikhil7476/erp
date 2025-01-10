@@ -5,8 +5,9 @@ import dynamic from "next/dynamic";
 import styles from "@/app/medical/routine-check-up/page.module.css";
 import Table from "@/app/component/DataTable";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
-import { Form, Row, Col, Container, FormLabel, FormControl, Button } from "react-bootstrap";
+import { Form, Row, Col, Container, FormLabel, FormControl, Button, Breadcrumb } from "react-bootstrap";
 import axios from "axios";
+import { CgAddR } from 'react-icons/cg';
 
 const CasteMasterPage = () => {
   const [data, setData] = useState([]); // Table data
@@ -122,21 +123,28 @@ const CasteMasterPage = () => {
   }, []);
 
   return (
-    <Container className={styles.formContainer}>
-      <Form className={styles.form}>
-        <Button
-          onClick={() => setShowAddForm(!showAddForm)}
-          className={`mb-4 ${styles.search}`}
-        >
-          Add Caste
-        </Button>
-
-        {/* Add Form */}
-        {showAddForm && (
-          <div className="mb-4">
+    <Container>
+      <Row className='mt-1 mb-1'>
+        <Col>
+          <Breadcrumb>
+            <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
+            <Breadcrumb.Item href="/master-entry/all-module">
+              Master Entry
+            </Breadcrumb.Item>
+            <Breadcrumb.Item active>Caste Master</Breadcrumb.Item>
+          </Breadcrumb>
+        </Col>
+      </Row>
+      <Button onClick={() => setShowAddForm(!showAddForm)} className={`mb-4 ${styles.search}`}>
+      <CgAddR/> Add Caste
+      </Button>
+      {showAddForm && (
+        <div className="cover-sheet">
+          <div className="studentHeading"><h2>  Add Document</h2></div>
+          <Form className="formSheet">
             <Row className="mb-3">
               <Col lg={6}>
-                <FormLabel>Caste Name</FormLabel>
+                <FormLabel className="labelForm">Caste Name</FormLabel>
                 <FormControl
                   type="text"
                   placeholder="Enter Caste Name"
@@ -152,20 +160,21 @@ const CasteMasterPage = () => {
                 </Button>
               </Col>
             </Row>
+          </Form>
+        </div>
+      )}
+      <Row>
+        <Col>
+          <div className="tableSheet">
+            <h2>Caste Records</h2> 
+          {loading && <p>Loading...</p>}
+          {error && <p style={{ color: "red" }}>{error}</p>}
+          {!loading && !error && <Table columns={columns} data={data} />}
           </div>
-        )}
-
-        {/* Table Section */}
-        <Row>
-          <Col>
-            <h2 style={{ fontSize: "22px" }}>Caste Records</h2>
-            {loading && <p>Loading...</p>}
-            {error && <p style={{ color: "red" }}>{error}</p>}
-            {!loading && !error && <Table columns={columns} data={data} />}
-          </Col>
-        </Row>
-      </Form>
-    </Container>
+        </Col>
+      </Row>
+    
+    </Container >
   );
 };
 

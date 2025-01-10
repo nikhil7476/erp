@@ -1,10 +1,12 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Form, Row, Col, Container, FormLabel, FormControl, Button } from "react-bootstrap";
+import { Form, Row, Col, Container, FormLabel, FormControl, Button, Breadcrumb } from "react-bootstrap";
 import Table from "@/app/component/DataTable";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import axios from "axios";
+import { CgAddR } from 'react-icons/cg';
+
 
 const ReligionMasterPage = () => {
   const [data, setData] = useState([]); // Table data
@@ -116,42 +118,58 @@ const ReligionMasterPage = () => {
 
   return (
     <Container>
-      <h2 className="mb-4">Religion Master</h2>
-
+      <Row className='mt-1 mb-1'>
+        <Col>
+          <Breadcrumb>
+            <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
+            <Breadcrumb.Item href="/master-entry/all-module">
+              Master Entry
+            </Breadcrumb.Item>
+            <Breadcrumb.Item active>Religion Master</Breadcrumb.Item>
+          </Breadcrumb>
+        </Col>
+      </Row>
       <Button onClick={() => setShowAddForm(!showAddForm)} className="mb-4">
-        {showAddForm ? "Close Form" : "Add Religion"}
+      <CgAddR/> {showAddForm ? "Close Form" : "Add Religion"}
       </Button>
-
-      {/* Add Form */}
       {showAddForm && (
-        <div className="mb-4">
-          <Row className="mb-3">
-            <Col lg={6}>
-              <FormLabel>Religion Name</FormLabel>
-              <FormControl
-                type="text"
-                placeholder="Enter Religion Name"
-                value={newReligionName}
-                onChange={(e) => setNewReligionName(e.target.value)}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <Button onClick={handleAdd}>Add Religion</Button>
-            </Col>
-          </Row>
+
+        <div className="cover-sheet">
+          <div className="studentHeading"><h2>  Add Document</h2></div>
+          <Form className="formSheet">
+            <Row className="mb-3">
+              <Col lg={6}>
+                <FormLabel className="labelForm">Religion Name</FormLabel>
+                <FormControl
+                  type="text"
+                  placeholder="Enter Religion Name"
+                  value={newReligionName}
+                  onChange={(e) => setNewReligionName(e.target.value)}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <Button onClick={handleAdd}>Add Religion</Button>
+              </Col>
+            </Row>
+          </Form>
         </div>
       )}
-
-      {/* Table Section */}
-      {loading ? (
-        <p>Loading...</p>
-      ) : error ? (
-        <p style={{ color: "red" }}>{error}</p>
-      ) : (
-        <Table columns={columns} data={data} />
-      )}
+  <Row>
+    <Col>
+      <div className="tableSheet">
+          <h2>Religion Master</h2>
+          {loading ? (
+            <p>Loading...</p>
+          ) : error ? (
+            <p style={{ color: "red" }}>{error}</p>
+          ) : (
+            <Table columns={columns} data={data} />
+          )}
+      </div>
+    </Col>
+  </Row>
     </Container>
   );
 };

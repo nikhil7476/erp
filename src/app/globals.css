@@ -1,5 +1,5 @@
 body {
-  background: #f7f7f7;
+  background: #f7f7f7 !important;
 }
 .container {
   max-width: 100% !important;
@@ -8,14 +8,15 @@ body {
 .layout {
   display: flex;
   height: 100vh;
+  background-color: #f7f7f7;
 }
 .header {
   height: 60px;
-  background-color: #4b0a8a;
+  background-color: #f7f7f7;
   padding: 10px;
 }
 .header h3 {
-  color: #fff;
+  color: #000;
   font-size: 22px;
   margin: 0;
 }
@@ -23,31 +24,43 @@ body {
   display: flex;
   justify-content: space-between;
 }
-#submit {
-  background-color: #8a59ca;
+#submit,
+.btn-primary
+{
+  background: -webkit-linear-gradient( left,
+    #2797af,#2b6293 
+  );
   color: white;
   border: none;
   border-radius: 4px;
   margin-right: 5px;
   padding: 10px 25px;
-  font-family: 'Times New Roman', Times, serif;
   font-size: 16px;
   margin: 10px 5px;
   float: center;
 }
+.btn-primary svg
+{
+  margin-right: 10px;
+}
+
 .date {
   border: 1px solid #ddd;
   border-radius: 5px;
   padding: 6px;
   width: 270px;
 }
-a {
+a 
+{
   text-decoration: none !important;
 }
 .sidebar {
   display: flex;
   flex-direction: column;
-  background-color: #520389;
+  /* background-color: #520389; */
+  background: -webkit-linear-gradient(
+    #2797af,#2b6293 
+  );
   color: #fff;
   width: 250px;
   min-width: 250px;
@@ -56,21 +69,26 @@ a {
   height: 100vh;
   z-index: 100;
   transition: width 0.3s ease;
+  border-radius: 20px;
   /* overflow-y: scroll; */
 }
-.sidebar ul::-webkit-scrollbar-track {
+.sidebar ul::-webkit-scrollbar-track 
+{
   border-radius: 10px;
-  background-color: #520389;
+  background-color: #0083a5;
 }
-.sidebar ul::-webkit-scrollbar {
+.sidebar ul::-webkit-scrollbar 
+{
   width: 6px;
-  background-color: #520389;
+  background-color: #0083a5;
 }
-.sidebar ul::-webkit-scrollbar-thumb {
+.sidebar ul::-webkit-scrollbar-thumb 
+{
   border-radius: 4px;
   background-color: rgba(255, 255, 255, 0.3);
 }
-.sidebar.closed {
+.sidebar.closed 
+{
   width: 80px;
   min-width: 80px;
 }
@@ -81,7 +99,7 @@ a {
 .sidebar ul {
   list-style: none;
   margin: 20px 0px;
-  background: #fff;
+  /* background: #fff; */
   /* margin: 10px 10px; */
   border-radius: 16px;
   padding: 5px;
@@ -95,22 +113,23 @@ a {
 .sidebar li {
   padding: 10px 8px;
   cursor: pointer;
-  background-color: #fff;
-  border-bottom: 1px solid #f4eeee;
+  /* background-color: #fff; */
+  /* border-bottom: 1px solid #f4eeee; */
+
 }
 .sidebar li span a {
   font-size: 14px;
-  color: #000;
+  color: #fff;
 }
 .sidebar ul ul li span a {
   font-size: 14px;
-  color: #666;
+  color: #fff;
 }
 .sidebar ul ul li svg {
   color: #fff;
   width: 24px;
   height: 24px;
-  background: #520389;
+  /* background: #520389; */
   padding: 5px;
   border-radius: 50%;
 }
@@ -143,12 +162,15 @@ main {
 .sidebarAccordion .accordion-item {
   border-radius: 0px !important;
   border: none;
-  border-bottom: 1px solid #f4eeee;
+  /* border-bottom: 1px solid #f4eeee; */
+  background-color: transparent;
 }
 .accordion-item>.accordion-header .accordion-button::after {
   width: 14px;
   height: 14px;
-  background-size: cover;
+  background-size: 0.8rem;
+  background-image: url(/dropArrow.png);
+
 }
 .sidebar.closed .accordion-item>.accordion-header .accordion-button::after {
   content: none;
@@ -160,6 +182,8 @@ main {
   font-size: 14px !important;
   font-weight: 500 !important;
   padding: 8px;
+  background-color: transparent;
+  color: #fff;
 }
 .accordion-item>.accordion-header .accordion-button:focus {
   box-shadow: none;
@@ -169,7 +193,7 @@ main {
   width: 26px;
   height: 26px;
   padding: 5px;
-  background: #520389;
+  /* background: #520389; */
   color: #fff;
   border-radius: 50%;
   margin-right: 10px;
@@ -182,16 +206,22 @@ main {
   padding: 0;
 }
 .rightNavbar .nav-link {
-  color: #ddb8f7;
+  color: #000;
 }
-.rightNavbar .nav-link svg circle,
+.rightNavbar.navbar-expand-lg .navbar-nav .dropdown span img
+{
+  width: 24px;
+}
+/* .rightNavbar .nav-link svg circle,
 .rightNavbar .nav-link svg {
   color: #ffaf01;
-}
+} */
+
+
 .rightNavbar .nav-link:hover,
 .rightNavbar .nav-link:focus,
 .rightNavbar .nav-link.dropdown-toggle.show {
-  color: #fff;
+  color: #000;
 }
 .rightNavbar.navbar-expand-lg .navbar-nav .dropdown-menu {
   right: 0;
@@ -243,13 +273,24 @@ footer {
 .dashboardCardCard span {
   font-size: 22px;
 }
+.studentHeading
+{
+  margin-bottom: 30px;
+}
+.studentHeading h2
+{
+  font-size: 30px;
+  font-weight:bold;
+}
+
+
+
 .studentCardTitle h4 {
   font-size: 14px;
   margin: 0;
 }
 .studentItemList h5 {
   font-size: 14px;
-  color: #000;
 }
 .studentCardDetails {
   display: grid;
@@ -268,45 +309,44 @@ footer {
   padding: 20px 20px 0;
 }
 .studentCardTitle {
-  background-color: #6d49b1;
+  background-color: #0083a5;
   padding: 6px 2px 6px 2px;
   color: #fff;
 }
-.studentCardTitle1 {
-  /* background-color: #6d49b1;
-  padding: 9px 9px 9px 9px;
-  color: #fff;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  width: 160px;
-  border-radius: 30px; */
-}
-.studentCardCount p {
+
+
+.studentCardCount p 
+{
   margin: 0;
   font-size: 24px;
   font-weight: 800;
 }
-.studentCardCount p span {
+.studentCardCount p span 
+{
   font-size: 14px;
   font-weight: 500;
   color: #666;
 }
-.studentCardTitle1 h4 {
+.studentCardTitle1 h4 
+{
   font-size: 16px !important;
 }
-.dashboardCardCard h1 {
+.dashboardCardCard h1 
+{
   font-size: 35px;
 }
-.iconBack {
+.iconBack 
+{
   width: 55px;
   height: 55px;
   border-radius: 50%;
   color: #fff;
-  background: #4b0a8a;
+  background: #0083a5;
   line-height: 55px;
   margin: auto;
 }
-.iconBack svg.studentIcon {
+.iconBack svg.studentIcon 
+{
   color: #fff;
   font-size: 20px;
 }
@@ -315,25 +355,45 @@ footer {
   justify-content: center;
   align-items: center;
 } */
-.studentImg {
+.studentImg 
+{
   padding-top: 10px;
   padding-bottom: 10px;
 }
-.studentImg img {
+.studentImg img 
+{
   /* width: 70px !important; */
   height: 70px !important;
 }
-.studentImg1 {
+.studentImg1 
+{
   padding-top: 10px;
   /* padding-bottom: 10px; */
 }
-.studentItemList {
+.studentItemList 
+{
   padding-top: 10px;
   padding-bottom: 10px;
   text-align: left;
+  min-width: 50%;
 }
+
+.addNewStudent a
+{
+  color: #000;
+}
+.addonbtn
+{
+  background-color: #8a59ca;
+  color: #fff; 
+  border-radius: 50%;
+  margin-top: 20px;
+}
+
+
 input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
+input::-webkit-inner-spin-button 
+{
   -webkit-appearance: none;
   /* margin: 0; */
 }
@@ -346,25 +406,21 @@ input::-webkit-inner-spin-button {
   transition: background .3s, border .3s, border-radius .3s, box-shadow .3s;
   overflow: hidden;
 }
-
 .cardContainer {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  justify-content: space-between;
+  justify-content: left;
   margin-bottom: 35px;
 }
-
 .subCard1 {
   width: 24%;
-  margin-top: 40px;
+  margin-bottom: 20px;
 }
-
 .SubCardLink {
   width: 100%;
   text-decoration: none;
 }
-
 .SubCard {
   background-color: #fafafa;
   /* border: 1px solid #e0e0e0; */
@@ -376,10 +432,110 @@ input::-webkit-inner-spin-button {
   position: relative;
   overflow: hidden;
 }
+.nav-tabs
+{
+  border: none;
+}
+.dataTableCover
+{
+  border:1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px; 
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3);
+}
+.searchBar
+{
+  display: flex;
+  align-items: center;
+}
+.searchBar button
+{
+   margin-top: 0px;
+}
 
 
+/* .result
+{
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 20px;
+} */
+.cover-sheet 
+{
+  background: rgb(249, 249, 249);
+  padding: 0px;
+  border-radius: 20px;
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+  border: 1px solid #ddd;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.cover-sheet .studentHeading
+{
+    padding: 10px 20px;
+    background-color: #2b6293;
+    margin-bottom: 10px;
+}
+.cover-sheet .studentHeading h2
+{
+  margin: 0;
+  font-size: 18px;
+  color: #fff;
+}
+.formSheet
+{
+  padding: 20px;
+}
+.labelForm
+{
+  font-size: 14px;
+  font-weight: bold;
+  color: #5c5c5c;
+}
+.tableSheet
+{
+margin-top: 20px;
+}
+
+.tableSheet h2
+{
+  font-size: 22px;
+  font-weight: bold;
+  color: #006393;
+  margin-bottom: 30px;
+  padding-left: 30px;
+  position: relative;
+  background-color: #f7f7f7;
+}
+.tableSheet h2::before
+{
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 16px;
+  height: 16px;
+  background-color: #000;
+  transform: rotate(24deg);
+}
+.tableSheet h2::after
+{
+  content: "";
+  position: absolute;
+  left: 0px;
+  top: 6px;
+  width: 9px;
+  height: 16px;
+  background-color: #2b6293;
+  transform: rotate(24deg);
+}
+.breadcrumb .breadcrumb-item a
+{
+  font-size: 14px;
+}
 /* 
-.SubCard::before {
+.SubCard::before 
+{
   content: "";
   position: absolute;
   width: 150%;
@@ -391,63 +547,90 @@ input::-webkit-inner-spin-button {
   border-radius: 50%;
   z-index: -1;
   animation: waving 6s ease-in-out infinite alternate;
-
 } */
-
-
-
-
-
-
-
-.SubCard:hover {
+.cardBorder
+{
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 20px;
+}
+.TabButton.nav-tabs
+{
+  border-bottom: 0;
+}
+.TabButton.nav-tabs .nav-link
+{
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-right: 10px;
+  color: #000;
+}
+.TabButton.nav-tabs .nav-item.show .nav-link, .TabButton.nav-tabs .nav-link.active
+{
+  border: 1px solid #ddd;
+  background: -webkit-linear-gradient( left,
+    #2797af,#2b6293 
+  );
+  color: #fff;
+}
+.SubCard:hover 
+{
   transform: translateY(-10px);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
 }
-
-.studentIcon {
+.studentIcon 
+{
   font-size: 40px;
   color: black;
   margin-bottom: 10px;
 }
-
 .SubCard h3 {
   font-weight: 700;
   font-size: 1.2rem;
   margin: 10px 0 0;
   color: #141e36;
 }
-
 .SubCard p {
   font-size: 0.8rem;
   color: #555555;
   margin-top: 8px;
 }
 .editButton {
-  background-color: #8a59ca;
+  background: #0083a5;
   color: white;
   border: none;
   border-radius: 4px;
-  margin-right: 5px;
+  margin-right: 2px;
   padding: 7px 10px;
-  width: 100px;
-  font-family: 'Times New Roman', Times, serif;
-  font-size: 16px;
+  font-size: 14px;
   margin: 10px 5px;
 }
-.deleteButton {
-  background-color: #8a59ca;
+.printButton
+{
+  background-color: #cd3434;
   color: white;
   border: none;
   border-radius: 4px;
-  margin-right: 5px;
+  margin-right: 0px;
   padding: 7px 10px;
-  width: 100px;
-  font-family: 'Times New Roman', Times, serif;
   font-size: 16px;
   margin: 10px 5px;
 }
-
+.btn-danger
+{
+  background: #e97171;
+}
+.form-control,
+.form-select
+{
+  color: #000;
+}
+.form-control::placeholder,
+.form-control:-ms-input-placeholder,
+.form-control::-ms-input-placeholder
+{
+  color: #999;
+}
 @media (max-width: 768px) {
   .subCard1 {
     width: 45%;

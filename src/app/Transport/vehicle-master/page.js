@@ -131,6 +131,7 @@ const VehicleRecords = () => {
           `https://erp-backend-fy3n.onrender.com/api/vehicles/${id}`,
           {
             vehicle_type: updatedVehicleType,
+            driver_name: updateddriver_name
           }
         );
         setData((prevData) =>
@@ -169,103 +170,104 @@ const VehicleRecords = () => {
 
   return (
     <Container>
-      <Row className="mt-1 mb-1">
-        <Col>
-          <Breadcrumb style={{ marginLeft: "20px" }}>
+      
+        <Breadcrumb>
             <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
             <Breadcrumb.Item href="/Transport/all-module">
               Transport
             </Breadcrumb.Item>
-            <Breadcrumb.Item active>Vehicle Records</Breadcrumb.Item>
-          </Breadcrumb>
-        </Col>
-      </Row>
+            <Breadcrumb.Item active>Vehicle Master</Breadcrumb.Item>
+        </Breadcrumb>
+       
 
       {/* Add Vehicle Form */}
-      <Row>
-        <Col>
-          <Button
-            onClick={() => setShowAddForm(!showAddForm)}
-            className="mb-4"
-          >
+          <Button onClick={() => setShowAddForm(!showAddForm)} className="mb-4">
             Add Vehicle
           </Button>
 
           {showAddForm && (
-            <div className="mb-4">
-              <Row className="mb-3">
-                <Col lg={4}>
-                  <FormLabel>Vehicle Type</FormLabel>
-                  <FormControl
-                    type="text"
-                    placeholder="Enter Vehicle Type"
-                    value={newVehicle.vehicle_type}
-                    onChange={(e) =>
-                      setNewVehicle({
-                        ...newVehicle,
-                        vehicle_type: e.target.value,
-                      })
-                    }
-                  />
-                </Col>
-                <Col lg={4}>
-                  <FormLabel>Vehicle No</FormLabel>
-                  <FormControl
-                    type="text"
-                    placeholder="Enter Vehicle No"
-                    value={newVehicle.vehicle_no}
-                    onChange={(e) =>
-                      setNewVehicle({
-                        ...newVehicle,
-                        vehicle_no: e.target.value,
-                      })
-                    }
-                  />
-                </Col>
-                <Col lg={4}>
-                  <FormLabel>Driver Name</FormLabel>
-                  <FormControl
-                    type="text"
-                    placeholder="Enter Driver Name"
-                    value={newVehicle.driver.driver_name}
-                    onChange={(e) =>
-                      setNewVehicle({
-                        ...newVehicle,
-                        driver: {
-                          ...newVehicle.driver,
-                          driver_name: e.target.value,
-                        },
-                      })
-                    }
-                  />
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <Button onClick={handleAdd}>Add Vehicle</Button>
-                </Col>
-              </Row>
-            </div>
+            
+            <div className="cover-sheet">
+                <div className="studentHeading"><h2>Add Vehicle Type</h2></div>
+                  <Form className="formSheet">
+                    <Row className="mb-3">
+                        <Col lg={4}>
+                              <FormLabel className="labelForm">Vehicle Type</FormLabel>
+                              <FormControl
+                                type="text"
+                                placeholder="Enter Vehicle Type"
+                                value={newVehicle.vehicle_type}
+                                onChange={(e) =>
+                                  setNewVehicle({
+                                    ...newVehicle,
+                                    vehicle_type: e.target.value,
+                                  })
+                                }
+                              />
+                        </Col>
+                        <Col lg={4}>
+                              <FormLabel className="labelForm">Vehicle No</FormLabel>
+                              <FormControl
+                                type="text"
+                                placeholder="Enter Vehicle No"
+                                value={newVehicle.vehicle_no}
+                                onChange={(e) =>
+                                  setNewVehicle({
+                                    ...newVehicle,
+                                    vehicle_no: e.target.value,
+                                  })
+                                }
+                              />
+                        </Col>
+                        <Col lg={4}>
+                              <FormLabel className="labelForm">Driver Name</FormLabel>
+                              <FormControl
+                                type="text"
+                                placeholder="Enter Driver Name"
+                                value={newVehicle.driver.driver_name}
+                                onChange={(e) =>
+                                  setNewVehicle({
+                                    ...newVehicle,
+                                    driver: {
+                                      ...newVehicle.driver,
+                                      driver_name: e.target.value,
+                                    },
+                                  })
+                                }
+                              />
+                        </Col>
+                    </Row>
+                    <Row>
+                      <Col>
+                        <Button onClick={handleAdd} className="btn btn-primary mt-4">Add Vehicle</Button>
+                      </Col>
+                    </Row>
+                  </Form>
+              </div>
+         
+              
+           
           )}
-        </Col>
-      </Row>
+      
 
-      {/* Table Section */}
-      <Row>
-        <Col>
-          <h2>Vehicle Records</h2>
-          {loading ? (
-            <p>Loading...</p>
-          ) : error ? (
-            <p style={{ color: "red" }}>{error}</p>
-          ) : data.length > 0 ? (
-            <Table columns={columns} data={data} />
-          ) : (
-            <p>No data available.</p>
-          )}
-        </Col>
-      </Row>
-    </Container>
+      {/* Table Section */ }
+  <Row>
+    <Col>
+    <div className="tableSheet">
+      <h2>Vehicle Records</h2>
+      {loading ? (
+        <p>Loading...</p>
+      ) : error ? (
+        <p style={{ color: "red" }}>{error}</p>
+      ) : data.length > 0 ? (
+        <Table columns={columns} data={data} />
+      ) : (
+        <p>No data available.</p>
+      )}
+      </div>
+    </Col>
+  </Row>
+    </Container >
   );
 };
 

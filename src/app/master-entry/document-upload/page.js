@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState, useEffect } from "react";
 import Table from "@/app/component/DataTable";
 import axios from "axios";
@@ -11,10 +10,11 @@ import {
   FormLabel,
   FormControl,
   Button,
+  Breadcrumb
 } from "react-bootstrap";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import styles from "@/app/medical/routine-check-up/page.module.css";
-
+import { CgAddR } from 'react-icons/cg'; 
 const DocumentMasterPage = () => {
   const [data, setData] = useState([]); // Documents state
   const [newDocumentName, setNewDocumentName] = useState(""); // New document name
@@ -155,20 +155,35 @@ const DocumentMasterPage = () => {
   }, []);
 
   return (
-    <Container className={styles.formContainer}>
-      <Form className={styles.form}>
-        <Button
-          onClick={() => setShowAddForm(!showAddForm)}
-          className={`mb-4 ${styles.search}`}
-        >
-          Add Document
-        </Button>
+    <Container>
+
+<Row className='mt-1 mb-1'>
+                        <Col>
+                          <Breadcrumb>
+                            <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
+                            <Breadcrumb.Item href="/master-entry/all-module">
+                              Master Entry
+                            </Breadcrumb.Item>
+                            <Breadcrumb.Item active>Document Upload</Breadcrumb.Item>
+                          </Breadcrumb>
+                        </Col>
+                      </Row>
+
+
+
+      <Button onClick={() => setShowAddForm(!showAddForm)} className={`mb-4 ${styles.search}`}>
+      <CgAddR/> Add Document
+      </Button>
 
         {showAddForm && (
-          <div className="result">
+
+       <div className="cover-sheet">
+              <div className="studentHeading"><h2>  Add Document</h2></div>
+                <Form className="formSheet">
+         
             <Row className="mb-3">
               <Col lg={6}>
-                <FormLabel className={styles.class}>Document Name</FormLabel>
+                <FormLabel className="labelForm">Document Name</FormLabel>
                 <FormControl
                   required
                   type="text"
@@ -182,24 +197,27 @@ const DocumentMasterPage = () => {
               <Col>
                 <Button
                   onClick={handleAddDocument}
-                  className={styles.search}
+                  className="btn btn-primary"
                 >
                   Add Document
                 </Button>
               </Col>
             </Row>
+            </Form>
           </div>
         )}
 
         <Row>
           <Col>
-            <h2 style={{ fontSize: "22px" }}>Document Records</h2>
+          <div className="tableSheet">
+            <h2>Document Records</h2>
             {loading && <p>Loading...</p>}
             {error && <p style={{ color: "red" }}>{error}</p>}
             {!loading && !error && <Table columns={columns} data={data} />}
+            </div>
           </Col>
         </Row>
-      </Form>
+      
     </Container>
   );
 };

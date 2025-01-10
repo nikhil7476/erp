@@ -5,15 +5,7 @@ import dynamic from "next/dynamic";
 import styles from "@/app/students/assign-roll-no/page.module.css";
 import Table from "@/app/component/DataTable";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
-import {
-  Form,
-  Row,
-  Col,
-  Container,
-  FormLabel,
-  FormSelect,
-  Button,
-} from "react-bootstrap";
+import { Form, Row, Col, Container, FormLabel, FormSelect, Button, Breadcrumb } from "react-bootstrap";
 import axios from "axios";
 
 const AssignRollNumbers = () => {
@@ -58,9 +50,7 @@ const AssignRollNumbers = () => {
             <FaEdit />
           </button>
           <button
-            className="editButton btn-danger"
-            onClick={() => handleDeleteRollNo(row._id)}
-          >
+            className="editButton btn-danger" onClick={() => handleDeleteRollNo(row._id)}>
             <FaTrashAlt />
           </button>
         </div>
@@ -148,57 +138,75 @@ const AssignRollNumbers = () => {
   }, []);
 
   return (
-    <Container className={styles.formContainer}>
-      <Form className={styles.form}>
-        <Row>
-          <Col>
-            <FormLabel>Select Class</FormLabel>
-            <FormSelect
-              value={selectedClass}
-              onChange={(e) => setSelectedClass(e.target.value)}
-            >
-              <option value="">Select Class</option>
-              {[1, 2, 3, 4, 5, 6, 7, 8].map((cls) => (
-                <option key={cls} value={cls}>
-                  {cls}
-                </option>
-              ))}
-            </FormSelect>
-          </Col>
-          <Col>
-            <FormLabel>Select Section</FormLabel>
-            <FormSelect
-              value={selectedSection}
-              onChange={(e) => setSelectedSection(e.target.value)}
-            >
-              <option value="">Select Section</option>
-              {["A", "B", "C"].map((section) => (
-                <option key={section} value={section}>
-                  {section}
-                </option>
-              ))}
-            </FormSelect>
-          </Col>
-        </Row>
-        <br />
-        <Button
-          className={styles.search}
-          onClick={fetchData}
-          disabled={!selectedClass || !selectedSection}
-        >
-          Search Students
-        </Button>
-        <br />
-        <h2>Assign Roll Numbers</h2>
-        {loading && <p>Loading...</p>}
-        {error && <p>{error}</p>}
-        {!loading && !error && <Table columns={columns} data={data} />}
-        <div className={styles.buttons}>
-          <Button onClick={handleAssignRollNo} className="editButton">
-            Assign Roll Numbers
+    <Container>
+      <Row className='mt-1 mb-1'>
+        <Col>
+          <Breadcrumb>
+            <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
+            <Breadcrumb.Item href="/students/all-module">
+              Student
+            </Breadcrumb.Item>
+            <Breadcrumb.Item active>Assign Roll No.</Breadcrumb.Item>
+          </Breadcrumb>
+        </Col>
+      </Row>
+
+
+      <div className="cover-sheet">
+        <div className="studentHeading"><h2>Search Students</h2></div>
+        <Form className="formSheet">
+          <Row>
+            <Col lg={6}>
+              <FormLabel className="labelForm">Select Class</FormLabel>
+              <FormSelect
+                value={selectedClass}
+                onChange={(e) => setSelectedClass(e.target.value)}
+              >
+                <option value="">Select Class</option>
+                {[1, 2, 3, 4, 5, 6, 7, 8].map((cls) => (
+                  <option key={cls} value={cls}>
+                    {cls}
+                  </option>
+                ))}
+              </FormSelect>
+            </Col>
+            <Col lg={6}>
+              <FormLabel className="labelForm">Select Section</FormLabel>
+              <FormSelect
+                value={selectedSection}
+                onChange={(e) => setSelectedSection(e.target.value)}
+              >
+                <option value="">Select Section</option>
+                {["A", "B", "C"].map((section) => (
+                  <option key={section} value={section}>
+                    {section}
+                  </option>
+                ))}
+              </FormSelect>
+            </Col>
+          </Row>
+         
+          <Button className="btn btn-primary mt-4" onClick={fetchData} disabled={!selectedClass || !selectedSection}>
+            Search Students
           </Button>
-        </div>
-      </Form>
+        </Form>
+      </div>
+
+      <Row>
+        <Col>
+          <div className="tableSheet">
+            <h2>Roll Numbers Assigner</h2>
+            {loading && <p>Loading...</p>}
+            {error && <p>{error}</p>}
+            {!loading && !error && <Table columns={columns} data={data} />}
+            <div className={styles.buttons}>
+              <Button onClick={handleAssignRollNo} className="editButton">
+                Assign Roll Numbers
+              </Button>
+            </div>
+          </div>
+        </Col>
+      </Row>
     </Container>
   );
 };

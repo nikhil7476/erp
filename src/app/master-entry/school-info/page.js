@@ -5,7 +5,7 @@ import axios from "axios";
 import Preview from "@/app/component/Preview";
 import styles from "../school-info/page.module.css";
 import { Form, Row, Col, Container, FormLabel, FormControl, Button, Breadcrumb } from "react-bootstrap";
-
+import { CgAddR } from 'react-icons/cg';
 export default function Farm() {
   const [showPreview, setShowPreview] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -88,7 +88,7 @@ export default function Farm() {
             <Col>
               <Breadcrumb>
                 <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
-                <Breadcrumb.Item href="/library">
+                <Breadcrumb.Item href="/master-entry/all-module">
                   Master Entry
                 </Breadcrumb.Item>
                 <Breadcrumb.Item active>School Info</Breadcrumb.Item>
@@ -96,7 +96,7 @@ export default function Farm() {
             </Col>
           </Row>
     <div className="cover-sheet">
-      <div className="studentHeading"><h2>School Info</h2> </div>
+      <div className="studentHeading"><h2>  School Info</h2> </div>
       {!showPreview ? (
         <Form onSubmit={handleSubmit}  className="formSheet" >
          

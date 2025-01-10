@@ -1,11 +1,11 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { Form, Row, Col, Container, FormLabel, FormControl, Button } from "react-bootstrap";
+import { Form, Row, Col, Container, FormLabel, FormControl, Button, Breadcrumb } from "react-bootstrap";
 import Table from "@/app/component/DataTable"; // Ensure the path to the DataTable component is correct
 import { FaEdit, FaTrashAlt } from "react-icons/fa"; // Icons for edit and delete
 import axios from "axios";
 import styles from "../year-master/page.module.css"; // CSS import
-
+import { CgAddR } from 'react-icons/cg';
 const YearMasterPage = () => {
   const [data, setData] = useState([]); // Table data
   const [loading, setLoading] = useState(false); // Loading state
@@ -129,54 +129,69 @@ const YearMasterPage = () => {
   }, []);
 
   return (
-    <Container className={styles.rec}>
-      <h2 className="mb-4">Year Master</h2>
+    <Container>
+      <Row className='mt-1 mb-1'>
+        <Col>
+          <Breadcrumb>
+            <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
+            <Breadcrumb.Item href="/master-entry/all-module">
+              Master Entry
+            </Breadcrumb.Item>
+            <Breadcrumb.Item active>Year Master</Breadcrumb.Item>
+          </Breadcrumb>
+        </Col>
+      </Row>
+
 
       <Button onClick={() => setShowAddForm(!showAddForm)} className="mb-4">
-        {showAddForm ? "Close Form" : "Add Year"}
+      <CgAddR/> {showAddForm ? "Close Form" : "Add Year"}
       </Button>
-
-      {/* Add/Edit Form */}
       {showAddForm && (
-        <div className="mb-4">
-          <Row className="mb-3">
-            <Col lg={6}>
-              <FormLabel>Class Name</FormLabel>
-              <FormControl
-                type="text"
-                placeholder="Enter Class Name"
-                value={newClassName}
-                onChange={(e) => setNewClassName(e.target.value)}
-              />
-            </Col>
-          </Row>
-          <Row className="mb-3">
-            <Col lg={6}>
-              <FormLabel>Year Code & Name</FormLabel>
-              <FormControl
-                type="text"
-                placeholder="Enter Year Code & Name"
-                value={newYearCodeAndName}
-                onChange={(e) => setNewYearCodeAndName(e.target.value)}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <Button onClick={handleSave}>{selectedYearId ? "Update Year" : "Add Year"}</Button>
-            </Col>
-          </Row>
+
+        <div className="cover-sheet">
+          <div className="studentHeading"><h2>  <CgAddR/> Add Year</h2></div>
+          <Form className="formSheet">
+            <Row className="mb-3">
+              <Col lg={6}>
+                <FormLabel className="labelForm">Class Name</FormLabel>
+                <FormControl
+                  type="text"
+                  placeholder="Enter Class Name"
+                  value={newClassName}
+                  onChange={(e) => setNewClassName(e.target.value)}
+                />
+              </Col>
+              <Col lg={6}>
+                <FormLabel className="labelForm">Year Code & Name</FormLabel>
+                <FormControl
+                  type="text"
+                  placeholder="Enter Year Code & Name"
+                  value={newYearCodeAndName}
+                  onChange={(e) => setNewYearCodeAndName(e.target.value)}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <Button className="btn btn-primary mt-4" onClick={handleSave}>{selectedYearId ? "Update Year" : "Add Year"}</Button>
+              </Col>
+            </Row>
+          </Form>
         </div>
       )}
 
-      {/* Table Section */}
-      {loading ? (
-        <p>Loading...</p>
-      ) : error ? (
-        <p style={{ color: "red" }}>{error}</p>
-      ) : (
-        <Table columns={columns} data={data} />
-      )}
+
+
+      <div className="tableSheet">
+        <h2> Year Master </h2>
+        {loading ? (
+          <p>Loading...</p>
+        ) : error ? (
+          <p style={{ color: "red" }}>{error}</p>
+        ) : (
+          <Table columns={columns} data={data} />
+        )}
+      </div>
     </Container>
   );
 };

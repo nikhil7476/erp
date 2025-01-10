@@ -6,8 +6,9 @@ import dynamic from "next/dynamic";
 import styles from "@/app/medical/routine-check-up/page.module.css";
 import Table from "@/app/component/DataTable";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
-import { Form, Row, Col, Container, FormLabel, FormControl, Button } from "react-bootstrap";
+import { Form, Row, Col, Container, FormLabel, FormControl, Button, Breadcrumb } from "react-bootstrap";
 import axios from "axios";
+import { CgAddR } from 'react-icons/cg';
 
 const AddLibraryGroup = () => {
   const [data, setData] = useState([]);
@@ -104,16 +105,30 @@ const AddLibraryGroup = () => {
   }, []);
 
   return (
-    <Container className={styles.formContainer}>
-      <Form className={styles.form}>
-        <Button onClick={() => setShowAddForm(!showAddForm)} className={`mb-4 ${styles.search}`}>
-          Add Group
-        </Button>
-        {showAddForm && (
-          <div className="mb-4">
+    <Container className="">
+      <Row className='mt-1 mb-1'>
+        <Col>
+          <Breadcrumb>
+            <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
+            <Breadcrumb.Item href="/library/all-module">
+              Library
+            </Breadcrumb.Item>
+            <Breadcrumb.Item active>Add Group</Breadcrumb.Item>
+          </Breadcrumb>
+        </Col>
+      </Row>
+
+      <Button onClick={() => setShowAddForm(!showAddForm)} className={`mb-4 ${styles.search}`}>
+        <CgAddR /> Add Group
+      </Button>
+      {showAddForm && (
+
+        <div className="cover-sheet">
+          <div className="studentHeading"><h2> Add New Group</h2></div>
+          <Form className="formSheet">
             <Row>
               <Col lg={6}>
-                <FormLabel>Group Name</FormLabel>
+                <FormLabel className="labelForm">Group Name</FormLabel>
                 <FormControl
                   type="text"
                   placeholder="Enter Group Name"
@@ -122,16 +137,20 @@ const AddLibraryGroup = () => {
                 />
               </Col>
             </Row>
-            <Button onClick={handleAdd} className={styles.search}>
+            <Button onClick={handleAdd} className="btn btn-primary">
               Add Group
             </Button>
-          </div>
-        )}
+          </Form>
+        </div>
+      )}
+
+
+      <div className="tableSheet">
         <h2>Group Records</h2>
         {loading && <p>Loading...</p>}
         {error && <p>{error}</p>}
         {!loading && !error && <Table columns={columns} data={data} />}
-      </Form>
+      </div>
     </Container>
   );
 };

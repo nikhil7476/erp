@@ -3,11 +3,11 @@
 import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
-import { Form, Row, Col, Container, FormLabel, FormControl, Button } from "react-bootstrap";
+import { Form, Row, Col, Container, FormLabel, FormControl, Button, Breadcrumb } from "react-bootstrap";
 import Table from "@/app/component/DataTable";
 import axios from "axios";
 import styles from "@/app/medical/routine-check-up/page.module.css"; // Use the same styles as in the Category page
-
+import { CgAddR } from 'react-icons/cg';
 const SubjectMasterPage = () => {
   const [subjects, setSubjects] = useState([]); // State for subjects
   const [newSubject, setNewSubject] = useState({ subject_name: "", teacher_in_charge: "", class_name: "", section_name: "" }); // New subject state
@@ -141,17 +141,29 @@ const SubjectMasterPage = () => {
   }, []);
 
   return (
-    <Container className={styles.formContainer}>
-      <Form className={styles.form}>
-        <Button onClick={() => setShowAddForm(!showAddForm)} className={`mb-4 ${styles.search}`}>
-          Add Subject
-        </Button>
+    <Container>
+      <Row className='mt-1 mb-1'>
+        <Col>
+          <Breadcrumb>
+            <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
+            <Breadcrumb.Item href="/master-entry/all-module">
+              Master Entry
+            </Breadcrumb.Item>
+            <Breadcrumb.Item active>Subject Master</Breadcrumb.Item>
+          </Breadcrumb>
+        </Col>
+      </Row>
 
-        {showAddForm && (
-          <div className="result">
+      <Button onClick={() => setShowAddForm(!showAddForm)} className={`mb-4 ${styles.search}`}>
+      <CgAddR/> Add Subject
+      </Button>
+      {showAddForm && (
+        <div className="cover-sheet">
+          <div className="studentHeading"><h2>  Add Document</h2></div>
+          <Form className="formSheet">
             <Row className="mb-3">
               <Col lg={6}>
-                <FormLabel className={styles.class}>Subject Name</FormLabel>
+                <FormLabel className="labelForm">Subject Name</FormLabel>
                 <FormControl
                   required
                   type="text"
@@ -161,7 +173,7 @@ const SubjectMasterPage = () => {
                 />
               </Col>
               <Col lg={6}>
-                <FormLabel className={styles.class}>Teacher In Charge</FormLabel>
+                <FormLabel className="labelForm">Teacher In Charge</FormLabel>
                 <FormControl
                   required
                   type="text"
@@ -173,7 +185,7 @@ const SubjectMasterPage = () => {
             </Row>
             <Row className="mb-3">
               <Col lg={6}>
-                <FormLabel className={styles.class}>Class Name</FormLabel>
+                <FormLabel className="labelForm">Class Name</FormLabel>
                 <FormControl
                   required
                   type="text"
@@ -183,7 +195,7 @@ const SubjectMasterPage = () => {
                 />
               </Col>
               <Col lg={6}>
-                <FormLabel className={styles.class}>Section Name</FormLabel>
+                <FormLabel className="labelForm">Section Name</FormLabel>
                 <FormControl
                   required
                   type="text"
@@ -200,18 +212,19 @@ const SubjectMasterPage = () => {
                 </Button>
               </Col>
             </Row>
-          </div>
-        )}
-
-        <Row>
-          <Col>
-            <h2 style={{ fontSize: "22px" }}>Subject Records</h2>
+          </Form>
+        </div>
+      )}
+      <Row>
+        <Col>
+          <div className="tableSheet">
+            <h2>Subject Records</h2>
             {loading && <p>Loading...</p>}
             {error && <p style={{ color: "red" }}>{error}</p>}
             {!loading && !error && <Table columns={columns} data={subjects} />}
-          </Col>
-        </Row>
-      </Form>
+          </div>
+        </Col>
+      </Row>
     </Container>
   );
 };

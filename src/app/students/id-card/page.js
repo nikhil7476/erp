@@ -2,8 +2,9 @@
 import React, { useState } from "react";
 import Table from "@/app/component/DataTable";
 import dynamic from "next/dynamic";
-import { Form, Row, Col, Container, FormLabel, Button } from "react-bootstrap";
+import { Form, Row, Col, Container, FormLabel, Button, Breadcrumb } from "react-bootstrap";
 import { FormSelect } from "react-bootstrap";
+import styles from "@/app/students/assign-roll-no/page.module.css"
 
 const IdCardPage = () => {
   const columns = [
@@ -115,51 +116,67 @@ const IdCardPage = () => {
   };
 
   return (
-    <Container className="form-Container">
-      <Form className="form">
-        <h2>Student Details ClassWise</h2>
-      <Row>
+    <Container>
+      <Row className='mt-1 mb-1'>
         <Col>
-        <FormLabel className="class">Select Class</FormLabel>
-          <FormSelect>
-          <option>Select Class</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          </FormSelect>
+          <Breadcrumb>
+            <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
+            <Breadcrumb.Item href="/students/all-module">
+              Student
+            </Breadcrumb.Item>
+            <Breadcrumb.Item active>Id Card</Breadcrumb.Item>
+          </Breadcrumb>
         </Col>
-        <Col>
-        <FormLabel className="class">Select Section</FormLabel>
-         <FormSelect>
-          <option>Select Section</option>
-          <option value="1">A</option>
-          <option value="2">B</option>
-          <option value="3">C</option>
-         </FormSelect>
-        </Col>
-      </Row><br/>
-      <Row>
-        <Col><Button className="search">Search Students</Button></Col>
       </Row>
-      <br/>
-      <Row>
-        <Col>
-        <h2 style={{fontSize: '22px'}}>Students Details</h2>
-        <Table columns={columns} data={data} />
-      <div className="buttons">
-        <button type="button" className="editButton">Previous</button>
-        <button type="button" className="editButton">Next</button>
+      <div className="cover-sheet">
+        <div className="studentHeading"><h2>Student Details ClassWise</h2></div>
+        <Form className="formSheet">
+          <Row>
+            <Col>
+              <FormLabel className="labelForm">Select Class</FormLabel>
+              <FormSelect>
+                <option>Select Class</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+              </FormSelect>
+            </Col>
+            <Col>
+              <FormLabel className="labelForm">Select Section</FormLabel>
+              <FormSelect>
+                <option>Select Section</option>
+                <option value="1">A</option>
+                <option value="2">B</option>
+                <option value="3">C</option>
+              </FormSelect>
+            </Col>
+          </Row>
+          <Row>
+            <Col><Button className="btn btn-primary mt-4">Search Students</Button></Col>
+          </Row>
+        </Form>
       </div>
+
+      <Row>
+        <Col>
+          <div className="tableSheet">
+            <h2>Students Details</h2>
+            <Table columns={columns} data={data} />
+            <div className={styles.buttons}>
+              <button type="button" className="editButton">Previous</button>
+              <button type="button" className="editButton">Next</button>
+            </div>
+          </div>
         </Col>
       </Row>
-    </Form>
+
     </Container>
   );
 };
 
-export default dynamic (() => Promise.resolve(IdCardPage), {ssr: false})
+export default dynamic(() => Promise.resolve(IdCardPage), { ssr: false })

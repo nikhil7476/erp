@@ -5,7 +5,7 @@ import { FaPlus, FaEdit, FaTrashAlt } from "react-icons/fa";
 import { Form, Row, Col, Container, FormLabel, FormControl, Button, Breadcrumb } from "react-bootstrap";
 import axios from "axios";
 import Table from "@/app/component/DataTable"; // Ensure this path is correct
-
+import { CgAddR } from 'react-icons/cg'; 
 const VehicleRecords = () => {
   const [data, setData] = useState([]); // Table data
   const [loading, setLoading] = useState(false); // Loading state
@@ -118,82 +118,73 @@ const VehicleRecords = () => {
           <button className="editButton" onClick={() => handleEdit(row._id)}>
             <FaEdit />
           </button>
-          <button
-            className="editButton btn-danger"
-            onClick={() => handleDelete(row._id)}
-          >
+          <button className="editButton btn-danger" onClick={() => handleDelete(row._id)}>
             <FaTrashAlt />
           </button>
         </div>
       ),
     },
   ];
-
   return (
     <Container>
       <Row className="mt-1 mb-1">
         <Col>
-          <Breadcrumb style={{ marginLeft: "20px" }}>
+          <Breadcrumb>
             <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
             <Breadcrumb.Item href="/Transport/all-module">
               Transport
             </Breadcrumb.Item>
-            <Breadcrumb.Item active>Vehicle Records</Breadcrumb.Item>
+            <Breadcrumb.Item active>Vehicle Type Master</Breadcrumb.Item>
           </Breadcrumb>
         </Col>
       </Row>
-
       {/* Add Vehicle Form */}
       <Row>
         <Col>
-          <Button
-            onClick={() => setShowAddForm(!showAddForm)}
-            className="mb-4"
-          >
-            <FaPlus /> Add Vehicle
+          <Button onClick={() => setShowAddForm(!showAddForm)} className="mb-4">
+           <CgAddR /> New Vehicle Type
           </Button>
-
           {showAddForm && (
-            <div className="mb-4">
-              <Row className="mb-3">
-                <Col lg={6}>
-                  <FormLabel>Vehicle Type</FormLabel>
-                  <FormControl
-                    type="text"
-                    placeholder="Enter Vehicle Type"
-                    value={newVehicle.vehicle_type}
-                    onChange={(e) =>
+            <div className="cover-sheet">
+              <div className="studentHeading"><h2>Add Vehicle Type</h2></div>
+              <Form className="formSheet">
+                <Row className="mb-3">
+                  <Col lg={6}>
+                    <FormLabel className="labelForm">Vehicle Type</FormLabel>
+                    <FormControl type="text" placeholder="Enter Vehicle Type" value={newVehicle.vehicle_type} onChange={(e) =>
                       setNewVehicle({
                         ...newVehicle,
                         vehicle_type: e.target.value,
                       })
                     }
-                  />
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <Button onClick={handleAdd}>Add Vehicle</Button>
-                </Col>
-              </Row>
+                    />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col>
+                    <Button onClick={handleAdd} class="btn btn-primary mt-4" >Add Vehicle Type</Button>
+                  </Col>
+                </Row>
+              </Form>
             </div>
           )}
         </Col>
       </Row>
-
       {/* Vehicle List Section */}
       <Row>
         <Col>
-          <h2>Vehicle Records</h2>
-          {loading ? (
-            <p>Loading...</p>
-          ) : error ? (
-            <p style={{ color: "red" }}>{error}</p>
-          ) : data.length > 0 ? (
-            <Table columns={columns} data={data} />
-          ) : (
-            <p>No vehicles available.</p>
-          )}
+          <div className="tableSheet">
+            <h2>Vehicle Records</h2>
+            {loading ? (
+              <p>Loading...</p>
+            ) : error ? (
+              <p style={{ color: "red" }}>{error}</p>
+            ) : data.length > 0 ? (
+              <Table columns={columns} data={data} />
+            ) : (
+              <p>No vehicles available.</p>
+            )}
+          </div>
         </Col>
       </Row>
     </Container>
